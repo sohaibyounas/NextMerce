@@ -1,0 +1,80 @@
+/* Hide default slick arrows if not using them */
+.slick-prev:before,
+.slick-next:before {
+  display: none;
+}
+
+/* Style for custom arrows */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1; /* Ensure arrows are above slides */
+  cursor: pointer;
+
+  /* Add your desired styling for individual arrows */
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.prev_arrow {
+  left: 10px;
+  background-color: "red";
+}
+
+.next_arrow {
+  right: 10px;
+  background-color: red;
+}
+
+/* combining arrows in a container */
+.slider-container {
+  position: relative;
+}
+
+/* If you want them in a single unit, you might wrap them in a div and style that */
+.combined-arrows-wrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+.combined-arrows-wrapper .custom-arrow {
+  position: static;
+  transform: none;
+}
+
+.categoryName {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.categoryName::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  width: 0%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.categoryName:hover ::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  width: 50%;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  background-color: rgb(97, 97, 215);
+  cursor: pointer;
+}
