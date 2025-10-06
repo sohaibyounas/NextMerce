@@ -14,6 +14,8 @@ import Icon2 from "@/assets/icons/icon-02.svg";
 import Icon3 from "@/assets/icons/icon-03.svg";
 import Icon4 from "@/assets/icons/icon-04.svg";
 import Category from "../Category/page";
+import Shop from "../shop-slider/page";
+import Phonedetail from "../Phonedetail/page";
 
 export default function Mainarea() {
   // slider styles
@@ -229,6 +231,12 @@ export default function Mainarea() {
 
       {/* category slides */}
       <Category />
+
+      {/* shop slider */}
+      <Shop />
+
+      {/* phone details */}
+      <Phonedetail />
     </>
   );
 }

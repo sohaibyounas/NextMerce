@@ -57,3 +57,23 @@
 .custom-bar:hover::before {
   width: 100%;
 }
+.cardcontent .cardbutton {
+  position: absolute;
+  bottom: -90px;
+  transition: 0.3s;
+}
+
+.cardcontent:hover .cardbutton {
+  bottom: 90px !important;
+  transition: 0.3s;
+}
+
+/* hidden button style */
+.hiddenbutton svg {
+  color: blue;
+  transition: color 0.3s ease;
+}
+
+.hiddenbutton:hover svg {
+  color: gray;
+}

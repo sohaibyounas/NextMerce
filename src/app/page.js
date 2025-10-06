@@ -10,8 +10,6 @@ export default function Home() {
 
       {/* main body */}
       <Mainarea />
-
-      {/*  */}
     </>
   );
 }

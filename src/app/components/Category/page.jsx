@@ -52,9 +52,9 @@ export default function Category() {
   };
 
   return (
-    <main className="py-8">
+    <main className="pt-[60px] pb-[70px] border-b-1 border-[#F2F3F8]">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-[#1C274C] mb-8 text-start next_arrow">
+        <h2 className="text-[30px] font-semibold text-[#1C274C] mb-8 text-start next_arrow">
           Browse by Category
         </h2>
         <div className="relative">
