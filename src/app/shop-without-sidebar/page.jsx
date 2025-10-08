@@ -4,20 +4,13 @@ import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import Seller from "../BestSeller/page.jsx";
-// import Header from "../Header/page.jsx";
-// import Mainarea from "../Main/page.jsx";
+import SamrtWatch from "@/assets/newarrivals/smartwatch.png";
+import Tablet from "@/assets/newarrivals/tablet.png";
+import Seller from "../components/BestSeller/page.jsx";
 
-export default function Shop() {
+export default function Shopslider() {
   return (
     <>
-      {/* header */}
-      {/* <Header /> */}
-
-      {/* main body */}
-      {/* <Mainarea /> */}
-
-      {/* images slider */}
       <Seller data={cardData} />
     </>
   );
@@ -63,6 +56,20 @@ const cardData = [
   {
     id: 6,
     image: Screen,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 7,
+    image: SamrtWatch,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 8,
+    image: Tablet,
     description: "This is the gray LCD.",
     price: "$150",
     priceCut: "$100",

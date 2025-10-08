@@ -57,6 +57,8 @@
 .custom-bar:hover::before {
   width: 100%;
 }
+
+/* shop slider cart */
 .cardcontent .cardbutton {
   position: absolute;
   bottom: -90px;
@@ -68,12 +70,15 @@
   transition: 0.3s;
 }
 
-/* hidden button style */
-.hiddenbutton svg {
-  color: blue;
-  transition: color 0.3s ease;
+/* best seller cart */
+.cartcontent .cardbutton {
+  position: absolute;
+  right: -50px;
+  top: 150px;
+  transition: 0.3s;
 }
 
-.hiddenbutton:hover svg {
-  color: gray;
+.cartcontent:hover .cardbutton {
+  right: 0px !important;
+  transition: 0.3s;
 }

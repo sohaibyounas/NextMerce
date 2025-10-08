@@ -1,15 +1,10 @@
-import Header from "./components/Header/page";
-import Mainarea from "./components/Main/page";
-
+import HomePage from "./Homepage/page";
 
 export default function Home() {
   return (
     <>
       {/* header */}
-      <Header />
-
-      {/* main body */}
-      <Mainarea />
+      <HomePage />
     </>
   );
 }

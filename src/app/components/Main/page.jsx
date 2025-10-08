@@ -16,6 +16,15 @@ import Icon4 from "@/assets/icons/icon-04.svg";
 import Category from "../Category/page";
 import Shop from "../shop-slider/page";
 import Phonedetail from "../Phonedetail/page";
+import Seller from "../BestSeller/page";
+import Fitness from "@/assets/newarrivals/fitness-runner.png";
+import GrayLCD from "@/assets/newarrivals/graylcd.png";
+import Iphone from "@/assets/newarrivals/iphone17.png";
+import Juicer from "@/assets/newarrivals/juicer.png";
+import Monitor from "@/assets/newarrivals/monitor.png";
+import Screen from "@/assets/newarrivals/lcdscreen.png";
+import Explore from "../Explore/page";
+import Feedback from "../Feedback/page";
 
 export default function Mainarea() {
   // slider styles
@@ -237,6 +246,75 @@ export default function Mainarea() {
 
       {/* phone details */}
       <Phonedetail />
+
+      {/* Best Seller product detail */}
+      <Seller data={cardData} />
+
+      {/* explore page */}
+      <Explore />
+
+      {/* User Feedback  */}
+      {/* <Feedback /> */}
     </>
   );
 }
+
+// images array
+const cardData = [
+  {
+    id: 1,
+    image: Fitness,
+    description: "This is the finess runner machine.",
+    price: "$200",
+    priceCut: "$150",
+  },
+  {
+    id: 2,
+    image: GrayLCD,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 3,
+    image: Iphone,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 4,
+    image: Juicer,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 5,
+    image: Monitor,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 6,
+    image: Screen,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 7,
+    image: Monitor,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+  {
+    id: 8,
+    image: Screen,
+    description: "This is the gray LCD.",
+    price: "$150",
+    priceCut: "$100",
+  },
+];

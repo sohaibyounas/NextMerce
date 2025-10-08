@@ -39,13 +39,11 @@ export default function Category() {
   };
 
   const handlePrev = () => {
-    console.log("Prev clicked", sliderRef.current);
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
   };
   const handleNext = () => {
-    console.log("Next clicked", sliderRef.current);
     if (sliderRef.current) {
       sliderRef.current.slickNext();
     }
