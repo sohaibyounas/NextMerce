@@ -25,6 +25,7 @@ import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
 import Explore from "../Explore/page";
 import Feedback from "../Feedback/page";
+import Footer from "../Footer/page";
 
 export default function Mainarea() {
   // slider styles
@@ -254,7 +255,10 @@ export default function Mainarea() {
       <Explore />
 
       {/* User Feedback  */}
-      {/* <Feedback /> */}
+      <Feedback />
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 }

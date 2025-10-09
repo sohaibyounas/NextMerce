@@ -55,7 +55,7 @@ const style = {
                   backgroundColor: "#3552b6",
             },
       },
-     
+
 }
 
 export default style;

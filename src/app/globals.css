@@ -82,3 +82,9 @@
   right: 0px !important;
   transition: 0.3s;
 }
+
+/* link text styles */
+
+.linkStyles:hover {
+  color: #3c50e0;
+}
