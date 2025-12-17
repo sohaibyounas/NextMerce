@@ -16,24 +16,27 @@ import { CiHeart } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 
-export default function Seller({ data }) {
+export default function Seller({ data = [] }) {
   const router = useRouter();
+  const safeData = Array.isArray(data) ? data : [];
   return (
     <Box>
       <Box
         sx={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "baseline",
           justifyContent: "space-between",
+          pr: 1,
         }}
       >
-        <Box sx={{ pt: "90px", pb: "48px" }}>
+        <Box sx={{ pt: "90px", pb: "48px", pl: 1 }}>
           <Typography
             sx={{
               fontSize: "28px",
               lineHeight: "40px",
               fontWeight: 600,
               color: "#1C274C",
+              cursor: "pointer",
             }}
           >
             Best Seller
@@ -59,10 +62,9 @@ export default function Seller({ data }) {
 
       {/* Product Details */}
       <Grid container spacing={2}>
-        {data.map((card) => (
-          <Grid size={{ xs: 6, sm: 4 }}>
+        {safeData.map((card) => (
+          <Grid key={card.id} xs={6} sm={4}>
             <Card
-              key={card.id}
               sx={{
                 minWidth: 275,
                 boxShadow: 0,

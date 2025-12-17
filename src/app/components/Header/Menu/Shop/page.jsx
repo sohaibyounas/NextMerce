@@ -1,7 +1,20 @@
+"use client";
+
+import Footer from "@/app/components/Footer/page";
+import Header from "../../page";
+import ShopWithSidebar from "@/app/components/Shop-with-Sidebar/page";
+
 export default function Shop() {
   return (
-    <div>
-      <h1>Shop</h1>
-    </div>
+    <>
+      {/* header section */}
+      <Header />
+
+      {/* shop with side bar */}
+      <ShopWithSidebar />
+
+      {/* footer section */}
+      <Footer />
+    </>
   );
 }

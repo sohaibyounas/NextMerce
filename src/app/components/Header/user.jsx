@@ -1,6 +1,6 @@
 import { FaCartShopping } from "react-icons/fa6";
-import User from "@/assets/user.svg";
 import Image from "next/image";
+import User from "@/assets/user.svg";
 import Heart from "@/assets/heart.svg";
 import Cart from "@/assets/cart.svg";
 

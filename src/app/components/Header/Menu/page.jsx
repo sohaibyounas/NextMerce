@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 import Blogs from "./Blogs/page";
 import Contact from "./Contact/page";
 import Pages from "./Pages/page";
@@ -6,11 +9,22 @@ import Popular from "./Popular/page";
 import Shop from "./Shop/page";
 
 const menuItems = [
-  { label: "Popular", component: Popular, href: "#", arrow: false },
-  { label: "Shop", component: Shop, href: "#", arrow: false },
-  { label: "Contact", component: Contact, href: "#", arrow: false },
-  { label: "Pages", component: Pages, href: "#", arrow: true },
-  { label: "Blogs", component: Blogs, href: "#", arrow: true },
+  {
+    label: "Home",
+    component: Blogs,
+    href: "/",
+    arrow: false,
+  },
+  {
+    label: "Popular",
+    component: Popular,
+    href: "/Popular",
+    arrow: false,
+  },
+  { label: "Shop", component: Shop, href: "/shop", arrow: false },
+  { label: "Contact", component: Contact, href: "/contact", arrow: false },
+  { label: "Pages", component: Pages, href: "/pages", arrow: true },
+  { label: "Blogs", component: Blogs, href: "/blogs", arrow: true },
 ];
 
 // Sample sub-items for Pages and Blogs dropdowns
@@ -18,7 +32,7 @@ const pagesSubItems = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "FAQ", href: "/faq" },
-  { label: "Shop with sidebar", component: Blogs, href: "#" },
+  { label: "Shop with sidebar", component: Blogs, href: "/shop-without-sidebar" },
 ];
 
 const blogsSubItems = [
@@ -26,11 +40,17 @@ const blogsSubItems = [
   { label: "Categories", href: "/blogs/categories" },
   { label: "Blogs Grid with sidebar", href: "/blogs/BlogGridwithsidebar" },
   { label: "Blog details", href: "/blogs/blogsdetails" },
-  { label: "Blogs Grid without sidebar", href: "nlogs/BlogGridwithoutsidebar" },
+  {
+    label: "Blogs Grid without sidebar",
+    href: "/blogs/BlogGridwithoutsidebar",
+  },
 ];
 
 export default function Menu() {
   const [openDropdown, setOpenDropdown] = useState(null);
+
+  const isInternalHref = (href) =>
+    typeof href === "string" && href.startsWith("/");
 
   // Handle hover to open/close dropdown
   const handleMouseEnter = (label) => {
@@ -56,28 +76,53 @@ export default function Menu() {
                 onMouseEnter={() => handleMouseEnter(item.label)}
                 onMouseLeave={handleMouseLeave}
               >
-                <a
-                  href={item.href}
-                  className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
-                >
-                  {item.label}
-                  {item.arrow && (
-                    <svg
-                      className="ml-1 h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </a>
+                {isInternalHref(item.href) ? (
+                  <Link
+                    href={item.href}
+                    className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
+                  >
+                    {item.label}
+                    {item.arrow && (
+                      <svg
+                        className="ml-1 h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
+                  >
+                    {item.label}
+                    {item.arrow && (
+                      <svg
+                        className="ml-1 h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </a>
+                )}
                 {/* Dropdown for items with arrow */}
                 {item.arrow && openDropdown === item.label && (
                   <div
@@ -88,15 +133,25 @@ export default function Menu() {
                       {(item.label === "Pages"
                         ? pagesSubItems
                         : blogsSubItems
-                      ).map((subItem) => (
-                        <a
-                          key={subItem.href}
-                          href={subItem.href}
-                          className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
-                        >
-                          {subItem.label}
-                        </a>
-                      ))}
+                      ).map((subItem) =>
+                        isInternalHref(subItem.href) ? (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
+                          >
+                            {subItem.label}
+                          </Link>
+                        ) : (
+                          <a
+                            key={subItem.href}
+                            href={subItem.href}
+                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
+                          >
+                            {subItem.label}
+                          </a>
+                        )
+                      )}
                     </div>
                   </div>
                 )}

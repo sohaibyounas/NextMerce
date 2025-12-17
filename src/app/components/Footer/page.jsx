@@ -236,7 +236,7 @@ export default function Footer() {
                   background: "#1C274C",
                   color: "#fff",
                   borderRadius: "8px",
-                  width: "150px",
+                  width: "200px",
                   py: "10px",
                 }}
               >
@@ -282,10 +282,10 @@ export default function Footer() {
 
               <Box
                 sx={{
-                  background: "#1C274C",
+                  background: "#3C50E0",
                   color: "#fff",
                   borderRadius: "8px",
-                  width: "150px",
+                  width: "200px",
                   py: "10px",
                 }}
               >
@@ -295,9 +295,10 @@ export default function Footer() {
                     alignItems: "center",
                     justifyContent: "space-around",
                     pr: 2,
+                    width: "100%",
                   }}
                 >
-                  <Icon sx={{ width: "34px", height: "35px", p: 1 }}>
+                  <Icon sx={{ width: "40px", height: "35px", p: 1 }}>
                     <FaGooglePlay color="#fff" />
                   </Icon>
                   <Box

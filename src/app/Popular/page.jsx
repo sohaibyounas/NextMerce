@@ -1,10 +1,11 @@
 "use client";
 
-import PopularPage from "@/app/components/Popular/page";
+import PopularPage from "../components/Popular/page";
 
 export default function Popular() {
   return (
     <>
+      {/* popular page route defined here */}
       <PopularPage />
     </>
   );
