@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Promo from "@/assets/general/promo-01.png";

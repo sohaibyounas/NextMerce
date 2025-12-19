@@ -20,6 +20,7 @@ import Image from "next/image";
 
 export default function Feedback() {
   const sliderRef = useRef(null);
+
   // slider styles
   const settings = {
     dots: false,

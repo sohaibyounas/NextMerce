@@ -1,3 +1,5 @@
+"use client";
+
 export default function DropdownMenu({ isOpen, setIsOpen, setSelected }) {
   const categories = ["Laptop & PC", "Electronics", "Clothing", "Books"];
 

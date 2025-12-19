@@ -1,3 +1,5 @@
+"use client";
+
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
 import Iphone from "@/assets/newarrivals/iphone17.png";

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaCartShopping } from "react-icons/fa6";
 import Image from "next/image";
 import User from "@/assets/user.svg";
