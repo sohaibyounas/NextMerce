@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import CCTV from "@/assets/products/cctv.png";
-import Handphone from "@/assets/products/handphone.png";
 import Mobile1 from "@/assets/products/mobile1.png";
+import Handphone from "@/assets/products/handphone.png";
 import Mobile2 from "@/assets/products/mobile2.png";
 import MobileWallpaper from "@/assets/products/mobile-wallpaper.png";
 import "slick-carousel/slick/slick.css";
@@ -13,21 +13,37 @@ import Icon1 from "@/assets/icons/icon-01.svg";
 import Icon2 from "@/assets/icons/icon-02.svg";
 import Icon3 from "@/assets/icons/icon-03.svg";
 import Icon4 from "@/assets/icons/icon-04.svg";
-import Category from "../Category/page";
-import Shop from "../shop-slider/page";
-import Phonedetail from "../Phonedetail/page";
-import Seller from "../BestSeller/page";
+import Category from "@/components/sections/Category/Category";
+import Shop from "@/components/sections/ShopSlider/ShopSlider";
+import Phonedetail from "@/components/sections/Phonedetail/Phonedetail";
+import Seller from "@/components/sections/BestSeller/BestSeller";
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
 import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import Explore from "../Explore/page";
-import Feedback from "../Feedback/page";
-import Footer from "../Footer/page";
+import Explore from "@/components/sections/Explore/Explore";
+import Feedback from "@/components/sections/Feedback/Feedback";
+import Footer from "@/components/layout/Footer/Footer";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Mainarea() {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/photos?_limit=10")
+      .then((response) => {
+        console.log("respone", response.data);
+        setImages(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching images:", error);
+      });
+  }, []);
+
   // slider styles
   const settings = {
     dots: true,
@@ -43,98 +59,43 @@ export default function Mainarea() {
   return (
     <>
       {/* slider and cards */}
-      <div className="grid grid-cols-12 gap-4 pt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-4 pt-8">
         {/* Image Slider */}
         <div className="col-span-8 px-2">
           <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide">
             <Slider {...settings}>
-              {/* image 1 */}
-              <div className="relative h-[400px] rounded-lg overflow-hidden">
+              {images.map((img) => (
                 <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${Handphone.src})`,
-                  }}
-                />
-                <div className="absolute" />
-                {/* Content  */}
-                <div className="relative z-10 h-full flex items-center justify-start p-8">
-                  <div className="text-white max-w-md">
-                    <p className="text-sm uppercase tracking-wide mb-6">
-                      LIMITED EDITION
-                    </p>
-                    <h1 className="text-4xl font-bold mb-4 leading-tight">
-                      Apple Airpod Max
-                    </h1>
-                    <p className="text-lg mb-6">
-                      Featuring A18 Chip, Liquid Glass, and AI-Powered
-                      Innovation
-                    </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
-                      Shop Now
-                    </button>
+                  key={img.id}
+                  className="relative h-[400px] rounded-lg overflow-hidden"
+                >
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${img.url})` }}
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/30" />
+                  {/* Content */}
+                  <div className="relative z-10 h-full flex items-center justify-start p-8">
+                    <div className="text-white max-w-md">
+                      <p className="text-sm uppercase tracking-wide mb-6">
+                        LIMITED EDITION
+                      </p>
+                      <h1 className="text-4xl font-bold mb-4 leading-tight">
+                        {img.title}
+                      </h1>
+                      <p className="text-lg mb-6">
+                        Featuring A18 Chip, Liquid Glass, and AI-Powered
+                        Innovation
+                      </p>
+                      <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
+                        Shop Now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* img2 */}
-              <div className="relative h-[400px] rounded-lg overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${MobileWallpaper.src})`,
-                  }}
-                />
-                <div className="absolute" />
-                {/* Content  */}
-                <div className="relative z-10 h-full flex items-center justify-start p-8">
-                  <div className="text-white max-w-md">
-                    <p className="text-sm uppercase tracking-wide mb-6">
-                      LIMITED EDITION
-                    </p>
-                    <h1 className="text-4xl font-bold mb-4 leading-tight">
-                      iPhone 16 Pro Max
-                    </h1>
-                    <p className="text-lg mb-6">
-                      Featuring A18 Chip, Liquid Glass, and AI-Powered
-                      Innovation
-                    </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
-                      Shop Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* img3 */}
-              <div className="relative h-[400px] rounded-lg overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${Mobile2.src})`,
-                  }}
-                />
-                <div className="absolute" />
-                {/* Content  */}
-                <div className="relative z-10 h-full flex items-center justify-start p-8">
-                  <div className="text-white max-w-md">
-                    <p className="text-sm uppercase tracking-wide mb-6">
-                      LIMITED EDITION
-                    </p>
-                    <h1 className="text-4xl font-bold mb-4 leading-tight">
-                      Apple Watch Ultra
-                    </h1>
-                    <p className="text-lg mb-6">
-                      Featuring A18 Chip, Liquid Glass, and AI-Powered
-                      Innovation
-                    </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
-                      Shop Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {/* slider ends */}
+              ))}
             </Slider>
           </div>
         </div>
@@ -320,5 +281,79 @@ const cardData = [
     description: "This is the gray LCD.",
     price: "$150",
     priceCut: "$100",
+  },
+];
+
+// dummy data
+const dummyimages = [
+  {
+    albumId: 1,
+    id: 1,
+    title: "accusamus beatae ad facilis cum similique qui sunt",
+    url: "https://via.placeholder.com/600/92c952",
+    thumbnailUrl: "https://via.placeholder.com/150/92c952",
+  },
+  {
+    albumId: 1,
+    id: 2,
+    title: "reprehenderit est deserunt velit ipsam",
+    url: "https://via.placeholder.com/600/771796",
+    thumbnailUrl: "https://via.placeholder.com/150/771796",
+  },
+  {
+    albumId: 1,
+    id: 3,
+    title: "officia porro iure quia iusto qui ipsa ut modi",
+    url: "https://via.placeholder.com/600/24f355",
+    thumbnailUrl: "https://via.placeholder.com/150/24f355",
+  },
+  {
+    albumId: 1,
+    id: 4,
+    title: "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
+    url: "https://via.placeholder.com/600/d32776",
+    thumbnailUrl: "https://via.placeholder.com/150/d32776",
+  },
+  {
+    albumId: 1,
+    id: 5,
+    title: "natus nisi omnis corporis facere molestiae rerum in",
+    url: "https://via.placeholder.com/600/f66b97",
+    thumbnailUrl: "https://via.placeholder.com/150/f66b97",
+  },
+  {
+    albumId: 1,
+    id: 6,
+    title: "accusamus ea aliquid et amet sequi nemo",
+    url: "https://via.placeholder.com/600/56a8c2",
+    thumbnailUrl: "https://via.placeholder.com/150/56a8c2",
+  },
+  {
+    albumId: 1,
+    id: 7,
+    title: "officia delectus consequatur vero aut veniam explicabo molestias",
+    url: "https://via.placeholder.com/600/b0f7cc",
+    thumbnailUrl: "https://via.placeholder.com/150/b0f7cc",
+  },
+  {
+    albumId: 1,
+    id: 8,
+    title: "aut porro officiis laborum odit ea laudantium corporis",
+    url: "https://via.placeholder.com/600/54176f",
+    thumbnailUrl: "https://via.placeholder.com/150/54176f",
+  },
+  {
+    albumId: 1,
+    id: 9,
+    title: "qui eius qui autem sed",
+    url: "https://via.placeholder.com/600/51aa97",
+    thumbnailUrl: "https://via.placeholder.com/150/51aa97",
+  },
+  {
+    albumId: 1,
+    id: 10,
+    title: "beatae et provident et ut vel",
+    url: "https://via.placeholder.com/600/810b14",
+    thumbnailUrl: "https://via.placeholder.com/150/810b14",
   },
 ];

@@ -63,7 +63,7 @@ export default function Seller({ data = [] }) {
       {/* Product Details */}
       <Grid container spacing={2}>
         {safeData.map((card) => (
-          <Grid key={card.id} xs={6} sm={4}>
+          <Grid key={card.id} size={{ xs: 6, sm: 4 }}>
             <Card
               sx={{
                 minWidth: 275,

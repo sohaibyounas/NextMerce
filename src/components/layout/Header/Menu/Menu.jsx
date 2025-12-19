@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Blogs from "./Blogs/page";
-import Contact from "./Contact/page";
-import Pages from "./Pages/page";
-import Popular from "./Popular/page";
-import Shop from "./Shop/page";
+import Blogs from "./Blogs/Blogs";
+import Contact from "./Contact/Contact";
+import Pages from "./Pages/Pages";
+import Popular from "./Popular/Popular";
+import Shop from "./Shop/Shop";
 
 const menuItems = [
   {
@@ -32,7 +32,11 @@ const pagesSubItems = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "FAQ", href: "/faq" },
-  { label: "Shop with sidebar", component: Blogs, href: "/shop-without-sidebar" },
+  {
+    label: "Shop with sidebar",
+    component: Blogs,
+    href: "/shop-without-sidebar",
+  },
 ];
 
 const blogsSubItems = [

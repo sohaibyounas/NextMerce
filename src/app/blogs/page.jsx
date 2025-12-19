@@ -1,6 +1,6 @@
 "use client";
 
-import BlogsComponent from "../components/Header/Menu/Blogs/page";
+import BlogsComponent from "@/components/layout/Header/Menu/Blogs/Blogs";
 
 export default function Blogs() {
   return <BlogsComponent />;

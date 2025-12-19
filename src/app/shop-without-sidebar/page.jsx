@@ -6,7 +6,7 @@ import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
 import SamrtWatch from "@/assets/newarrivals/smartwatch.png";
 import Tablet from "@/assets/newarrivals/tablet.png";
-import Seller from "../components/BestSeller/page.jsx";
+import Seller from "@/components/sections/BestSeller/BestSeller";
 
 export default function Shopslider() {
   return (

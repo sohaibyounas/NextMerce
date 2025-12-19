@@ -4,7 +4,7 @@ import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import Seller from "../BestSeller/page.jsx";
+import Seller from "@/components/sections/BestSeller/BestSeller";
 // import Header from "../Header/page.jsx";
 // import Mainarea from "../Main/page.jsx";
 

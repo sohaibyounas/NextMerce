@@ -10,7 +10,7 @@ export default function Phonedetail() {
       {/* phone detail */}
       <Grid
         container
-        space={2}
+        spacing={2}
         sx={{
           width: "100%",
           mt: "83px",

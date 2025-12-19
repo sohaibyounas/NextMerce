@@ -1,8 +1,8 @@
 "use client";
 
-import Footer from "@/app/components/Footer/page";
-import Header from "../../page";
-import ShopWithSidebar from "@/app/components/Shop-with-Sidebar/page";
+import Footer from "@/components/layout/Footer/Footer";
+import Header from "@/components/layout/Header/Header";
+import ShopWithSidebar from "@/components/sections/ShopWithSidebar/ShopWithSidebar";
 
 export default function Shop() {
   return (

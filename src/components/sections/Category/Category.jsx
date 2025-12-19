@@ -9,7 +9,7 @@ import Juicer from "@/assets/products/juicer.webp";
 import Headphone from "@/assets/products/new-headphone.webp";
 import Workout from "@/assets/products/workout.webp";
 import Slider from "react-slick";
-import style from "../Category/category.module.css";
+import style from "./category.module.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRef } from "react";
 
@@ -26,6 +26,7 @@ const categories = [
 
 export default function Category() {
   const sliderRef = useRef(null);
+
   // slider styles
   const settings = {
     dots: true,

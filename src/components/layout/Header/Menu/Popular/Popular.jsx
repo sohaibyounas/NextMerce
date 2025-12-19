@@ -1,6 +1,6 @@
 "use client";
 
-import PopularPage from "@/app/components/Popular/page";
+import PopularPage from "@/components/sections/Popular/Popular";
 
 export default function Popular() {
   return (

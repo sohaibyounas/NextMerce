@@ -1,14 +1,14 @@
 "use client";
 
-import Seller from "../BestSeller/page";
-import Header from "../Header/page";
+import Seller from "@/components/sections/BestSeller/BestSeller";
+import Header from "@/components/layout/Header/Header";
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
 import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import Footer from "../Footer/page";
+import Footer from "@/components/layout/Footer/Footer";
 import { Box, Breadcrumbs, Link as MuiLink, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -45,7 +45,9 @@ export default function PopularPage() {
             justifyContent: "space-between",
           }}
         >
-          <Typography sx={{ fontSize: "32px", fontWeight: 600, color: "#1C274C" }}>
+          <Typography
+            sx={{ fontSize: "32px", fontWeight: 600, color: "#1C274C" }}
+          >
             Our Best Products
           </Typography>
           {/* dynamically route */}

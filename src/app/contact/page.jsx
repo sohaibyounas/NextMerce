@@ -1,4 +1,4 @@
-import ContactComponent from "../components/Header/Menu/Contact/page";
+import ContactComponent from "@/components/layout/Header/Menu/Contact/Contact";
 
 export default function Contact() {
   return <ContactComponent />;
