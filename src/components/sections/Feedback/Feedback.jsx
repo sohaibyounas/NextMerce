@@ -2,7 +2,10 @@
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRef } from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import {
   Box,
   Button,
@@ -19,29 +22,16 @@ import "./syle.css";
 import Image from "next/image";
 
 export default function Feedback() {
-  const sliderRef = useRef(null);
-
-  // slider styles
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 2000,
-    spaceBetween: 2,
-  };
+  const swiperRef = useRef(null);
 
   const handlePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev();
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
     }
   };
   const handleNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext();
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
     }
   };
 
@@ -123,70 +113,91 @@ export default function Feedback() {
                 <IoIosArrowForward />
               </button>
             </div>
-            <Slider ref={sliderRef} {...settings}>
+            <Swiper
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              modules={[Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              breakpoints={{
+                640: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="mySwiper"
+            >
               {UserData.map((user, index) => (
-                // card
-                <Card
-                  key={index}
-                  className="slick-slide"
-                  sx={{
-                    minWidth: 275,
-                    boxShadow: "none",
-                    border: "1px solid #E5E7EB",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <CardContent
+                <SwiperSlide key={index}>
+                  <Card
+                    className="slick-slide"
                     sx={{
-                      "&:last-child": {
-                        paddingBottom: 2,
-                      },
+                      minWidth: 275,
+                      boxShadow: "none",
+                      border: "1px solid #E5E7EB",
+                      borderRadius: "10px",
                     }}
                   >
-                    <Typography sx={{ pb: "20px" }}>{user.star}</Typography>
-                    <Typography
+                    <CardContent
                       sx={{
-                        color: "#1c274c",
-                        fontSize: 14,
-                        pb: "20px",
-                        fontWeight: 400,
+                        "&:last-child": {
+                          paddingBottom: 2,
+                        },
                       }}
                     >
-                      {user.Text}
-                    </Typography>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                      <Image
-                        src={user.image}
-                        alt={user.name}
-                        className="w-[40px] h-[40px] rounded-full"
-                      />
-                      <Box>
-                        <Typography
-                          sx={{
-                            color: "#1c274c",
-                            fontSize: 14,
-                            fontWeight: 500,
-                            lineHeight: "24px",
-                          }}
-                        >
-                          {user.name}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#1c274c",
-                            fontSize: 14,
-                            fontWeight: 400,
-                            lineHeight: "22px",
-                          }}
-                        >
-                          {user.field}
-                        </Typography>
+                      <Typography sx={{ pb: "20px" }}>{user.star}</Typography>
+                      <Typography
+                        sx={{
+                          color: "#1c274c",
+                          fontSize: 14,
+                          pb: "20px",
+                          fontWeight: 400,
+                        }}
+                      >
+                        {user.Text}
+                      </Typography>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                      >
+                        <Image
+                          src={user.image}
+                          alt={user.name}
+                          className="w-[40px] h-[40px] rounded-full"
+                        />
+                        <Box>
+                          <Typography
+                            sx={{
+                              color: "#1c274c",
+                              fontSize: 14,
+                              fontWeight: 500,
+                              lineHeight: "24px",
+                            }}
+                          >
+                            {user.name}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              color: "#1c274c",
+                              fontSize: 14,
+                              fontWeight: 400,
+                              lineHeight: "22px",
+                            }}
+                          >
+                            {user.field}
+                          </Typography>
+                        </Box>
                       </Box>
-                    </Box>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </SwiperSlide>
               ))}
-            </Slider>
+            </Swiper>
           </div>
         </div>
       </main>

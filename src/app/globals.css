@@ -1,38 +1,35 @@
 @import "tailwindcss";
 
 /* Slider styles */
-.custom_slide .slick-dots {
+.custom_slide .swiper-pagination {
   text-align: center;
   width: 100%;
   margin: 0;
   padding: 0;
-  list-style: none;
   display: block;
   position: absolute;
-  bottom: 25px;
+  bottom: 0px !important;
 }
 
-.custom_slide .slick-dots li {
+@media (min-width: 768px) {
+  .custom_slide .swiper-pagination {
+    bottom: 20px !important;
+  }
+}
+
+.custom_slide .swiper-pagination-bullet {
   display: inline-block;
-  margin: 0 8px;
-}
-
-.custom_slide .slick-dots li button {
+  margin: 0 8px !important;
   background: #d1d5db;
   border: none;
   width: 24px;
   height: 4px;
   border-radius: 4px;
   cursor: pointer;
-  padding: 0;
-  font-size: 0;
+  opacity: 1;
 }
 
-.custom_slide .slick-dots li button:before {
-  content: "";
-}
-
-.custom_slide .slick-dots li.slick-active button {
+.custom_slide .swiper-pagination-bullet-active {
   background: #3b82f6;
 }
 
@@ -62,12 +59,12 @@
 .cardcontent .cardbutton {
   position: absolute;
   bottom: -90px;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
 .cardcontent:hover .cardbutton {
   bottom: 90px !important;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
 /* best seller cart */
@@ -75,12 +72,12 @@
   position: absolute;
   right: -50px;
   top: 150px;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
 .cartcontent:hover .cardbutton {
   right: 0px !important;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
 /* link text styles */

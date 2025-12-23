@@ -6,8 +6,8 @@ export default function DropdownMenu({ isOpen, setIsOpen, setSelected }) {
   return (
     <>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 w-[160px] origin-top-right rounded-md bg-white border border-[#e5e7eb] focus:outline-none shadow-lg">
-          <div className="py-1 px-2">
+        <div className="absolute left-0 z-[100] mt-3 w-64 origin-top-left rounded-xl bg-white border border-[#F2F3F8] shadow-[0_10px_40px_rgba(0,0,0,0.08)] py-2 focus:outline-none animate-in fade-in zoom-in-95 duration-200">
+          <div className="px-1.5 space-y-0.5">
             {categories.map((category) => (
               <button
                 key={category}
@@ -15,8 +15,7 @@ export default function DropdownMenu({ isOpen, setIsOpen, setSelected }) {
                   setSelected(category);
                   setIsOpen(false);
                 }}
-                className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] text-[14px] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
-                role="menuitem"
+                className="flex w-full px-4 py-2.5 rounded-lg text-sm text-[#4E5566] font-medium hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 text-left"
               >
                 {category}
               </button>

@@ -3,13 +3,12 @@ import Link from "next/link";
 import { FaApple, FaGooglePlay, FaRegEnvelope } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLocalPhone } from "react-icons/md";
-import Image from "next/image";
 
 export default function Footer() {
   return (
     <>
       <Grid container spacing={2} pt={11} px={2}>
-        {/* 1st grid */}
+        {/* help & support */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Box>
             <Typography
@@ -105,7 +104,8 @@ export default function Footer() {
             </Box>
           </Box>
         </Grid>
-        {/* 2nd grid */}
+
+        {/* Account */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Box>
             <Typography
@@ -149,7 +149,8 @@ export default function Footer() {
             </Box>
           </Box>
         </Grid>
-        {/* 3rd grid */}
+
+        {/* Quick Link */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Box>
             <Typography
@@ -198,7 +199,8 @@ export default function Footer() {
             </Box>
           </Box>
         </Grid>
-        {/* 4th grid */}
+
+        {/* Download App */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Box>
             <Typography

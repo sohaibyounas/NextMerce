@@ -27,3 +27,29 @@
   background-color: rgb(97, 97, 215);
   cursor: pointer;
 }
+
+/* swiper slider styles */
+.mySwiper :global(.swiper-pagination) {
+  position: relative !important;
+  margin-top: 50px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.mySwiper :global(.swiper-pagination-bullet) {
+  width: 12px;
+  height: 12px;
+  background-color: #cbd5e1;
+  opacity: 1;
+  margin: 0 !important;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.mySwiper :global(.swiper-pagination-bullet-active) {
+  background-color: #2563eb;
+  width: 30px;
+  border-radius: 6px;
+}

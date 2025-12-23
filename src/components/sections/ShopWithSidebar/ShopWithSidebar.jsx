@@ -1,15 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
-  Breadcrumbs,
   Button,
   Card,
   CardContent,
@@ -17,13 +14,13 @@ import {
   Chip,
   FormControl,
   FormControlLabel,
-  Link as MuiLink,
   MenuItem,
   Paper,
   Select,
   Slider,
   Typography,
 } from "@mui/material";
+import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
 import { FiChevronDown, FiGrid, FiList } from "react-icons/fi";
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
@@ -33,8 +30,6 @@ import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
 
 export default function ShopWithSidebar() {
-  const pathname = usePathname();
-
   const [view, setView] = useState("grid");
   const [sort, setSort] = useState("latest");
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -42,21 +37,7 @@ export default function ShopWithSidebar() {
   const [selectedColors, setSelectedColors] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 999]);
 
-  const segments = pathname.split("/").filter(Boolean);
-  const breadcrumbs = [
-    { href: "/", label: "Home" },
-    ...segments.map((segment, index) => {
-      const href = `/${segments.slice(0, index + 1).join("/")}`;
-      const label = decodeURIComponent(segment)
-        .split("-")
-        .filter(Boolean)
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-      return { href, label };
-    }),
-  ];
-
+  // saved calculated value
   const products = useMemo(
     () => [
       {
@@ -120,7 +101,7 @@ export default function ShopWithSidebar() {
         image: Screen,
       },
     ],
-    [],
+    []
   );
 
   const categoryCounts = useMemo(() => {
@@ -137,7 +118,7 @@ export default function ShopWithSidebar() {
         label,
         count,
       })),
-    [categoryCounts],
+    [categoryCounts]
   );
 
   const sizes = ["XL", "XXL", "SM", "XM"];
@@ -155,11 +136,14 @@ export default function ShopWithSidebar() {
   const filteredProducts = useMemo(() => {
     const matchesFilters = (p) => {
       const inCategory =
-        selectedCategories.length === 0 || selectedCategories.includes(p.category);
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(p.category);
       const inSizes =
-        selectedSizes.length === 0 || p.sizes.some((s) => selectedSizes.includes(s));
+        selectedSizes.length === 0 ||
+        p.sizes.some((s) => selectedSizes.includes(s));
       const inColors =
-        selectedColors.length === 0 || p.colors.some((c) => selectedColors.includes(c));
+        selectedColors.length === 0 ||
+        p.colors.some((c) => selectedColors.includes(c));
       const inPrice = p.price >= priceRange[0] && p.price <= priceRange[1];
       return inCategory && inSizes && inColors && inPrice;
     };
@@ -167,25 +151,35 @@ export default function ShopWithSidebar() {
     const list = products.filter(matchesFilters);
 
     if (sort === "priceLow") return [...list].sort((a, b) => a.price - b.price);
-    if (sort === "priceHigh") return [...list].sort((a, b) => b.price - a.price);
+    if (sort === "priceHigh")
+      return [...list].sort((a, b) => b.price - a.price);
     return list;
-  }, [priceRange, products, selectedCategories, selectedColors, selectedSizes, sort]);
+  }, [
+    priceRange,
+    products,
+    selectedCategories,
+    selectedColors,
+    selectedSizes,
+    sort,
+  ]);
 
   const onToggleCategory = (category) => {
     setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
     );
   };
 
   const onToggleSize = (size) => {
     setSelectedSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size],
+      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
   };
 
   const onToggleColor = (hex) => {
     setSelectedColors((prev) =>
-      prev.includes(hex) ? prev.filter((c) => c !== hex) : [...prev, hex],
+      prev.includes(hex) ? prev.filter((c) => c !== hex) : [...prev, hex]
     );
   };
 
@@ -200,62 +194,17 @@ export default function ShopWithSidebar() {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "#F3F4F6" }}>
+      <Box sx={{ flexGrow: 1 }}>
+        <Breadcrumb title="Explore All Products" />
         <Box
           sx={{
             maxWidth: 1200,
             mx: "auto",
             px: { xs: 2, md: 3 },
             py: { xs: 3, md: 4 },
+            backgroundColor: "#F3F4F6",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: { xs: "flex-start", md: "center" },
-              justifyContent: "space-between",
-              flexDirection: { xs: "column", md: "row" },
-              gap: 1,
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#1C274C",
-                fontSize: "32px",
-                fontWeight: 600,
-                lineHeight: "38px",
-              }}
-            >
-              Explore All Products
-            </Typography>
-
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mt: { xs: 0, md: 1 } }}>
-              {breadcrumbs.map((crumb, idx) => {
-                const isLast = idx === breadcrumbs.length - 1;
-
-                if (isLast) {
-                  return (
-                    <Typography key={crumb.href} color="text.primary">
-                      {crumb.label}
-                    </Typography>
-                  );
-                }
-
-                return (
-                  <MuiLink
-                    key={crumb.href}
-                    component={Link}
-                    href={crumb.href}
-                    underline="hover"
-                    color="inherit"
-                  >
-                    {crumb.label}
-                  </MuiLink>
-                );
-              })}
-            </Breadcrumbs>
-          </Box>
-
           <Box
             sx={{
               mt: 3,
@@ -277,7 +226,9 @@ export default function ShopWithSidebar() {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography sx={{ fontWeight: 600, color: "#111827" }}>Filters:</Typography>
+                <Typography sx={{ fontWeight: 600, color: "#111827" }}>
+                  Filters:
+                </Typography>
                 <Button
                   onClick={onClearAll}
                   variant="text"
@@ -287,13 +238,22 @@ export default function ShopWithSidebar() {
                 </Button>
               </Paper>
 
-              <Paper elevation={0} sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}>
+              <Paper
+                elevation={0}
+                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+              >
                 <Accordion defaultExpanded elevation={0} disableGutters>
                   <AccordionSummary expandIcon={<FiChevronDown />}>
                     <Typography sx={{ fontWeight: 600 }}>Category</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.5,
+                      }}
+                    >
                       {allCategories.map((c) => (
                         <Box
                           key={c.label}
@@ -335,7 +295,10 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
-              <Paper elevation={0} sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}>
+              <Paper
+                elevation={0}
+                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+              >
                 <Accordion defaultExpanded elevation={0} disableGutters>
                   <AccordionSummary expandIcon={<FiChevronDown />}>
                     <Typography sx={{ fontWeight: 600 }}>Size</Typography>
@@ -364,7 +327,10 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
-              <Paper elevation={0} sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}>
+              <Paper
+                elevation={0}
+                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+              >
                 <Accordion defaultExpanded elevation={0} disableGutters>
                   <AccordionSummary expandIcon={<FiChevronDown />}>
                     <Typography sx={{ fontWeight: 600 }}>Colors</Typography>
@@ -385,8 +351,8 @@ export default function ShopWithSidebar() {
                               border: selected
                                 ? "2px solid #1C274C"
                                 : hex === "#FFFFFF"
-                                  ? "1px solid #D1D5DB"
-                                  : "1px solid transparent",
+                                ? "1px solid #D1D5DB"
+                                : "1px solid transparent",
                               cursor: "pointer",
                             }}
                           />
@@ -397,7 +363,10 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
-              <Paper elevation={0} sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}>
+              <Paper
+                elevation={0}
+                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+              >
                 <Accordion defaultExpanded elevation={0} disableGutters>
                   <AccordionSummary expandIcon={<FiChevronDown />}>
                     <Typography sx={{ fontWeight: 600 }}>Price</Typography>
@@ -466,16 +435,27 @@ export default function ShopWithSidebar() {
                   gap: 2,
                 }}
               >
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    flexWrap: "wrap",
+                  }}
+                >
                   <FormControl size="small" sx={{ minWidth: 180 }}>
-                    <Select value={sort} onChange={(e) => setSort(e.target.value)}>
+                    <Select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                    >
                       <MenuItem value="latest">Latest Products</MenuItem>
                       <MenuItem value="priceLow">Price: Low to High</MenuItem>
                       <MenuItem value="priceHigh">Price: High to Low</MenuItem>
                     </Select>
                   </FormControl>
                   <Typography sx={{ color: "#111827" }}>
-                    Showing {filteredProducts.length} of {products.length} Products
+                    Showing {filteredProducts.length} of {products.length}{" "}
+                    Products
                   </Typography>
                 </Box>
 
@@ -491,7 +471,8 @@ export default function ShopWithSidebar() {
                       alignItems: "center",
                       justifyContent: "center",
                       cursor: "pointer",
-                      backgroundColor: view === "grid" ? "#1C274C" : "transparent",
+                      backgroundColor:
+                        view === "grid" ? "#1C274C" : "transparent",
                       color: view === "grid" ? "#FFFFFF" : "#111827",
                     }}
                   >
@@ -508,7 +489,8 @@ export default function ShopWithSidebar() {
                       alignItems: "center",
                       justifyContent: "center",
                       cursor: "pointer",
-                      backgroundColor: view === "list" ? "#1C274C" : "transparent",
+                      backgroundColor:
+                        view === "list" ? "#1C274C" : "transparent",
                       color: view === "list" ? "#FFFFFF" : "#111827",
                     }}
                   >
@@ -552,7 +534,11 @@ export default function ShopWithSidebar() {
                         <Image
                           src={p.image}
                           alt={p.title}
-                          style={{ width: "180px", height: "180px", objectFit: "contain" }}
+                          style={{
+                            width: "180px",
+                            height: "180px",
+                            objectFit: "contain",
+                          }}
                         />
                       </Box>
                       <CardContent sx={{ p: 2 }}>
@@ -566,7 +552,9 @@ export default function ShopWithSidebar() {
                         >
                           {p.title}
                         </Typography>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           <Typography
                             sx={{
                               textDecoration: "line-through",
@@ -577,7 +565,13 @@ export default function ShopWithSidebar() {
                           >
                             ${p.oldPrice}
                           </Typography>
-                          <Typography sx={{ color: "#1C274C", fontWeight: 800, fontSize: 14 }}>
+                          <Typography
+                            sx={{
+                              color: "#1C274C",
+                              fontWeight: 800,
+                              fontSize: 14,
+                            }}
+                          >
                             ${p.price}
                           </Typography>
                         </Box>
@@ -616,17 +610,36 @@ export default function ShopWithSidebar() {
                         <Image
                           src={p.image}
                           alt={p.title}
-                          style={{ width: "90px", height: "90px", objectFit: "contain" }}
+                          style={{
+                            width: "90px",
+                            height: "90px",
+                            objectFit: "contain",
+                          }}
                         />
                       </Box>
                       <Box sx={{ flex: 1 }}>
-                        <Typography sx={{ fontSize: 16, fontWeight: 700, color: "#1C274C" }}>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            color: "#1C274C",
+                          }}
+                        >
                           {p.title}
                         </Typography>
-                        <Typography sx={{ fontSize: 13, color: "#6B7280", mt: 0.5 }}>
+                        <Typography
+                          sx={{ fontSize: 13, color: "#6B7280", mt: 0.5 }}
+                        >
                           {p.category}
                         </Typography>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                            mt: 1,
+                          }}
+                        >
                           <Typography
                             sx={{
                               textDecoration: "line-through",
@@ -637,7 +650,13 @@ export default function ShopWithSidebar() {
                           >
                             ${p.oldPrice}
                           </Typography>
-                          <Typography sx={{ color: "#1C274C", fontWeight: 800, fontSize: 14 }}>
+                          <Typography
+                            sx={{
+                              color: "#1C274C",
+                              fontWeight: 800,
+                              fontSize: 14,
+                            }}
+                          >
                             ${p.price}
                           </Typography>
                         </Box>

@@ -3,7 +3,7 @@ import { Box, Breadcrumbs, Link as MuiLink, Typography } from "@mui/material";
 import Link from "next/link";
 import { useBreadcrumbs } from "./useBreadcrumbs";
 
-export default function Breadcumb({ title }) {
+export default function Breadcrumb({ title }) {
   const breadcrumbs = useBreadcrumbs();
 
   return (

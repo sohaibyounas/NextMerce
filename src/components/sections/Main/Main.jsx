@@ -6,9 +6,10 @@ import Mobile1 from "@/assets/products/mobile1.png";
 import Handphone from "@/assets/products/handphone.png";
 import Mobile2 from "@/assets/products/mobile2.png";
 import MobileWallpaper from "@/assets/products/mobile-wallpaper.png";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import Icon1 from "@/assets/icons/icon-01.svg";
 import Icon2 from "@/assets/icons/icon-02.svg";
 import Icon3 from "@/assets/icons/icon-03.svg";
@@ -44,18 +45,6 @@ export default function Mainarea() {
       });
   }, []);
 
-  // slider styles
-  const settings = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 2000,
-  };
-
   return (
     <>
       {/* slider and cards */}
@@ -63,40 +52,45 @@ export default function Mainarea() {
         {/* Image Slider */}
         <div className="col-span-8 px-2">
           <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide">
-            <Slider {...settings}>
+            <Swiper
+              modules={[Pagination, Autoplay]}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              className="h-full"
+            >
               {images.map((img) => (
-                <div
-                  key={img.id}
-                  className="relative h-[400px] rounded-lg overflow-hidden"
-                >
-                  {/* Background Image */}
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${img.url})` }}
-                  />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/30" />
-                  {/* Content */}
-                  <div className="relative z-10 h-full flex items-center justify-start p-8">
-                    <div className="text-white max-w-md">
-                      <p className="text-sm uppercase tracking-wide mb-6">
-                        LIMITED EDITION
-                      </p>
-                      <h1 className="text-4xl font-bold mb-4 leading-tight">
-                        {img.title}
-                      </h1>
-                      <p className="text-lg mb-6">
-                        Featuring A18 Chip, Liquid Glass, and AI-Powered
-                        Innovation
-                      </p>
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
-                        Shop Now
-                      </button>
+                <SwiperSlide key={img.id}>
+                  <div className="relative h-[450px] sm:h-[400px] rounded-lg overflow-hidden">
+                    {/* Background Image */}
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${img.url})` }}
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/30" />
+
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex items-center justify-start px-6 py-10 pb-20 sm:p-8">
+                      <div className="text-white max-w-md">
+                        <p className="text-sm uppercase tracking-wide mb-6">
+                          LIMITED EDITION
+                        </p>
+                        <h1 className="text-2xl sm:text-4xl font-bold mb-4 leading-tight">
+                          {img.title}
+                        </h1>
+                        <p className="text-lg mb-6">
+                          Featuring A18 Chip, Liquid Glass, and AI-Powered
+                          Innovation
+                        </p>
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
+                          Shop Now
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </SwiperSlide>
               ))}
-            </Slider>
+            </Swiper>
           </div>
         </div>
 
@@ -158,44 +152,89 @@ export default function Mainarea() {
         </div>
       </div>
 
-      {/* general texts */}
-      <div className="flex items-center flex-wrap gap-4 xl-gap-12.5 mt-10 mx-[100px]">
-        <div className="flex flex-row items-center gap-4 ">
-          <div>
-            <Image src={Icon1} alt="Icon1" width={40} height={41} />
+      {/* general texts / value propositions */}
+      <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start justify-between gap-8 sm:gap-6 lg:gap-10">
+        {/* 1st */}
+        <div className="flex items-center gap-4">
+          <div className="flex-shrink-0">
+            <Image
+              src={Icon1}
+              alt="Free Shipping"
+              width={45}
+              height={45}
+              className="w-10 h-10 sm:w-11 sm:h-11"
+            />
           </div>
-          <div>
-            <h2>Free Shipping</h2>
-            <p>For all orders $200</p>
+          <div className="flex flex-col">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+              Free Shipping
+            </h3>
+            <p className="text-[14px] text-[#606882] font-medium leading-none">
+              For all orders $200
+            </p>
           </div>
         </div>
 
-        <div className="flex flex-row items-center gap-4 ">
-          <div>
-            <Image src={Icon2} alt="Icon1" width={40} height={41} />
+        {/* 2nd */}
+        <div className="flex items-center gap-4">
+          <div className="flex-shrink-0">
+            <Image
+              src={Icon2}
+              alt="1 & 1 Returns"
+              width={45}
+              height={45}
+              className="w-10 h-10 sm:w-11 sm:h-11"
+            />
           </div>
-          <div>
-            <h2>1 & 1 Returns</h2>
-            <p>Cancellation after 1 day</p>
+          <div className="flex flex-col">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+              1 & 1 Returns
+            </h3>
+            <p className="text-[14px] text-[#606882] font-medium leading-none">
+              Cancellation after 1 day
+            </p>
           </div>
         </div>
 
-        <div className="flex flex-row items-center gap-4 ">
-          <div>
-            <Image src={Icon3} alt="Icon1" width={40} height={41} />
+        {/* 3rd */}
+        <div className="flex items-center gap-4">
+          <div className="flex-shrink-0">
+            <Image
+              src={Icon3}
+              alt="Secure Payments"
+              width={45}
+              height={45}
+              className="w-10 h-10 sm:w-11 sm:h-11"
+            />
           </div>
-          <div>
-            <h2>100% Secure Payments</h2>
-            <p>Gurantee secure payments</p>
+          <div className="flex flex-col">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+              100% Secure Payments
+            </h3>
+            <p className="text-[14px] text-[#606882] font-medium leading-none">
+              Guarantee secure payments
+            </p>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-4">
-          <div>
-            <Image src={Icon4} alt="Icon1" width={40} height={41} />
+
+        {/* 4th */}
+        <div className="flex items-center gap-4">
+          <div className="flex-shrink-0">
+            <Image
+              src={Icon4}
+              alt="Dedicated Support"
+              width={45}
+              height={45}
+              className="w-10 h-10 sm:w-11 sm:h-11"
+            />
           </div>
-          <div>
-            <h2>24/7 Dedicated </h2>
-            <p>Support Anywhere & anytime</p>
+          <div className="flex flex-col">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+              24/7 Dedicated Support
+            </h3>
+            <p className="text-[14px] text-[#606882] font-medium leading-none">
+              Support Anywhere & anytime
+            </p>
           </div>
         </div>
       </div>

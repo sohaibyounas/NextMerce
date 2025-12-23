@@ -6,29 +6,26 @@ import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
 import SamrtWatch from "@/assets/newarrivals/smartwatch.png";
 import Tablet from "@/assets/newarrivals/tablet.png";
-<<<<<<< HEAD
-import Seller from "../components/BestSeller/page.jsx";
-import Header from "../components/Header/page.jsx";
-import Footer from "../components/Footer/page.jsx";
-=======
+import Header from "@/components/layout/Header/Header";
+import Footer from "@/components/layout/Footer/Footer";
 import Seller from "@/components/sections/BestSeller/BestSeller";
->>>>>>> 1b347ab60638d37a18c5b61e28ff633ac7b6f577
+import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
+import { Box } from "@mui/material";
 
-export default function Shopslider() {
+export default function ShopWithoutSidebar() {
   return (
     <>
-<<<<<<< HEAD
       {/* header */}
       <Header />
-
       {/* shop-without-sidebar detail page */}
-      <Seller data={cardData} />
-
+      <Box sx={{ flexGrow: 1 }}>
+        <Breadcrumb title="Shop Without Sidebar" />
+        <Box sx={{ backgroundColor: "#F3F4F6", pt: 2 }}>
+          <Seller data={cardData} />
+        </Box>
+      </Box>
       {/* footer */}
       <Footer />
-=======
-      <Seller data={cardData} />
->>>>>>> 1b347ab60638d37a18c5b61e28ff633ac7b6f577
     </>
   );
 }

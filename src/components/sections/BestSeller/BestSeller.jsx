@@ -21,6 +21,7 @@ export default function Seller({ data = [] }) {
   const safeData = Array.isArray(data) ? data : [];
   return (
     <Box>
+      {/* title + view button */}
       <Box
         sx={{
           display: "flex",
@@ -29,6 +30,7 @@ export default function Seller({ data = [] }) {
           pr: 1,
         }}
       >
+        {/* title */}
         <Box sx={{ pt: "90px", pb: "48px", pl: 1 }}>
           <Typography
             sx={{
@@ -66,7 +68,7 @@ export default function Seller({ data = [] }) {
           <Grid key={card.id} size={{ xs: 6, sm: 4 }}>
             <Card
               sx={{
-                minWidth: 275,
+                width: "100%",
                 boxShadow: 0,
                 borderRadius: "10px",
                 backgroundColor: "#F6F7FB",

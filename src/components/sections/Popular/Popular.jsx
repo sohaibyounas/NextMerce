@@ -9,76 +9,21 @@ import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
 import Footer from "@/components/layout/Footer/Footer";
-import { Box, Breadcrumbs, Link as MuiLink, Typography } from "@mui/material";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Box } from "@mui/material";
+import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
 
 export default function PopularPage() {
-  const pathname = usePathname();
-
-  const segments = pathname.split("/").filter(Boolean);
-  const breadcrumbs = [
-    { href: "/", label: "Home" },
-    ...segments.map((segment, index) => {
-      const href = `/${segments.slice(0, index + 1).join("/")}`;
-      const label = decodeURIComponent(segment)
-        .split("-")
-        .filter(Boolean)
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-      return { href, label };
-    }),
-  ];
-
   return (
     <>
       {/* header section */}
       <Header />
 
       {/* product details section */}
-      <Box sx={{ flexGrow: 1, backgroundColor: "#F3F4F6" }}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography
-            sx={{ fontSize: "32px", fontWeight: 600, color: "#1C274C" }}
-          >
-            Our Best Products
-          </Typography>
-          {/* dynamically route */}
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mt: 1 }}>
-            {breadcrumbs.map((crumb, idx) => {
-              const isLast = idx === breadcrumbs.length - 1;
-
-              if (isLast) {
-                return (
-                  <Typography key={crumb.href} color="text.primary">
-                    {crumb.label}
-                  </Typography>
-                );
-              }
-
-              return (
-                <MuiLink
-                  key={crumb.href}
-                  component={Link}
-                  href={crumb.href}
-                  underline="hover"
-                  color="inherit"
-                >
-                  {crumb.label}
-                </MuiLink>
-              );
-            })}
-          </Breadcrumbs>
+      <Box sx={{ flexGrow: 1 }}>
+        <Breadcrumb title="Our Best Products" />
+        <Box sx={{ backgroundColor: "#F3F4F6", pt: 2 }}>
+          <Seller data={cardData} />
         </Box>
-
-        <Seller data={cardData} />
       </Box>
 
       {/* footer section */}

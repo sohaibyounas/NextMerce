@@ -65,20 +65,24 @@ export default function Header() {
       {/* header left side */}
       <div className="bg-white px-2 py-[11px]">
         <div className="flex items-center justify-between">
+          {/* logo + filters */}
           <div className="flex items-center justify-between gap-[10px]">
+            {/* logo with home route */}
             <div>
               <Link href="/">
                 <Image
                   src={NextLogo}
                   alt="Next Logo"
-                  width={190}
-                  height={190}
+                  width={"100%"}
+                  height={"auto"}
                   priority
                 />
               </Link>
             </div>
 
+            {/* search bar, dropdowns */}
             <div className="flex items-center justify-center w-full flex-1 min-w-0">
+              {/* dropdown */}
               <div className="relative px-2" ref={dropdownRef}>
                 <div
                   onClick={() => setIsOpen(!isOpen)}
@@ -103,23 +107,30 @@ export default function Header() {
                 />
               </div>
 
+              {/* search bar */}
               <div className="w-full">
                 <SearchBar />
               </div>
             </div>
           </div>
 
+          {/* user details */}
           <div className="hidden lg:block">
             <UserDetails />
           </div>
 
-          <div className="flex items-center gap-3 lg:hidden">
+          {/* mobile menu */}
+          <div className="flex items-center gap-3 lg:hidden h-auto">
+            {/* wishlist button */}
             <button type="button" className="relative">
               <Image src={Heart} alt="Wishlist" className="w-auto h-auto" />
             </button>
+            {/* cart button */}
             <button type="button" className="relative">
               <Image src={Cart} alt="Cart" className="w-auto h-auto" />
             </button>
+
+            {/* mobile menu button */}
             <button
               type="button"
               aria-label="Open menu"
@@ -132,71 +143,70 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Updated Menu */}
+      {/* desktop menu */}
       <div className="hidden lg:flex w-full bg-white mx-auto px-4 py-3 border border-t border-b border-[#e5e7eb] items-center justify-between">
         <Menu />
       </div>
 
-      {/* show menu on dektop (above md) */}
+      {/* mobile menu drawer */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          {/* close button */}
-          <button
-            type="button"
-            aria-label="Close menu overlay"
-            className="absolute inset-0 bg-black/40"
+          {/* backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
-          <div className="absolute inset-y-0 right-0 w-[85%] max-w-sm bg-white shadow-xl">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[#e5e7eb]">
-              <div className="flex items-center">
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Image
-                    src={NextLogo}
-                    alt="Next Logo"
-                    width={170}
-                    height={170}
-                    priority
-                  />
-                </Link>
-              </div>
+          {/* sidebar panel */}
+          <div className="absolute inset-y-0 right-0 w-[85%] max-w-sm bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out">
+            {/* sidebar header */}
+            <div className="flex-none flex items-center justify-between px-6 py-5 border-b border-[#F2F3F8]">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <Image
+                  src={NextLogo}
+                  alt="Next Logo"
+                  width={140}
+                  height={40}
+                  priority
+                  className="h-8 w-auto"
+                />
+              </Link>
               <button
                 type="button"
-                aria-label="Close menu"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2"
+                className="p-2 -mr-2 rounded-full hover:bg-gray-100 transition-colors"
               >
                 <IoClose className="h-6 w-6 text-[#1C274C]" />
               </button>
             </div>
 
-            {/* navbar */}
-            <div className="px-5 py-6">
-              <nav className="space-y-6">
+            {/* scrollable navigation area */}
+            <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-6">
+              <nav className="space-y-4">
                 <Link
                   href="/Popular"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-[20px] font-[600] text-[#1C274C]"
+                  className="flex items-center text-[18px] font-semibold text-[#1C274C] py-2 hover:text-blue-600 transition-colors"
                 >
                   Popular
                 </Link>
                 <Link
                   href="/shop"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-[20px] font-[600] text-[#1C274C]"
+                  className="flex items-center text-[18px] font-semibold text-[#1C274C] py-2 hover:text-blue-600 transition-colors"
                 >
                   Shop
                 </Link>
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-[20px] font-[600] text-[#1C274C]"
+                  className="flex items-center text-[18px] font-semibold text-[#1C274C] py-2 hover:text-blue-600 transition-colors"
                 >
                   Contact
                 </Link>
 
-                <div>
+                {/* pages accordion / dropdown */}
+                <div className="border-t border-[#F2F3F8] pt-2">
                   <button
                     type="button"
                     onClick={() =>
@@ -204,32 +214,39 @@ export default function Header() {
                         mobileOpenSection === "pages" ? null : "pages"
                       )
                     }
-                    className="w-full flex items-center justify-between text-[20px] font-[600] text-[#1C274C]"
+                    className="w-full flex items-center justify-between py-3 text-[18px] font-semibold text-[#1C274C] hover:text-blue-600 transition-colors"
                   >
                     <span>Pages</span>
                     <IoIosArrowDown
-                      className={`h-5 w-5 transition-transform ${
+                      className={`h-5 w-5 transition-transform duration-300 ${
                         mobileOpenSection === "pages" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
-                  {mobileOpenSection === "pages" && (
-                    <div className="mt-3 space-y-3 pl-1">
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      mobileOpenSection === "pages"
+                        ? "max-h-96 opacity-100 mt-1"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="space-y-3 pl-4 border-l-2 border-[#F2F3F8] ml-1">
                       {pagesSubItems.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="block text-[16px] font-[500] text-[#606882]"
+                          className="block text-[15px] font-medium text-[#606882] py-1 hover:text-blue-600 transition-colors"
                         >
                           {item.label}
                         </Link>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                <div>
+                {/* blogs accordion */}
+                <div className="border-t border-[#F2F3F8] pt-2">
                   <button
                     type="button"
                     onClick={() =>
@@ -237,59 +254,80 @@ export default function Header() {
                         mobileOpenSection === "blogs" ? null : "blogs"
                       )
                     }
-                    className="w-full flex items-center justify-between text-[20px] font-[600] text-[#1C274C]"
+                    className="w-full flex items-center justify-between py-3 text-[18px] font-semibold text-[#1C274C] hover:text-blue-600 transition-colors"
                   >
                     <span>Blogs</span>
                     <IoIosArrowDown
-                      className={`h-5 w-5 transition-transform ${
+                      className={`h-5 w-5 transition-transform duration-300 ${
                         mobileOpenSection === "blogs" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
-                  {mobileOpenSection === "blogs" && (
-                    <div className="mt-3 space-y-3 pl-1">
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      mobileOpenSection === "blogs"
+                        ? "max-h-96 opacity-100 mt-1"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="space-y-3 pl-4 border-l-2 border-[#F2F3F8] ml-1">
                       {blogsSubItems.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="block text-[16px] font-[500] text-[#606882]"
+                          className="block text-[15px] font-medium text-[#606882] py-1 hover:text-blue-600 transition-colors"
                         >
                           {item.label}
                         </Link>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
               </nav>
             </div>
 
-            {/* sign / register */}
-            <div className="absolute left-0 right-0 bottom-0 border-t border-[#e5e7eb]">
-              <div className="px-5 py-4 space-y-4">
+            {/* sidebar footer area */}
+            <div className="flex-none border-t border-[#F2F3F8] p-6 bg-gray-50/50">
+              <div className="space-y-5">
                 <Link
                   href="#"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 text-[18px] font-[600] text-[#1C274C]"
+                  className="flex items-center gap-4 group"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e5e7eb]">
-                    <span className="text-[#1C274C]">A</span>
-                  </span>
-                  <span>Sign In / Register</span>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white border border-[#E5E7EB] shadow-sm text-[#1C274C] font-bold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all">
+                    Account
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[16px] font-bold text-[#1C274C]">
+                      Sign In
+                    </span>
+                    <span className="text-[13px] text-[#606882]">
+                      Enter your account
+                    </span>
+                  </div>
                 </Link>
+
                 <Link
                   href="#"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 text-[18px] font-[600] text-[#1C274C]"
+                  className="flex items-center gap-4 group"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e5e7eb]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white border border-[#E5E7EB] shadow-sm group-hover:bg-blue-600 group-hover:border-blue-600 transition-all">
                     <Image
                       src={Heart}
                       alt="Wishlist"
-                      className="w-auto h-auto"
+                      className="w-5 h-5 group-hover:brightness-0 group-hover:invert transition-all"
                     />
-                  </span>
-                  <span>Wishlist</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[16px] font-bold text-[#1C274C]">
+                      My Wishlist
+                    </span>
+                    <span className="text-[13px] text-[#606882]">
+                      Saved products
+                    </span>
+                  </div>
                 </Link>
               </div>
             </div>
