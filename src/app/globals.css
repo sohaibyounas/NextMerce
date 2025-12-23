@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* Slider styles */
+.custom_slide .slick-dots {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: block;
+  position: absolute;
+  bottom: 25px;
+}
+
+.custom_slide .slick-dots li {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.custom_slide .slick-dots li button {
+  background: #d1d5db;
+  border: none;
+  width: 24px;
+  height: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0;
+}
+
+.custom_slide .slick-dots li button:before {
+  content: "";
+}
+
+.custom_slide .slick-dots li.slick-active button {
+  background: #3b82f6;
+}
+
+/* menu dropdown border */
+.custom-bar {
+  position: relative;
+}
+
+.custom-bar::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #3b82f6;
+  transition: width 0.3s ease-in-out;
+}
+
+.custom-bar:hover::before {
+  width: 100%;
+}
+
+/* shop slider cart */
+.cardcontent .cardbutton {
+  position: absolute;
+  bottom: -90px;
+  transition: 0.3s;
+}
+
+.cardcontent:hover .cardbutton {
+  bottom: 90px !important;
+  transition: 0.3s;
+}
+
+/* best seller cart */
+.cartcontent .cardbutton {
+  position: absolute;
+  right: -50px;
+  top: 150px;
+  transition: 0.3s;
+}
+
+.cartcontent:hover .cardbutton {
+  right: 0px !important;
+  transition: 0.3s;
+}
+
+/* link text styles */
+
+.linkStyles:hover {
+  color: #3c50e0;
+}
