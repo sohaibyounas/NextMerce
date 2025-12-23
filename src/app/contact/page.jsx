@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Box } from "@mui/material";
 import Footer from "../components/Footer/page";
 import ContactComponent from "../components/Header/Menu/Contact/page";
@@ -20,4 +21,10 @@ export default function Contact() {
       <Footer />
     </>
   );
+=======
+import ContactComponent from "@/components/layout/Header/Menu/Contact/Contact";
+
+export default function Contact() {
+  return <ContactComponent />;
+>>>>>>> 1b347ab60638d37a18c5b61e28ff633ac7b6f577
 }

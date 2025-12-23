@@ -1,34 +1,26 @@
+"use client";
+
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
 import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import SamrtWatch from "@/assets/newarrivals/smartwatch.png";
-import Tablet from "@/assets/newarrivals/tablet.png";
-<<<<<<< HEAD
-import Seller from "../components/BestSeller/page.jsx";
-import Header from "../components/Header/page.jsx";
-import Footer from "../components/Footer/page.jsx";
-=======
 import Seller from "@/components/sections/BestSeller/BestSeller";
->>>>>>> 1b347ab60638d37a18c5b61e28ff633ac7b6f577
+// import Header from "../Header/page.jsx";
+// import Mainarea from "../Main/page.jsx";
 
-export default function Shopslider() {
+export default function Shop() {
   return (
     <>
-<<<<<<< HEAD
       {/* header */}
-      <Header />
+      {/* <Header /> */}
 
-      {/* shop-without-sidebar detail page */}
-      <Seller data={cardData} />
+      {/* main body */}
+      {/* <Mainarea /> */}
 
-      {/* footer */}
-      <Footer />
-=======
+      {/* images slider */}
       <Seller data={cardData} />
->>>>>>> 1b347ab60638d37a18c5b61e28ff633ac7b6f577
     </>
   );
 }
@@ -73,20 +65,6 @@ const cardData = [
   {
     id: 6,
     image: Screen,
-    description: "This is the gray LCD.",
-    price: "$150",
-    priceCut: "$100",
-  },
-  {
-    id: 7,
-    image: SamrtWatch,
-    description: "This is the gray LCD.",
-    price: "$150",
-    priceCut: "$100",
-  },
-  {
-    id: 8,
-    image: Tablet,
     description: "This is the gray LCD.",
     price: "$150",
     priceCut: "$100",
