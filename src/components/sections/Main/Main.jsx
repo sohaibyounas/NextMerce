@@ -33,6 +33,7 @@ import axios from "axios";
 export default function Mainarea() {
   const [images, setImages] = useState([]);
 
+  // api call
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/photos?_limit=10")
@@ -153,7 +154,7 @@ export default function Mainarea() {
       </div>
 
       {/* general texts / value propositions */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start justify-between gap-8 sm:gap-6 lg:gap-10">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start justify-between gap-8 sm:gap-6 lg:gap-10 mt-6 px-2">
         {/* 1st */}
         <div className="flex items-center gap-4">
           <div className="flex-shrink-0">

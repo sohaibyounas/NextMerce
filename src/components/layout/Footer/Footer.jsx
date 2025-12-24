@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Icon, Typography } from "@mui/material";
+import { Box, Grid, Icon, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaApple, FaGooglePlay, FaRegEnvelope } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
@@ -10,13 +10,12 @@ export default function Footer() {
       <Grid container spacing={2} pt={11} px={2}>
         {/* help & support */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Box>
-            <Typography
-              sx={{ fontSize: "22px", fontWeight: 500, lineHeight: "30px" }}
-            >
-              Help & Support
-            </Typography>
-          </Box>
+          <Typography
+            sx={{ fontSize: "22px", fontWeight: 500, lineHeight: "30px" }}
+          >
+            Help & Support
+          </Typography>
+
           {/* help options */}
           <Box sx={{ pt: 3.6 }}>
             {/* 1st */}
@@ -24,7 +23,7 @@ export default function Footer() {
               sx={{
                 display: "flex",
                 alignItems: "start",
-                justifyContent: "space-between",
+                justifyContent: "start",
                 gap: "10px",
               }}
             >
@@ -34,20 +33,19 @@ export default function Footer() {
                 </Icon>
               </Box>
               <Box>
-                <Box>
-                  <Typography
-                    sx={{
-                      fontSize: "16px",
-                      lineHeight: "24px",
-                      fontWeight: 400,
-                      maxWidth: "300px",
-                    }}
-                  >
-                    685 Market Street,Las Vegas, LA 95820,United States.
-                  </Typography>
-                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "16px",
+                    lineHeight: "24px",
+                    fontWeight: 400,
+                    maxWidth: "250px",
+                  }}
+                >
+                  685 Market Street,Las Vegas, LA 95820,United States.
+                </Typography>
               </Box>
             </Box>
+
             {/* 2nd */}
             <Box
               sx={{
@@ -75,6 +73,7 @@ export default function Footer() {
                 </Typography>
               </Box>
             </Box>
+
             {/* 3rd */}
             <Box
               sx={{
@@ -107,17 +106,16 @@ export default function Footer() {
 
         {/* Account */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "22px",
-                lineHeight: "30px",
-                fontWeight: 500,
-              }}
-            >
-              Account
-            </Typography>
-          </Box>
+          <Typography
+            sx={{
+              fontSize: "22px",
+              lineHeight: "30px",
+              fontWeight: 500,
+            }}
+          >
+            Account
+          </Typography>
+
           {/* links */}
           <Box
             sx={{
@@ -152,17 +150,16 @@ export default function Footer() {
 
         {/* Quick Link */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "22px",
-                lineHeight: "30px",
-                fontWeight: 500,
-              }}
-            >
-              Quick Link
-            </Typography>
-          </Box>
+          <Typography
+            sx={{
+              fontSize: "22px",
+              lineHeight: "30px",
+              fontWeight: 500,
+            }}
+          >
+            Quick Link
+          </Typography>
+
           {/* links */}
           <Box
             sx={{
@@ -202,17 +199,16 @@ export default function Footer() {
 
         {/* Download App */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "22px",
-                lineHeight: "30px",
-                fontWeight: 500,
-              }}
-            >
-              Download App
-            </Typography>
-          </Box>
+          <Typography
+            sx={{
+              fontSize: "22px",
+              lineHeight: "30px",
+              fontWeight: 500,
+            }}
+          >
+            Download App
+          </Typography>
+
           {/* links */}
           <Box
             sx={{

@@ -15,10 +15,12 @@ import Image from "next/image";
 import { CiHeart } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
+import Link from "next/link";
 
 export default function Seller({ data = [] }) {
   const router = useRouter();
   const safeData = Array.isArray(data) ? data : [];
+
   return (
     <Box>
       {/* title + view button */}
@@ -66,206 +68,225 @@ export default function Seller({ data = [] }) {
       <Grid container spacing={2}>
         {safeData.map((card) => (
           <Grid key={card.id} size={{ xs: 6, sm: 4 }}>
-            <Card
-              sx={{
-                width: "100%",
-                boxShadow: 0,
-                borderRadius: "10px",
-                backgroundColor: "#F6F7FB",
-              }}
-            >
-              <CardContent
-                className="cartcontent"
+            <Link href="/Productdetails" style={{ textDecoration: "none" }}>
+              <Card
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "start",
-                  position: "relative",
-                  p: 0,
-                  "&:last-child": {
-                    paddingBottom: 0,
+                  width: "100%",
+                  maxHeight: "400px",
+                  boxShadow: "sm",
+                  borderRadius: "10px",
+                  backgroundColor: "#F6F7FB",
+                  border: "1px solid #E5E7EB",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease-in-out",
+                  "&:hover": {
+                    transform: "translateY(-5px)",
+                    boxShadow: "md",
                   },
                 }}
+                onClick={() => {
+                  console.log("Card clicked:", card);
+                  router.push(`/ProductDetails`);
+                }}
               >
-                {/* card details */}
-                <Box
+                <CardContent
+                  className="cartcontent"
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 1,
-                    mt: 4,
-                    p: "0px 5px",
+                    alignItems: "start",
+                    position: "relative",
+                    p: 0,
+                    "&:last-child": {
+                      paddingBottom: 0,
+                    },
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "#1C274C",
-                    }}
-                  >
-                    {card.description}
-                  </Typography>
+                  {/* card details */}
                   <Box
                     sx={{
                       display: "flex",
+                      flexDirection: "column",
                       gap: 1,
-                      alignItems: "center",
-                      justifyContent: "center",
+                      mt: 4,
+                      p: "0px 5px",
                     }}
                   >
                     <Typography
                       sx={{
                         fontSize: "18px",
-                        fontWeight: 500,
-                        lineHeight: "28px",
-                        color: "#1c274c",
+                        fontWeight: 600,
+                        color: "#1C274C",
                       }}
                     >
-                      {card.price}
+                      {card.description}
                     </Typography>
-                    <Typography
+                    <Box
                       sx={{
-                        textDecoration: "line-through",
-                        fontSize: "18px",
-                        fontWeight: 500,
-                        lineHeight: "28px",
-                        color: "#8C92A4",
+                        display: "flex",
+                        gap: 1,
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      {card.priceCut}
-                    </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: "18px",
+                          fontWeight: 500,
+                          lineHeight: "28px",
+                          color: "#1c274c",
+                        }}
+                      >
+                        {card.price}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          textDecoration: "line-through",
+                          fontSize: "18px",
+                          fontWeight: 500,
+                          lineHeight: "28px",
+                          color: "#8C92A4",
+                        }}
+                      >
+                        {card.priceCut}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-                {/* card image */}
-                <Box
-                  sx={{
-                    width: "100%",
-                    p: 2,
-                  }}
-                >
-                  <Image
-                    src={card.image}
-                    alt="image"
-                    style={{ width: "200px", height: "200px" }}
-                  />
-                </Box>
+                  {/* card image */}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      p: 2,
+                    }}
+                  >
+                    <Image
+                      src={card.image}
+                      alt="image"
+                      style={{ width: "200px", height: "200px" }}
+                    />
+                  </Box>
 
-                {/* cart details */}
-                <Box
-                  className="cardbutton"
-                  sx={{
-                    width: "fit-content",
-                    display: "flex",
-                    alignItems: "start",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    gap: 2,
-                  }}
-                >
-                  <Tooltip
-                    title="Quick View"
-                    enterDelay={100}
-                    leaveDelay={200}
-                    placement="left-start"
-                    slotProps={{
-                      tooltip: {
-                        sx: {
-                          bgcolor: "#fff",
-                          color: "#000",
-                          borderRadius: "8px",
-                          fontSize: "10px",
-                          fontWeight: 500,
-                        },
-                      },
+                  {/* cart details */}
+                  <Box
+                    className="cardbutton"
+                    sx={{
+                      width: "fit-content",
+                      display: "flex",
+                      alignItems: "start",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      gap: 2,
                     }}
                   >
-                    <Icon
-                      className="hiddenbutton"
-                      sx={{
-                        mr: 2,
-                        cursor: "pointer",
-                        boxShadow: 1,
-                        borderRadius: "50%",
-                        p: "4px",
-                        color: "#000",
-                        "&:hover": {
-                          background: "#5C5CFF",
+                    {/* quick view */}
+                    <Tooltip
+                      title="Quick View"
+                      enterDelay={100}
+                      leaveDelay={200}
+                      placement="left-start"
+                      slotProps={{
+                        tooltip: {
+                          sx: {
+                            bgcolor: "#fff",
+                            color: "#000",
+                            borderRadius: "8px",
+                            fontSize: "10px",
+                            fontWeight: 500,
+                          },
                         },
                       }}
                     >
-                      <CiHeart size={15} />
-                    </Icon>
-                  </Tooltip>
-                  <Tooltip
-                    title="Add to Cart"
-                    enterDelay={100}
-                    leaveDelay={200}
-                    placement="left-start"
-                    slotProps={{
-                      tooltip: {
-                        sx: {
-                          bgcolor: "#fff",
+                      <Icon
+                        className="hiddenbutton"
+                        sx={{
+                          mr: 2,
+                          cursor: "pointer",
+                          boxShadow: 1,
+                          borderRadius: "50%",
+                          p: "4px",
                           color: "#000",
-                          borderRadius: "8px",
-                          fontSize: "10px",
-                          fontWeight: 500,
-                        },
-                      },
-                    }}
-                  >
-                    <Icon
-                      sx={{
-                        mr: 2,
-                        cursor: "pointer",
-                        boxShadow: 1,
-                        borderRadius: "50%",
-                        p: "6px 4px",
-                        color: "#000",
-                        "&:hover": {
-                          background: "#5C5CFF",
+                          "&:hover": {
+                            background: "#5C5CFF",
+                          },
+                        }}
+                      >
+                        <CiHeart size={15} />
+                      </Icon>
+                    </Tooltip>
+
+                    {/* add to cart */}
+                    <Tooltip
+                      title="Add to Cart"
+                      enterDelay={100}
+                      leaveDelay={200}
+                      placement="left-start"
+                      slotProps={{
+                        tooltip: {
+                          sx: {
+                            bgcolor: "#fff",
+                            color: "#000",
+                            borderRadius: "8px",
+                            fontSize: "10px",
+                            fontWeight: 500,
+                          },
                         },
                       }}
                     >
-                      <IoCartOutline size={15} />
-                    </Icon>
-                  </Tooltip>
-                  <Tooltip
-                    title="Add to Wishlist"
-                    enterDelay={100}
-                    leaveDelay={200}
-                    placement="left-start"
-                    slotProps={{
-                      tooltip: {
-                        sx: {
-                          bgcolor: "#fff",
+                      <Icon
+                        sx={{
+                          mr: 2,
+                          cursor: "pointer",
+                          boxShadow: 1,
+                          borderRadius: "50%",
+                          p: "6px 4px",
                           color: "#000",
-                          borderRadius: "8px",
-                          fontSize: "10px",
-                          fontWeight: 500,
-                        },
-                      },
-                    }}
-                  >
-                    <Icon
-                      className="hiddenbutton"
-                      sx={{
-                        cursor: "pointer",
-                        boxShadow: 1,
-                        borderRadius: "50%",
-                        p: "4px",
-                        color: "#000",
-                        "&:hover": {
-                          background: "#5C5CFF",
+                          "&:hover": {
+                            background: "#5C5CFF",
+                          },
+                        }}
+                      >
+                        <IoCartOutline size={15} />
+                      </Icon>
+                    </Tooltip>
+
+                    {/* add to wishlist */}
+                    <Tooltip
+                      title="Add to Wishlist"
+                      enterDelay={100}
+                      leaveDelay={200}
+                      placement="left-start"
+                      slotProps={{
+                        tooltip: {
+                          sx: {
+                            bgcolor: "#fff",
+                            color: "#000",
+                            borderRadius: "8px",
+                            fontSize: "10px",
+                            fontWeight: 500,
+                          },
                         },
                       }}
                     >
-                      <FiEye size={15} />
-                    </Icon>
-                  </Tooltip>
-                </Box>
-              </CardContent>
-            </Card>
+                      <Icon
+                        className="hiddenbutton"
+                        sx={{
+                          cursor: "pointer",
+                          boxShadow: 1,
+                          borderRadius: "50%",
+                          p: "4px",
+                          color: "#000",
+                          "&:hover": {
+                            background: "#5C5CFF",
+                          },
+                        }}
+                      >
+                        <FiEye size={15} />
+                      </Icon>
+                    </Tooltip>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

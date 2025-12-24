@@ -14,14 +14,18 @@ import {
   Chip,
   FormControl,
   FormControlLabel,
+  Icon,
   MenuItem,
   Paper,
   Select,
   Slider,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
-import { FiChevronDown, FiGrid, FiList } from "react-icons/fi";
+import { FiChevronDown, FiGrid, FiList, FiEye } from "react-icons/fi";
+import { CiHeart } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
 import GrayLCD from "@/assets/newarrivals/graylcd.png";
 import Iphone from "@/assets/newarrivals/iphone17.png";
@@ -205,6 +209,7 @@ export default function ShopWithSidebar() {
             backgroundColor: "#F3F4F6",
           }}
         >
+          {/* sidebar  + products view */}
           <Box
             sx={{
               mt: 3,
@@ -214,7 +219,9 @@ export default function ShopWithSidebar() {
               alignItems: "start",
             }}
           >
+            {/* sidebar filters */}
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {/* filters */}
               <Paper
                 elevation={0}
                 sx={{
@@ -238,6 +245,7 @@ export default function ShopWithSidebar() {
                 </Button>
               </Paper>
 
+              {/* category */}
               <Paper
                 elevation={0}
                 sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
@@ -295,6 +303,7 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
+              {/* size */}
               <Paper
                 elevation={0}
                 sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
@@ -327,6 +336,7 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
+              {/* color */}
               <Paper
                 elevation={0}
                 sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
@@ -363,6 +373,7 @@ export default function ShopWithSidebar() {
                 </Accordion>
               </Paper>
 
+              {/* price */}
               <Paper
                 elevation={0}
                 sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
@@ -416,12 +427,11 @@ export default function ShopWithSidebar() {
                   </AccordionDetails>
                 </Accordion>
               </Paper>
-
-              {/* side bar */}
-              {/* paste the code you design here */}
             </Box>
 
+            {/* products view grid/ full */}
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {/* products */}
               <Paper
                 elevation={0}
                 sx={{
@@ -514,72 +524,214 @@ export default function ShopWithSidebar() {
                   {filteredProducts.map((p) => (
                     <Card
                       key={p.id}
+                      className="cartcontent"
                       elevation={0}
                       sx={{
                         borderRadius: 2,
                         border: "1px solid #E5E7EB",
-                        overflow: "hidden",
+                        overflow: "visible",
                         backgroundColor: "#FFFFFF",
+                        position: "relative",
                       }}
                     >
-                      <Box
+                      <CardContent
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          p: 2,
-                          minHeight: 220,
+                          p: 0,
+                          "&:last-child": {
+                            paddingBottom: 0,
+                          },
+                          position: "relative",
                         }}
                       >
-                        <Image
-                          src={p.image}
-                          alt={p.title}
-                          style={{
-                            width: "180px",
-                            height: "180px",
-                            objectFit: "contain",
-                          }}
-                        />
-                      </Box>
-                      <CardContent sx={{ p: 2 }}>
-                        <Typography
-                          sx={{
-                            fontSize: 14,
-                            fontWeight: 700,
-                            color: "#1C274C",
-                            mb: 1,
-                          }}
-                        >
-                          {p.title}
-                        </Typography>
                         <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            p: 2,
+                            minHeight: 220,
+                          }}
                         >
-                          <Typography
-                            sx={{
-                              textDecoration: "line-through",
-                              color: "#8C92A4",
-                              fontWeight: 600,
-                              fontSize: 14,
+                          <Image
+                            src={p.image}
+                            alt={p.title}
+                            style={{
+                              width: "180px",
+                              height: "180px",
+                              objectFit: "contain",
                             }}
-                          >
-                            ${p.oldPrice}
-                          </Typography>
+                          />
+                        </Box>
+
+                        {/* product title, price */}
+                        <Box sx={{ p: 2 }}>
                           <Typography
                             sx={{
+                              fontSize: 14,
+                              fontWeight: 700,
                               color: "#1C274C",
-                              fontWeight: 800,
-                              fontSize: 14,
+                              mb: 1,
                             }}
                           >
-                            ${p.price}
+                            {p.title}
                           </Typography>
+
+                          {/* old, new price */}
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                textDecoration: "line-through",
+                                color: "#8C92A4",
+                                fontWeight: 600,
+                                fontSize: 14,
+                              }}
+                            >
+                              ${p.oldPrice}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                color: "#1C274C",
+                                fontWeight: 800,
+                                fontSize: 14,
+                              }}
+                            >
+                              ${p.price}
+                            </Typography>
+                          </Box>
+                        </Box>
+
+                        {/* Cart Options */}
+                        <Box
+                          className="cardbutton"
+                          sx={{
+                            width: "fit-content",
+                            display: "flex",
+                            alignItems: "start",
+                            justifyContent: "center",
+                            flexDirection: "column",
+                            gap: 2,
+                          }}
+                        >
+                          {/* Wishlist */}
+                          <Tooltip
+                            title="Add to Wishlist"
+                            enterDelay={100}
+                            leaveDelay={200}
+                            placement="left-start"
+                            slotProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: "#fff",
+                                  color: "#000",
+                                  borderRadius: "8px",
+                                  fontSize: "10px",
+                                  fontWeight: 500,
+                                },
+                              },
+                            }}
+                          >
+                            <Icon
+                              sx={{
+                                cursor: "pointer",
+                                boxShadow: 1,
+                                borderRadius: "50%",
+                                p: "4px",
+                                color: "#000",
+                                backgroundColor: "#fff",
+                                "&:hover": {
+                                  background: "#5C5CFF",
+                                  color: "#fff",
+                                },
+                              }}
+                            >
+                              <CiHeart size={15} />
+                            </Icon>
+                          </Tooltip>
+
+                          {/* Add to Cart */}
+                          <Tooltip
+                            title="Add to Cart"
+                            enterDelay={100}
+                            leaveDelay={200}
+                            placement="left-start"
+                            slotProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: "#fff",
+                                  color: "#000",
+                                  borderRadius: "8px",
+                                  fontSize: "10px",
+                                  fontWeight: 500,
+                                },
+                              },
+                            }}
+                          >
+                            <Icon
+                              sx={{
+                                cursor: "pointer",
+                                boxShadow: 1,
+                                borderRadius: "50%",
+                                p: "6px 4px",
+                                color: "#000",
+                                backgroundColor: "#fff",
+                                "&:hover": {
+                                  background: "#5C5CFF",
+                                  color: "#fff",
+                                },
+                              }}
+                            >
+                              <IoCartOutline size={15} />
+                            </Icon>
+                          </Tooltip>
+
+                          {/* Quick View */}
+                          <Tooltip
+                            title="Quick View"
+                            enterDelay={100}
+                            leaveDelay={200}
+                            placement="left-start"
+                            slotProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: "#fff",
+                                  color: "#000",
+                                  borderRadius: "8px",
+                                  fontSize: "10px",
+                                  fontWeight: 500,
+                                },
+                              },
+                            }}
+                          >
+                            <Icon
+                              sx={{
+                                cursor: "pointer",
+                                boxShadow: 1,
+                                borderRadius: "50%",
+                                p: "4px",
+                                color: "#000",
+                                backgroundColor: "#fff",
+                                "&:hover": {
+                                  background: "#5C5CFF",
+                                  color: "#fff",
+                                },
+                              }}
+                            >
+                              <FiEye size={15} />
+                            </Icon>
+                          </Tooltip>
                         </Box>
                       </CardContent>
                     </Card>
                   ))}
                 </Box>
               ) : (
+                // detial view
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   {filteredProducts.map((p) => (
                     <Paper

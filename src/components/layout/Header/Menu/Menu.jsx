@@ -7,6 +7,7 @@ import Contact from "./Contact/Contact";
 import Pages from "./Pages/Pages";
 import Popular from "./Popular/Popular";
 import Shop from "./Shop/Shop";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const menuItems = [
   {
@@ -52,18 +53,33 @@ const blogsSubItems = [
 
 export default function Menu() {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   const isInternalHref = (href) =>
     typeof href === "string" && href.startsWith("/");
 
   // Handle hover to open/close dropdown
   const handleMouseEnter = (label) => {
+    // Clear any existing timeout
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+
     if (menuItems.find((item) => item.label === label && item.arrow)) {
       setOpenDropdown(label);
     }
   };
 
   const handleMouseLeave = () => {
+    // Add a small delay before closing
+    const id = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 200);
+    setTimeoutId(id);
+  };
+
+  const handleDropdownItemClick = () => {
     setOpenDropdown(null);
   };
 
@@ -86,22 +102,7 @@ export default function Menu() {
                     className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
                   >
                     {item.label}
-                    {item.arrow && (
-                      <svg
-                        className="ml-1 h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
+                    {item.arrow && <IoIosArrowDown />}
                   </Link>
                 ) : (
                   <a
@@ -109,29 +110,17 @@ export default function Menu() {
                     className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
                   >
                     {item.label}
-                    {item.arrow && (
-                      <svg
-                        className="ml-1 h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
+                    {item.arrow && <IoIosArrowUp />}
                   </a>
                 )}
                 {/* Dropdown for items with arrow */}
                 {item.arrow && openDropdown === item.label && (
                   <div
-                    className={`absolute left-0 z-10 mt-2 rounded-md bg-white border border-[#e5e7eb] shadow-lg
-    ${item.label === "Pages" ? "w-[180px]" : "w-[220px]"}`}
+                    className={`absolute left-0 z-10 mt-2 rounded-md bg-white border border-[#e5e7eb] shadow-lg ${
+                      item.label === "Pages" ? "w-[180px]" : "w-[220px]"
+                    }`}
+                    onMouseEnter={() => handleMouseEnter(item.label)}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <div className="py-1 px-2">
                       {(item.label === "Pages"
@@ -142,6 +131,7 @@ export default function Menu() {
                           <Link
                             key={subItem.href}
                             href={subItem.href}
+                            onClick={handleDropdownItemClick}
                             className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
                           >
                             {subItem.label}
@@ -150,6 +140,7 @@ export default function Menu() {
                           <a
                             key={subItem.href}
                             href={subItem.href}
+                            onClick={handleDropdownItemClick}
                             className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
                           >
                             {subItem.label}
