@@ -24,6 +24,10 @@ import {
   MdRemove,
   MdFavoriteBorder,
   MdShoppingCart,
+  MdFullscreen,
+  MdClose,
+  MdArrowBack,
+  MdArrowForward,
 } from "react-icons/md";
 import Image from "next/image";
 import Fitness from "@/assets/newarrivals/fitness-runner.png";
@@ -147,6 +151,16 @@ export default function ProductDetails() {
   const [reviewName, setReviewName] = useState("");
   const [reviewEmail, setReviewEmail] = useState("");
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  const handleNextImage = () => {
+    setSelectedImage((prev) => (prev + 1) % cardData.length);
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImage((prev) => (prev - 1 + cardData.length) % cardData.length);
+  };
+
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -210,6 +224,21 @@ export default function ProductDetails() {
                   fill
                   style={{ objectFit: "contain" }}
                 />
+                <IconButton
+                  onClick={() => setIsLightboxOpen(true)}
+                  sx={{
+                    position: "absolute",
+                    top: 16,
+                    right: 16,
+                    bgcolor: "rgba(255,255,255,0.9)",
+                    boxShadow: 1,
+                    "&:hover": {
+                      bgcolor: "#fff",
+                    },
+                  }}
+                >
+                  <MdFullscreen size={24} />
+                </IconButton>
               </Box>
 
               {/* Thumbnail Images */}
@@ -734,6 +763,106 @@ export default function ProductDetails() {
 
       {/* subscription */}
       <Subscription />
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            bgcolor: "rgba(0,0,0,0.9)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backdropFilter: "blur(5px)",
+          }}
+        >
+          {/* Close Button */}
+          <IconButton
+            onClick={() => setIsLightboxOpen(false)}
+            sx={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              color: "#fff",
+              "&:hover": {
+                bgcolor: "rgba(255,255,255,0.1)",
+              },
+            }}
+          >
+            <MdClose size={32} />
+          </IconButton>
+
+          {/* Previous Button */}
+          <IconButton
+            onClick={handlePrevImage}
+            sx={{
+              position: "absolute",
+              left: 20,
+              color: "#fff",
+              "&:hover": {
+                bgcolor: "rgba(255,255,255,0.1)",
+              },
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <MdArrowBack size={48} />
+          </IconButton>
+
+          {/* Main Lightbox Image */}
+          <Box
+            sx={{
+              width: { xs: "90%", md: "80%" },
+              height: { xs: "60%", md: "80%" },
+              position: "relative",
+            }}
+          >
+            <Image
+              src={cardData[selectedImage]?.image}
+              alt={productData.name}
+              fill
+              style={{ objectFit: "contain" }}
+            />
+          </Box>
+
+          {/* Next Button */}
+          <IconButton
+            onClick={handleNextImage}
+            sx={{
+              position: "absolute",
+              right: 20,
+              color: "#fff",
+              "&:hover": {
+                bgcolor: "rgba(255,255,255,0.1)",
+              },
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <MdArrowForward size={48} />
+          </IconButton>
+
+          {/* Mobile Navigation (Bottom) */}
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 20,
+              display: { xs: "flex", md: "none" },
+              gap: 4,
+            }}
+          >
+            <IconButton onClick={handlePrevImage} sx={{ color: "#fff" }}>
+              <MdArrowBack size={32} />
+            </IconButton>
+            <IconButton onClick={handleNextImage} sx={{ color: "#fff" }}>
+              <MdArrowForward size={32} />
+            </IconButton>
+          </Box>
+        </Box>
+      )}
 
       {/* footer */}
       <Footer />
