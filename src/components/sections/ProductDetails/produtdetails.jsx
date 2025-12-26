@@ -197,9 +197,9 @@ export default function ProductDetails() {
       <Breadcrumb title="Shop Details" />
 
       {/* Product Details */}
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
         {/* Product Main Section */}
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {/* Product Images */}
           <Grid item xs={12} md={6}>
             <Box>
@@ -207,7 +207,7 @@ export default function ProductDetails() {
               <Box
                 sx={{
                   width: "100%",
-                  height: 400,
+                  height: { xs: 300, sm: 400 },
                   bgcolor: "#f5f5f5",
                   borderRadius: 2,
                   mb: 2,
@@ -287,7 +287,7 @@ export default function ProductDetails() {
               <Typography
                 variant="h4"
                 sx={{
-                  fontSize: "24px",
+                  fontSize: { xs: "20px", md: "24px" },
                   fontWeight: 600,
                   color: "#1C274C",
                   mb: 2,
@@ -387,14 +387,23 @@ export default function ProductDetails() {
               </Box>
 
               {/* Quantity and Actions */}
-              <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 2,
+                  mb: 3,
+                }}
+              >
                 {/* Quantity Selector */}
                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "space-between",
                     border: "1px solid #E5E7EB",
                     borderRadius: "8px",
+                    width: { xs: "100%", sm: "auto" },
                   }}
                 >
                   <IconButton
@@ -423,6 +432,7 @@ export default function ProductDetails() {
                     textTransform: "none",
                     px: 4,
                     borderRadius: "8px",
+                    width: { xs: "100%", sm: "auto" },
                     "&:hover": {
                       bgcolor: "#2A3EB1",
                     },
@@ -441,6 +451,7 @@ export default function ProductDetails() {
                     textTransform: "none",
                     px: 3,
                     borderRadius: "8px",
+                    width: { xs: "100%", sm: "auto" },
                     "&:hover": {
                       borderColor: "#3C50E0",
                       bgcolor: "#f5f7ff",
@@ -455,6 +466,7 @@ export default function ProductDetails() {
                   sx={{
                     border: "1px solid #E5E7EB",
                     borderRadius: "8px",
+                    width: { xs: "100%", sm: "auto" },
                     "&:hover": {
                       borderColor: "#3C50E0",
                       bgcolor: "#f5f7ff",
@@ -473,12 +485,15 @@ export default function ProductDetails() {
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
             sx={{
               borderBottom: 1,
               borderColor: "divider",
               "& .MuiTab-root": {
                 textTransform: "none",
-                fontSize: "16px",
+                fontSize: { xs: "14px", md: "16px" },
                 fontWeight: 500,
                 color: "#606882",
                 "&.Mui-selected": {
@@ -746,6 +761,7 @@ export default function ProductDetails() {
                         borderRadius: "8px",
                         fontSize: "16px",
                         fontWeight: 500,
+                        width: { xs: "100%", sm: "auto" },
                         "&:hover": {
                           bgcolor: "#2A3EB1",
                         },
