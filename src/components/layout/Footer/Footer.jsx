@@ -175,6 +175,11 @@ export default function Footer() {
               </Link>
             </Box>
             <Box>
+              <Link href="/services" className="linkStyles">
+                Services
+              </Link>
+            </Box>
+            <Box>
               <Link href="#" className="linkStyles">
                 Refund Policy
               </Link>

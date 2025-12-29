@@ -173,10 +173,14 @@ export default function AboutUs() {
                   mb: 4,
                 }}
               >
-                We started with a simple mission: to make high-quality products
-                accessible to everyone. Today, we stand as a beacon of
-                innovation and customer satisfaction, bridging the gap between
-                premium quality and affordability.
+                At NextMerce, we believe shopping should be simple, enjoyable,
+                and tailored to you. What started as a small idea has grown into
+                a vibrant platform dedicated to bringing quality products and
+                exceptional experiences to customers around the world. Our
+                mission is to make premium items accessible to everyone —
+                without the hassle. Every day, we work with passion and purpose
+                to innovate, inspire, and deliver excellence. Join us as we
+                reimagine the future of online shopping.
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Button
