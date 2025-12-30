@@ -137,11 +137,11 @@ const FadeInSection = ({ children, delay = 0, direction = "up" }) => {
   const getTransform = () => {
     switch (direction) {
       case "left":
-        return isVisible ? "translateX(0)" : "translateX(-50px)";
+        return isVisible ? "translateX(0)" : "translateX(-30px)";
       case "right":
-        return isVisible ? "translateX(0)" : "translateX(50px)";
+        return isVisible ? "translateX(0)" : "translateX(30px)";
       default:
-        return isVisible ? "translateY(0)" : "translateY(50px)";
+        return isVisible ? "translateY(0)" : "translateY(30px)";
     }
   };
 
@@ -151,7 +151,7 @@ const FadeInSection = ({ children, delay = 0, direction = "up" }) => {
       sx={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
-        transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
+        transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
       }}
     >
       {children}
@@ -173,66 +173,46 @@ export default function Services() {
           {/* Text Content */}
           <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
             <FadeInSection direction="left">
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "#3C50E0",
-                  fontWeight: 600,
-                  mb: 2,
-                  textTransform: "uppercase",
-                  letterSpacing: { xs: 1, md: 1.5 },
-                  fontSize: { xs: "0.9rem", md: "1.25rem" },
-                  textAlign: { xs: "center", md: "left" },
-                }}
-              >
-                Customer First
-              </Typography>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontWeight: 800,
-                  fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
-                  lineHeight: { xs: 1.2, md: 1.2 },
-                  mb: 3,
-                  color: "#1C274C",
-                  textAlign: { xs: "center", md: "left" },
-                }}
-              >
-                Enhancing Your{" "}
-                <Box
-                  component="span"
+              <Box sx={{ position: "relative", zIndex: 1 }}>
+                <Typography
+                  variant="caption"
                   sx={{
-                    background:
-                      "linear-gradient(45deg, #3C50E0 30%, #F59E0B 90%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
+                    color: "#3C50E0",
+                    fontWeight: 700,
+                    letterSpacing: 2,
+                    textTransform: "uppercase",
+                    display: "block",
+                    mb: 2,
                   }}
                 >
-                  Shopping
-                </Box>{" "}
-                Experience
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#606882",
-                  fontSize: { xs: "1rem", md: "1.1rem" },
-                  lineHeight: 1.8,
-                  mb: 4,
-                  textAlign: { xs: "center", md: "left" },
-                  px: { xs: 2, md: 0 },
-                }}
-              >
-                We go beyond just selling products. From seamless browsing and
-                secure payments to lightning-fast delivery and dedicated
-                support, we're committed to making your shopping journey
-                exceptional.
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "flex-start" },
-                }}
-              >
+                  World Class Services
+                </Typography>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: { xs: "2.5rem", md: "3.5rem" },
+                    lineHeight: 1.1,
+                    mb: 3,
+                    color: "#1C274C",
+                  }}
+                >
+                  We Provide Best <br />
+                  <span style={{ color: "#3C50E0" }}>Customer</span> Experiences
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#606882",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    lineHeight: 1.8,
+                    mb: 4,
+                  }}
+                >
+                  We go beyond just selling products. From seamless browsing and
+                  secure payments to lightning-fast delivery and dedicated
+                  support, we're committed to making your shopping journey
+                  exceptional.
+                </Typography>
                 <Button
                   variant="contained"
                   size="large"
@@ -240,14 +220,19 @@ export default function Services() {
                   sx={{
                     bgcolor: "#3C50E0",
                     borderRadius: "50px",
-                    px: { xs: 3, md: 4 },
+                    px: 4,
                     py: 1.5,
-                    fontSize: { xs: "0.9rem", md: "1rem" },
                     textTransform: "none",
-                    "&:hover": { bgcolor: "#2A3EB1" },
+                    fontSize: "1rem",
+                    boxShadow: "0 10px 20px rgba(60, 80, 224, 0.2)",
+                    "&:hover": {
+                      bgcolor: "#2A3EB1",
+                      transform: "translateY(-2px)",
+                    },
+                    transition: "all 0.3s",
                   }}
                 >
-                  Start Shopping
+                  Explore Services
                 </Button>
               </Box>
             </FadeInSection>

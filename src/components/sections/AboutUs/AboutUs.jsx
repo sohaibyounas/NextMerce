@@ -116,8 +116,8 @@ const FadeInSection = ({ children, delay = 0 }) => {
       ref={ref}
       sx={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(50px)",
-        transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
+        transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
       }}
     >
       {children}
@@ -135,81 +135,97 @@ export default function AboutUs() {
 
       {/* Hero Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-        <Grid container spacing={6} alignItems="center">
+        <Grid container spacing={8} alignItems="center">
           <Grid item xs={12} md={6}>
             <FadeInSection>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "#3C50E0",
-                  fontWeight: 600,
-                  mb: 2,
-                  textTransform: "uppercase",
-                  letterSpacing: 1.5,
-                }}
-              >
-                Our Story
-              </Typography>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontWeight: 800,
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
-                  lineHeight: 1.2,
-                  mb: 3,
-                  background:
-                    "linear-gradient(45deg, #1C274C 30%, #3C50E0 90%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Innovating the Future of Shopping
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#606882",
-                  fontSize: "1.1rem",
-                  lineHeight: 1.8,
-                  mb: 4,
-                }}
-              >
-                At NextMerce, we believe shopping should be simple, enjoyable,
-                and tailored to you. What started as a small idea has grown into
-                a vibrant platform dedicated to bringing quality products and
-                exceptional experiences to customers around the world. Our
-                mission is to make premium items accessible to everyone —
-                without the hassle. Every day, we work with passion and purpose
-                to innovate, inspire, and deliver excellence. Join us as we
-                reimagine the future of online shopping.
-              </Typography>
-              <Stack direction="row" spacing={2}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  endIcon={<MdArrowForward />}
-                  sx={{
-                    bgcolor: "#3C50E0",
-                    borderRadius: "50px",
-                    px: 4,
-                    py: 1.5,
-                    textTransform: "none",
-                    fontSize: "1rem",
-                    "&:hover": { bgcolor: "#2A3EB1" },
-                  }}
-                >
-                  Learn More
-                </Button>
-                <IconButton
+              <Box sx={{ position: "relative" }}>
+                <Typography
+                  variant="h6"
                   sx={{
                     color: "#3C50E0",
-                    border: "2px solid #3C50E0",
-                    p: 1.5,
-                    "&:hover": { bgcolor: "#EFF2FF" },
+                    fontWeight: 700,
+                    mb: 2,
+                    textTransform: "uppercase",
+                    letterSpacing: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    "&:before": {
+                      content: '""',
+                      width: 40,
+                      height: 2,
+                      bgcolor: "#3C50E0",
+                    },
                   }}
                 >
-                  <MdPlayCircleOutline size={28} />
-                </IconButton>
-              </Stack>
+                  Our Story
+                </Typography>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: { xs: "2.5rem", md: "4rem" },
+                    lineHeight: 1.1,
+                    mb: 3,
+                    color: "#1C274C",
+                  }}
+                >
+                  Innovating the <br />
+                  <span style={{ color: "#3C50E0" }}>Future</span> of Shopping
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#606882",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.8,
+                    mb: 4,
+                  }}
+                >
+                  At NextMerce, we believe shopping should be simple, enjoyable,
+                  and tailored to you. What started as a small idea has grown
+                  into a vibrant platform dedicated to bringing quality products
+                  and exceptional experiences to customers around the world.
+                </Typography>
+                <Stack direction="row" spacing={3}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    endIcon={<MdArrowForward />}
+                    sx={{
+                      bgcolor: "#3C50E0",
+                      borderRadius: "50px",
+                      px: 5,
+                      py: 1.8,
+                      textTransform: "none",
+                      fontSize: "1rem",
+                      boxShadow: "0 10px 20px rgba(60, 80, 224, 0.2)",
+                      "&:hover": {
+                        bgcolor: "#2A3EB1",
+                        transform: "translateY(-2px)",
+                        boxShadow: "0 15px 30px rgba(60, 80, 224, 0.3)",
+                      },
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    Explore More
+                  </Button>
+                  <IconButton
+                    sx={{
+                      color: "#3C50E0",
+                      bgcolor: "rgba(60, 80, 224, 0.1)",
+                      p: 2,
+                      "&:hover": {
+                        bgcolor: "#3C50E0",
+                        color: "white",
+                        transform: "scale(1.1)",
+                      },
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    <MdPlayCircleOutline size={32} />
+                  </IconButton>
+                </Stack>
+              </Box>
             </FadeInSection>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -217,42 +233,25 @@ export default function AboutUs() {
               <Box
                 sx={{
                   position: "relative",
-                  height: { xs: 300, md: 500 },
-                  borderRadius: "20px",
+                  height: { xs: 350, md: 600 },
+                  borderRadius: "30px",
                   overflow: "hidden",
-                  boxShadow: "0 20px 40px rgba(60, 80, 224, 0.15)",
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
                 }}
               >
-                {/* Abstract Background Shapes */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: -50,
-                    right: -50,
-                    width: 200,
-                    height: 200,
-                    bgcolor: "rgba(60, 80, 224, 0.1)",
-                    borderRadius: "50%",
-                    zIndex: 0,
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: -30,
-                    left: -30,
-                    width: 150,
-                    height: 150,
-                    bgcolor: "rgba(28, 39, 76, 0.05)",
-                    borderRadius: "50%",
-                    zIndex: 0,
-                  }}
-                />
                 <Image
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80"
                   alt="Our Office"
                   fill
-                  style={{ objectFit: "cover", zIndex: 1 }}
+                  style={{ objectFit: "cover" }}
+                />
+                <Box
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)",
+                  }}
                 />
               </Box>
             </FadeInSection>
@@ -260,8 +259,75 @@ export default function AboutUs() {
         </Grid>
       </Container>
 
+      {/* Mission & Vision Section */}
+      <Box sx={{ bgcolor: "#F9FAFB", py: 10 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={6}>
+              <FadeInSection>
+                <Box
+                  sx={{
+                    bgcolor: "white",
+                    p: 5,
+                    borderRadius: 4,
+                    height: "100%",
+                    boxShadow: "0 4px 25px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{ fontWeight: 800, mb: 3, color: "#1C274C" }}
+                  >
+                    Our Mission
+                  </Typography>
+                  <Typography sx={{ color: "#606882", lineHeight: 1.8, mb: 3 }}>
+                    To revolutionize the online shopping experience by providing
+                    a seamless, secure, and customer-centric platform. We strive
+                    to bridge the gap between quality products and eager
+                    consumers, ensuring satisfaction in every transaction.
+                  </Typography>
+                </Box>
+              </FadeInSection>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FadeInSection delay={0.2}>
+                <Box
+                  sx={{
+                    bgcolor: "#3C50E0",
+                    p: 5,
+                    borderRadius: 4,
+                    height: "100%",
+                    color: "white",
+                    boxShadow: "0 10px 30px rgba(60, 80, 224, 0.3)",
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{ fontWeight: 800, mb: 3, color: "#fff" }}
+                  >
+                    Our Vision
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "rgba(255,255,255,0.9)",
+                      lineHeight: 1.8,
+                      mb: 3,
+                    }}
+                  >
+                    To become the global leader in e-commerce inovation, setting
+                    standards for reliability, speed, and customer care. We
+                    envision a world where shopping is not just a necessity but
+                    a delightful journey of discovery.
+                  </Typography>
+                </Box>
+              </FadeInSection>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
       {/* Stats Section */}
-      <Box sx={{ bgcolor: "#F9FAFB", py: 8 }}>
+      <Box sx={{ bgcolor: "white", py: 8 }}>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
             {stats.map((stat, index) => (
