@@ -202,7 +202,7 @@ export default function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center text-[18px] font-semibold text-[#1C274C] py-2 hover:text-blue-600 transition-colors"
                 >
-                  Contact
+                  Contact Us
                 </Link>
 
                 {/* pages accordion / dropdown */}

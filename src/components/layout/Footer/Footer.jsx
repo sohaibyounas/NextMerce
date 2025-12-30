@@ -190,13 +190,13 @@ export default function Footer() {
               </Link>
             </Box>
             <Box>
-              <Link href="#" className="linkStyles">
-                FAQ's
+              <Link href="/faq" className="linkStyles">
+                FAQs
               </Link>
             </Box>
             <Box>
-              <Link href="#" className="linkStyles">
-                Contract
+              <Link href="/contact" className="linkStyles">
+                Contact Us
               </Link>
             </Box>
           </Box>

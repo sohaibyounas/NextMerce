@@ -23,7 +23,7 @@ const menuItems = [
     arrow: false,
   },
   { label: "Shop", component: Shop, href: "/shop", arrow: false },
-  { label: "Contact", component: Contact, href: "/contact", arrow: false },
+  { label: "Contact Us", component: Contact, href: "/contact", arrow: false },
   { label: "Pages", component: Pages, href: "/pages", arrow: true },
   { label: "Blogs", component: Blogs, href: "/blogs", arrow: true },
 ];
