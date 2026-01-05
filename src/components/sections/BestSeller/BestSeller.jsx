@@ -153,18 +153,14 @@ export default function Seller({ data = [] }) {
                     </Box>
                   </Box>
                   {/* card image */}
-                  <Box
-                    sx={{
-                      width: "100%",
-                      p: 2,
-                    }}
-                  >
+                  <div className="relative w-full h-48 sm:h-56 mt-4 p-4">
                     <Image
                       src={card.image}
-                      alt="image"
-                      style={{ width: "200px", height: "200px" }}
+                      alt={card.description}
+                      fill
+                      className="object-contain"
                     />
-                  </Box>
+                  </div>
 
                   {/* cart details */}
                   <Box

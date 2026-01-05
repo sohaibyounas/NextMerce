@@ -49,9 +49,9 @@ export default function Mainarea() {
   return (
     <>
       {/* slider and cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-4 pt-8">
+      <div className="grid grid-cols-12 gap-4 pt-8">
         {/* Image Slider */}
-        <div className="col-span-8 px-2">
+        <div className="col-span-12 lg:col-span-8 px-2">
           <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide">
             <Swiper
               modules={[Pagination, Autoplay]}
@@ -96,7 +96,7 @@ export default function Mainarea() {
         </div>
 
         {/* Products */}
-        <div className="col-span-4 grid grid-rows-2 gap-4 pr-2">
+        <div className="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4 px-2 lg:px-0 lg:pr-2">
           {/* First card */}
           <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
             <div className="flex items-start justify-between flex-1">

@@ -1,7 +1,7 @@
-export default function BlogGridWithSidebar() {
-  return (
-    <div>
-      <h1>Blogs Grid with sidebar</h1>
-    </div>
-  );
+"use client";
+
+import BlogsComponent from "@/components/layout/Header/Menu/Blogs/Blogs";
+
+export default function BlogGridWithSidebarPage() {
+  return <BlogsComponent />;
 }
