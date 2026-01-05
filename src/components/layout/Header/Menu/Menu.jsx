@@ -2,30 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Blogs from "./Blogs/Blogs";
-import Contact from "./Contact/Contact";
-import Pages from "./Pages/Pages";
-import Popular from "./Popular/Popular";
-import Shop from "./Shop/Shop";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const menuItems = [
   {
     label: "Home",
-    component: Blogs,
     href: "/",
     arrow: false,
   },
   {
     label: "Popular",
-    component: Popular,
     href: "/Popular",
     arrow: false,
   },
-  { label: "Shop", component: Shop, href: "/shop", arrow: false },
-  { label: "Contact Us", component: Contact, href: "/contact", arrow: false },
-  { label: "Pages", component: Pages, href: "/pages", arrow: true },
-  { label: "Blogs", component: Blogs, href: "/blogs", arrow: true },
+  { label: "Shop", href: "/shop", arrow: false },
+  { label: "Contact Us", href: "/contact", arrow: false },
+  { label: "Pages", href: "/pages", arrow: true },
+  { label: "Blogs", href: "/blogs", arrow: true },
 ];
 
 // Sample sub-items for Pages and Blogs dropdowns
@@ -35,7 +28,6 @@ const pagesSubItems = [
   { label: "FAQ", href: "/faq" },
   {
     label: "Shop with sidebar",
-    component: Blogs,
     href: "/shop-without-sidebar",
   },
 ];
