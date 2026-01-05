@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  * {
+    @apply transition-colors duration-300;
+  }
+
+  body {
+    @apply bg-white text-[#1C274C] dark:bg-[#0B1120] dark:text-gray-100;
+  }
+}
+
 /* Slider styles */
 .custom_slide .swiper-pagination {
   text-align: center;

@@ -1,17 +1,51 @@
+"use client";
+
 import { Box, Grid, Icon, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaApple, FaGooglePlay, FaRegEnvelope } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlineLocalPhone } from "react-icons/md";
+import {
+  MdOutlineDesignServices,
+  MdOutlineLocalPhone,
+  MdPrivacyTip,
+  MdOutlineContactSupport,
+} from "react-icons/md";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { IoMdLogIn } from "react-icons/io";
+import { TiShoppingCart } from "react-icons/ti";
+import { FaClipboardList, FaQuestionCircle } from "react-icons/fa";
+import { CiShop } from "react-icons/ci";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { HiDocumentText } from "react-icons/hi";
 
 export default function Footer() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && theme === "dark";
+
   return (
-    <>
+    <Box
+      sx={{
+        borderTop: isDark ? "1px solid #374151" : "1px solid #F2F3F8",
+        transition: "all 0.3s ease",
+      }}
+    >
       <Grid container spacing={2} pt={11} px={2}>
         {/* help & support */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Typography
-            sx={{ fontSize: "22px", fontWeight: 500, lineHeight: "30px" }}
+            sx={{
+              fontSize: "22px",
+              fontWeight: 500,
+              lineHeight: "30px",
+              color: isDark ? "#fff" : "#1C274C",
+            }}
           >
             Help & Support
           </Typography>
@@ -29,7 +63,7 @@ export default function Footer() {
             >
               <Box>
                 <Icon>
-                  <IoLocationOutline color="blue" />
+                  <IoLocationOutline color={isDark ? "white" : "#3b82f6"} />
                 </Icon>
               </Box>
               <Box>
@@ -39,6 +73,7 @@ export default function Footer() {
                     lineHeight: "24px",
                     fontWeight: 400,
                     maxWidth: "250px",
+                    color: isDark ? "#D1D5DB" : "#1C274C",
                   }}
                 >
                   685 Market Street,Las Vegas, LA 95820,United States.
@@ -57,7 +92,7 @@ export default function Footer() {
             >
               <Box>
                 <Icon>
-                  <MdOutlineLocalPhone color="blue" />
+                  <MdOutlineLocalPhone color={isDark ? "white" : "#3b82f6"} />
                 </Icon>
               </Box>
               <Box>
@@ -67,6 +102,7 @@ export default function Footer() {
                     lineHeight: "24px",
                     fontWeight: 400,
                     maxWidth: "300px",
+                    color: isDark ? "#D1D5DB" : "#1C274C",
                   }}
                 >
                   (+92) 343-546-5755
@@ -85,7 +121,7 @@ export default function Footer() {
             >
               <Box>
                 <Icon>
-                  <FaRegEnvelope color="blue" />
+                  <FaRegEnvelope color={isDark ? "white" : "#3b82f6"} />
                 </Icon>
               </Box>
               <Box>
@@ -95,6 +131,7 @@ export default function Footer() {
                     lineHeight: "24px",
                     fontWeight: 400,
                     maxWidth: "300px",
+                    color: isDark ? "#D1D5DB" : "#1C274C",
                   }}
                 >
                   dummy@gmail.com
@@ -111,6 +148,7 @@ export default function Footer() {
               fontSize: "22px",
               lineHeight: "30px",
               fontWeight: 500,
+              color: isDark ? "#fff" : "#1C274C",
             }}
           >
             Account
@@ -125,23 +163,67 @@ export default function Footer() {
               gap: "5px",
             }}
           >
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <IoMdLogIn color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Login / Register
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <TiShoppingCart color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Cart
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <FaClipboardList color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Wishlist
               </Link>
             </Box>
-            <Box>
-              <Link href="#" className="linkStyles">
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <CiShop color={isDark ? "white" : "#3b82f6"} />
+              </span>
+              <Link href="/Shop" className="linkStyles">
                 Shop
               </Link>
             </Box>
@@ -155,6 +237,7 @@ export default function Footer() {
               fontSize: "22px",
               lineHeight: "30px",
               fontWeight: 500,
+              color: isDark ? "#fff" : "#1C274C",
             }}
           >
             Quick Link
@@ -169,32 +252,98 @@ export default function Footer() {
               gap: "5px",
             }}
           >
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <MdPrivacyTip color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Privacy Policy
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <MdOutlineDesignServices color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="/services" className="linkStyles">
                 Services
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <RiMoneyDollarCircleLine color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Refund Policy
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <HiDocumentText color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="#" className="linkStyles">
                 Terms of Use
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <FaQuestionCircle color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="/faq" className="linkStyles">
                 FAQs
               </Link>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                "&:hover": { color: "#3b82f6" },
+                transition: "color 0.3s",
+              }}
+            >
+              <span>
+                <MdOutlineContactSupport color={isDark ? "white" : "#3b82f6"} />
+              </span>
               <Link href="/contact" className="linkStyles">
                 Contact Us
               </Link>
@@ -209,6 +358,7 @@ export default function Footer() {
               fontSize: "22px",
               lineHeight: "30px",
               fontWeight: 500,
+              color: isDark ? "#fff" : "#1C274C",
             }}
           >
             Download App
@@ -224,7 +374,9 @@ export default function Footer() {
             }}
           >
             <Box>
-              <Typography>Save $3 With App & New User only</Typography>
+              <Typography sx={{ color: isDark ? "#D1D5DB" : "#1C274C" }}>
+                Save $3 With App & New User only
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -336,6 +488,6 @@ export default function Footer() {
           </Box>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }

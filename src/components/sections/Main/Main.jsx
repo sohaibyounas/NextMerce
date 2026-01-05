@@ -29,9 +29,18 @@ import Feedback from "@/components/sections/Feedback/Feedback";
 import Footer from "@/components/layout/Footer/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useTheme } from "next-themes";
 
 export default function Mainarea() {
   const [images, setImages] = useState([]);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && theme === "dark";
 
   // api call
   useEffect(() => {
@@ -52,7 +61,7 @@ export default function Mainarea() {
       <div className="grid grid-cols-12 gap-4 pt-8">
         {/* Image Slider */}
         <div className="col-span-12 lg:col-span-8 px-2">
-          <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide">
+          <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
             <Swiper
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
@@ -68,7 +77,7 @@ export default function Mainarea() {
                       style={{ backgroundImage: `url(${img.url})` }}
                     />
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-black/30" />
+                    <div className="absolute inset-0 bg-black/20 dark:bg-black/50 transition-colors duration-300" />
 
                     {/* Content */}
                     <div className="relative z-10 h-full flex items-center justify-start px-6 py-10 pb-20 sm:p-8">
@@ -98,11 +107,11 @@ export default function Mainarea() {
         {/* Products */}
         <div className="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4 px-2 lg:px-0 lg:pr-2">
           {/* First card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
             <div className="flex items-start justify-between flex-1">
               <div className="flex-1">
                 <div className="max-w-[180px]">
-                  <h3 className="text-xl font-semibold text-gray-800 leading-tight mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 leading-tight mb-4">
                     Smart Security Home Camera
                   </h3>
                 </div>
@@ -112,24 +121,26 @@ export default function Mainarea() {
                   src={CCTV}
                   alt="Security Camera"
                   fill
-                  className="object-contain"
+                  className="object-contain dark:brightness-90"
                 />
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-sm text-gray-700 font-medium">
+              <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
                 Save up to
-                <span className="text-lg text-blue-600 font-bold">$450</span>
+                <span className="text-lg text-blue-600 dark:text-blue-400 font-bold ml-1">
+                  $450
+                </span>
               </p>
             </div>
           </div>
 
           {/* Second card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
             <div className="flex items-start justify-between flex-1">
               <div className="flex-1">
                 <div className="max-w-[180px]">
-                  <h3 className="text-xl font-semibold text-gray-800 leading-tight mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 leading-tight mb-4">
                     Smart Security Home Camera
                   </h3>
                 </div>
@@ -139,14 +150,16 @@ export default function Mainarea() {
                   src={Mobile1}
                   alt="Security Camera"
                   fill
-                  className="object-contain"
+                  className="object-contain dark:brightness-90"
                 />
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-sm text-gray-700 font-medium">
+              <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
                 Save up to
-                <span className="text-lg text-blue-600 font-bold">$450</span>
+                <span className="text-lg text-blue-600 dark:text-blue-400 font-bold ml-1">
+                  $450
+                </span>
               </p>
             </div>
           </div>
@@ -167,10 +180,10 @@ export default function Mainarea() {
             />
           </div>
           <div className="flex flex-col">
-            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] dark:text-gray-100 leading-none mb-1.5">
               Free Shipping
             </h3>
-            <p className="text-[14px] text-[#606882] font-medium leading-none">
+            <p className="text-[14px] text-[#606882] dark:text-gray-400 font-medium leading-none">
               For all orders $200
             </p>
           </div>
@@ -188,10 +201,10 @@ export default function Mainarea() {
             />
           </div>
           <div className="flex flex-col">
-            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] dark:text-gray-100 leading-none mb-1.5">
               1 & 1 Returns
             </h3>
-            <p className="text-[14px] text-[#606882] font-medium leading-none">
+            <p className="text-[14px] text-[#606882] dark:text-gray-400 font-medium leading-none">
               Cancellation after 1 day
             </p>
           </div>
@@ -209,10 +222,10 @@ export default function Mainarea() {
             />
           </div>
           <div className="flex flex-col">
-            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] dark:text-gray-100 leading-none mb-1.5">
               100% Secure Payments
             </h3>
-            <p className="text-[14px] text-[#606882] font-medium leading-none">
+            <p className="text-[14px] text-[#606882] dark:text-gray-400 font-medium leading-none">
               Guarantee secure payments
             </p>
           </div>
@@ -230,10 +243,10 @@ export default function Mainarea() {
             />
           </div>
           <div className="flex flex-col">
-            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] leading-none mb-1.5">
+            <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1C274C] dark:text-gray-100 leading-none mb-1.5">
               24/7 Dedicated Support
             </h3>
-            <p className="text-[14px] text-[#606882] font-medium leading-none">
+            <p className="text-[14px] text-[#606882] dark:text-gray-400 font-medium leading-none">
               Support Anywhere & anytime
             </p>
           </div>

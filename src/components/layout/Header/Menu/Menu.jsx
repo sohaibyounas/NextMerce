@@ -91,7 +91,7 @@ export default function Menu() {
                 {isInternalHref(item.href) ? (
                   <Link
                     href={item.href}
-                    className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
+                    className="flex items-center px-2 py-1 text-[#1C274C] dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition duration-200 ease-in-out"
                   >
                     {item.label}
                     {item.arrow && <IoIosArrowDown />}
@@ -99,7 +99,7 @@ export default function Menu() {
                 ) : (
                   <a
                     href={item.href}
-                    className="flex items-center px-2 py-1 text-[#1C274C] hover:text-blue-600 transition duration-200 ease-in-out"
+                    className="flex items-center px-2 py-1 text-[#1C274C] dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition duration-200 ease-in-out"
                   >
                     {item.label}
                     {item.arrow && <IoIosArrowUp />}
@@ -108,7 +108,7 @@ export default function Menu() {
                 {/* Dropdown for items with arrow */}
                 {item.arrow && openDropdown === item.label && (
                   <div
-                    className={`absolute left-0 z-10 mt-2 rounded-md bg-white border border-[#e5e7eb] shadow-lg ${
+                    className={`absolute left-0 z-10 mt-2 rounded-md bg-white dark:bg-[#1E293B] border border-[#e5e7eb] dark:border-gray-700 shadow-lg ${
                       item.label === "Pages" ? "w-[180px]" : "w-[220px]"
                     }`}
                     onMouseEnter={() => handleMouseEnter(item.label)}
@@ -124,7 +124,7 @@ export default function Menu() {
                             key={subItem.href}
                             href={subItem.href}
                             onClick={handleDropdownItemClick}
-                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
+                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] dark:text-gray-400 font-[400] hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition duration-200 ease-in-out"
                           >
                             {subItem.label}
                           </Link>
@@ -149,11 +149,11 @@ export default function Menu() {
 
         {/* Right Side */}
         <div className="flex items-center space-x-2 select-none">
-          <p className="text-[14px] text-[#1C274C] font-[500] hover:text-blue-600">
+          <p className="text-[14px] text-[#1C274C] dark:text-gray-200 font-[500] hover:text-blue-600 dark:hover:text-blue-400">
             Best Selling
           </p>
-          <div className="bg-[#F23030] text-white px-2 py-1 rounded-full text-[8px] font-[600]">
-            SALE
+          <div className="bg-[#F23030] uppercase text-white px-2 py-1 rounded-full text-[8px] font-[600]">
+            sale
           </div>
         </div>
       </div>

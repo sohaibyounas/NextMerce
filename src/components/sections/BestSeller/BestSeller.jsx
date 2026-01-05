@@ -16,10 +16,20 @@ import { CiHeart } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Seller({ data = [] }) {
   const router = useRouter();
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const safeData = Array.isArray(data) ? data : [];
+  const isDark = mounted && theme === "dark";
 
   return (
     <Box>
@@ -39,7 +49,7 @@ export default function Seller({ data = [] }) {
               fontSize: "28px",
               lineHeight: "40px",
               fontWeight: 600,
-              color: "#1C274C",
+              color: isDark ? "#fff" : "#1C274C",
               cursor: "pointer",
             }}
           >
@@ -49,10 +59,11 @@ export default function Seller({ data = [] }) {
         {/* view details button */}
         <Button
           sx={{
-            border: "1px solid #E5E7EB",
+            border: isDark ? "1px solid #374151" : "1px solid #E5E7EB",
             borderRadius: "20px",
             textTransform: "none",
             p: "0px 10px",
+            color: isDark ? "#fff" : "#1C274C",
             "&:hover": {
               background: "#1c274c",
               color: "#fff",
@@ -75,8 +86,8 @@ export default function Seller({ data = [] }) {
                   maxHeight: "400px",
                   boxShadow: "sm",
                   borderRadius: "10px",
-                  backgroundColor: "#F6F7FB",
-                  border: "1px solid #E5E7EB",
+                  backgroundColor: isDark ? "#1E293B" : "#F6F7FB",
+                  border: isDark ? "1px solid #374151" : "1px solid #E5E7EB",
                   cursor: "pointer",
                   transition: "all 0.3s ease-in-out",
                   "&:hover": {
@@ -116,7 +127,7 @@ export default function Seller({ data = [] }) {
                       sx={{
                         fontSize: "18px",
                         fontWeight: 600,
-                        color: "#1C274C",
+                        color: isDark ? "#fff" : "#1C274C",
                       }}
                     >
                       {card.description}
@@ -134,7 +145,7 @@ export default function Seller({ data = [] }) {
                           fontSize: "18px",
                           fontWeight: 500,
                           lineHeight: "28px",
-                          color: "#1c274c",
+                          color: isDark ? "#60A5FA" : "#1c274c",
                         }}
                       >
                         {card.price}
@@ -200,7 +211,8 @@ export default function Seller({ data = [] }) {
                           boxShadow: 1,
                           borderRadius: "50%",
                           p: "4px",
-                          color: "#000",
+                          color: isDark ? "#fff" : "#000",
+                          backgroundColor: isDark ? "#0B1120" : "#fff",
                           "&:hover": {
                             background: "#5C5CFF",
                           },
@@ -235,7 +247,8 @@ export default function Seller({ data = [] }) {
                           boxShadow: 1,
                           borderRadius: "50%",
                           p: "6px 4px",
-                          color: "#000",
+                          color: isDark ? "#fff" : "#000",
+                          backgroundColor: isDark ? "#0B1120" : "#fff",
                           "&:hover": {
                             background: "#5C5CFF",
                           },
@@ -270,7 +283,8 @@ export default function Seller({ data = [] }) {
                           boxShadow: 1,
                           borderRadius: "50%",
                           p: "4px",
-                          color: "#000",
+                          color: isDark ? "#fff" : "#000",
+                          backgroundColor: isDark ? "#0B1120" : "#fff",
                           "&:hover": {
                             background: "#5C5CFF",
                           },

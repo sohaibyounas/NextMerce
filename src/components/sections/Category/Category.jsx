@@ -47,20 +47,20 @@ export default function Category() {
     <main className="pt-10 md:pt-20 pb-10 md:pb-20 border-b border-[#F2F3F8]">
       <div className="container">
         <div className="flex flex-row items-center justify-between gap-4 mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1C274C] text-center sm:text-start">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1C274C] dark:text-gray-100 text-center sm:text-start">
             Browse by Category
           </h2>
           {/* custom arrow */}
           <div className="flex gap-2">
             <button
               onClick={handlePrev}
-              className="border border-gray-400 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 delay-150 duration-300 ease-in-out"
+              className="border border-gray-400 dark:border-gray-600 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 dark:hover:bg-blue-600 text-[#1C274C] dark:text-gray-100 transition-all duration-300"
             >
               <IoIosArrowBack />
             </button>
             <button
               onClick={handleNext}
-              className="border border-gray-400 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 delay-150 duration-300 ease-in-out"
+              className="border border-gray-400 dark:border-gray-600 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 dark:hover:bg-blue-600 text-[#1C274C] dark:text-gray-100 transition-all duration-300"
             >
               <IoIosArrowForward />
             </button>
@@ -107,15 +107,15 @@ export default function Category() {
             {categories.map((category, index) => (
               <SwiperSlide key={index}>
                 <div className={`flex-shrink-0 w-full text-center`}>
-                  <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px] mx-auto bg-white rounded-full overflow-hidden shadow-md">
+                  <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px] mx-auto bg-white dark:bg-gray-800 rounded-full overflow-hidden shadow-md">
                     <img
                       src={category.img.src}
                       alt={category.name}
-                      className="w-full h-full object-contain bg-[#F2F3F8]"
+                      className="w-full h-full object-contain bg-[#F2F3F8] dark:bg-gray-700"
                     />
                   </div>
                   <p
-                    className={`${style.categoryName} mt-3 text-[#1C274C] font-semibold text-[16px] hover:text-blue-600`}
+                    className={`${style.categoryName} mt-3 text-[#1C274C] dark:text-gray-200 font-semibold text-[16px] hover:text-blue-600 dark:hover:text-blue-400`}
                   >
                     {category.name}
                   </p>

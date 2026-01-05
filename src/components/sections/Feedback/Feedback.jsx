@@ -16,6 +16,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import user2 from "@/assets/general/image.jpg";
 import { FaStar } from "react-icons/fa6";
 import "./syle.css";
@@ -24,6 +26,14 @@ import Subscription from "../Subscription/subscription";
 
 export default function Feedback() {
   const swiperRef = useRef(null);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && theme === "dark";
 
   const handlePrev = () => {
     if (swiperRef.current) {
@@ -95,7 +105,7 @@ export default function Feedback() {
     <>
       <main className="pt-[60px] pb-[70px] border-b-1 border-[#F2F3F8]">
         <div className="container mx-auto px-4">
-          <h2 className="text-[28px] font-[600] text-[#1C274C] mb-8 text-start next_arrow">
+          <h2 className="text-[28px] font-[600] text-[#1C274C] dark:text-gray-100 mb-8 text-start next_arrow">
             User Feedbacks
           </h2>
           <div className="relative">
@@ -103,13 +113,13 @@ export default function Feedback() {
             <div className="absolute right-[-10px] top-[-50px] flex gap-2">
               <button
                 onClick={handlePrev}
-                className="border border-[#E5E7EB] rounded-full cursor-pointer p-[7px] hover:bg-sky-700 delay-150 duration-300 ease-in-out"
+                className="border border-[#E5E7EB] dark:border-gray-700 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 dark:hover:bg-blue-600 text-[#1C274C] dark:text-gray-100 transition-all duration-300"
               >
                 <IoIosArrowBack />
               </button>
               <button
                 onClick={handleNext}
-                className="border border-[#E5E7EB] rounded-full cursor-pointer p-[7px] hover:bg-sky-700 delay-150 duration-300 ease-in-out"
+                className="border border-[#E5E7EB] dark:border-gray-700 rounded-full cursor-pointer p-[7px] hover:bg-sky-700 dark:hover:bg-blue-600 text-[#1C274C] dark:text-gray-100 transition-all duration-300"
               >
                 <IoIosArrowForward />
               </button>
@@ -141,7 +151,10 @@ export default function Feedback() {
                     sx={{
                       minWidth: 275,
                       boxShadow: "none",
-                      border: "1px solid #E5E7EB",
+                      border: isDark
+                        ? "1px solid #374151"
+                        : "1px solid #E5E7EB",
+                      backgroundColor: isDark ? "#1E293B" : "#fff",
                       borderRadius: "10px",
                     }}
                   >
@@ -155,7 +168,7 @@ export default function Feedback() {
                       <Typography sx={{ pb: "20px" }}>{user.star}</Typography>
                       <Typography
                         sx={{
-                          color: "#1c274c",
+                          color: isDark ? "#D1D5DB" : "#1c274c",
                           fontSize: 14,
                           pb: "20px",
                           fontWeight: 400,
@@ -174,7 +187,7 @@ export default function Feedback() {
                         <Box>
                           <Typography
                             sx={{
-                              color: "#1c274c",
+                              color: isDark ? "#F3F4F6" : "#1c274c",
                               fontSize: 14,
                               fontWeight: 500,
                               lineHeight: "24px",
@@ -184,7 +197,7 @@ export default function Feedback() {
                           </Typography>
                           <Typography
                             sx={{
-                              color: "#1c274c",
+                              color: isDark ? "#9CA3AF" : "#1c274c",
                               fontSize: 14,
                               fontWeight: 400,
                               lineHeight: "22px",

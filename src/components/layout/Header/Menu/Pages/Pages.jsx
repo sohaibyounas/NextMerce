@@ -154,7 +154,7 @@ export default function Pages() {
             <div className="bg-gradient-to-r from-blue-600 to-indigo-800 rounded-[3rem] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
 
-              <div className="flex flex-col md:flex-col items-center justify-between gap-12 relative z-10">
+              <div className="flex flex-col md:flex-col lg:flex-row items-center justify-between gap-12 relative">
                 <div className="text-center md:text-left">
                   <h2 className="text-3xl md:text-3xl font-bold mb-4">
                     Can't find what you're looking for?
