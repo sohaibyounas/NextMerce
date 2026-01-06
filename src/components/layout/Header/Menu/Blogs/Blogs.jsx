@@ -4,63 +4,9 @@ import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import Gadgets from "@/assets/blogs/gadgets.png";
-import Smartphones from "@/assets/blogs/smartphones.png";
-import SmartHome from "@/assets/blogs/smarthome.png";
-import Ecommerce from "@/assets/blogs/ecommerce.png";
 import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
 import { FaCalendarAlt, FaUser, FaArrowRight, FaSearch } from "react-icons/fa";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "Top 10 Essential Gadgets for Every Tech Enthusiast in 2024",
-    excerpt:
-      "Discover the must-have gadgets that will redefine your digital lifestyle this year.",
-    image: Gadgets,
-    date: "Dec 30, 2023",
-    author: "Alex Rivers",
-    category: "Tech Trends",
-  },
-  {
-    id: 2,
-    title: "Mastering the Choice: How to Pick Your Next Smartphone",
-    excerpt:
-      "With so many options on the market, choosing a smartphone can be overwhelming.",
-    image: Smartphones,
-    date: "Dec 28, 2023",
-    author: "Sarah J. Miller",
-    category: "Guides",
-  },
-  {
-    id: 3,
-    title: "Building the Ultimate Smart Home: From Bulbs to Bridges",
-    excerpt: "Learn how to create a seamless, voice-controlled living space.",
-    image: SmartHome,
-    date: "Dec 25, 2023",
-    author: "David Chen",
-    category: "Smart Home",
-  },
-  {
-    id: 4,
-    title: "The Future of E-commerce: What to Expect in the Next Decade",
-    excerpt:
-      "Explore the emerging trends in online shopping, including virtual try-ons.",
-    image: Ecommerce,
-    date: "Dec 22, 2023",
-    author: "Emily Watson",
-    category: "E-commerce",
-  },
-];
-
-const categories = [
-  "Tech Trends",
-  "Guides",
-  "Smart Home",
-  "E-commerce",
-  "Reviews",
-  "General",
-];
+import { blogPosts, categories } from "@/lib/blogData";
 
 export default function Blogs() {
   return (

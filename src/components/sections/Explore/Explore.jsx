@@ -12,17 +12,17 @@ export default function Explore() {
         container
         spacing={2}
         pt={10}
+        className="bg-gradient-to-tr from-[#3b4371] via-[#7695b3] to-[#d0e9f3] dark:from-[#1e293b] dark:via-[#334155] dark:to-[#0f172a] transition-all duration-500"
         sx={{
-          backgroundImage:
-            "linear-gradient(to right top, #3b4371, #546b93, #7695b3, #a0bfd3, #d0e9f3)",
+          minHeight: "450px",
         }}
       >
         {/* grid text */}
         <Grid size={6} pl={7}>
           <Box>
             <Typography
+              className="text-[#3C50E0] dark:text-blue-400"
               sx={{
-                color: "#3C50E0",
                 fontSize: "22px",
                 fontWeight: 500,
                 lineHeight: "30px",
@@ -31,8 +31,8 @@ export default function Explore() {
               Don’t Miss!!
             </Typography>
             <Typography
+              className="text-[#1c274c] dark:text-white"
               sx={{
-                color: "#1c274c",
                 fontSize: "40px",
                 fontWeight: 700,
                 lineHeight: "48px",
@@ -43,8 +43,8 @@ export default function Explore() {
               Enhance Your Music Experience
             </Typography>
             <Typography
+              className="text-[#1c274c] dark:text-gray-300"
               sx={{
-                color: "#1c274c",
                 fontSize: "16px",
                 fontWeight: 400,
                 lineHeight: "24x",

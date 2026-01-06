@@ -11,7 +11,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const countDownDate = new Date("Nov 5, 2025 15:30:00").getTime();
+    const countDownDate = new Date("Nov 5, 2027 15:30:00").getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -44,9 +44,7 @@ const CountdownTimer = () => {
 
   if (timeLeft === null) {
     return (
-      <p className="text-center text-4xl font-semibold text-white">
-        EXPIRED
-      </p>
+      <p className="text-center text-4xl font-semibold text-white">EXPIRED</p>
     );
   }
 
@@ -59,10 +57,12 @@ const CountdownTimer = () => {
         { label: "Seconds", value: timeLeft.seconds },
       ].map((item, index) => (
         <div key={index} className="text-center">
-          <div className="bg-white text-gray-900 text-4xl font-bold rounded-xl shadow-md w-20 h-20 flex justify-center items-center">
+          <div className="bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-4xl font-bold rounded-xl shadow-md w-20 h-20 flex justify-center items-center transition-colors duration-300">
             {item.value}
           </div>
-          <p className="text-white mt-2 font-medium">{item.label}</p>
+          <p className="text-white dark:text-gray-300 mt-2 font-medium">
+            {item.label}
+          </p>
         </div>
       ))}
     </div>

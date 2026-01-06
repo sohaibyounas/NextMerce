@@ -102,7 +102,7 @@ export default function Category() {
                 slidesPerView: 6,
               },
             }}
-            className="mySwiper"
+            className={style.mySwiper}
           >
             {categories.map((category, index) => (
               <SwiperSlide key={index}>

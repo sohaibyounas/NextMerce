@@ -29,9 +29,13 @@
 }
 
 /* swiper slider styles */
+.mySwiper {
+  padding-bottom: 50px !important;
+}
+
 .mySwiper :global(.swiper-pagination) {
-  position: relative !important;
-  margin-top: 50px !important;
+  position: absolute !important;
+  bottom: 0 !important;
   display: flex;
   justify-content: center;
   align-items: center;

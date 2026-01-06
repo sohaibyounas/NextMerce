@@ -13,10 +13,10 @@ export default function Phonedetail() {
       <Grid
         container
         spacing={2}
+        className="bg-[#F5F5F5] dark:bg-slate-900/50 transition-colors duration-300"
         sx={{
           width: "100%",
           mt: "83px",
-          backgroundColor: "#F5F5F5",
           alignItems: "center",
           justifyContent: "space-between",
         }}
@@ -24,21 +24,21 @@ export default function Phonedetail() {
         {/* phone text */}
         <Grid size={6} maxWidth={600} pl={10}>
           <Typography
+            className="text-[#1C274C] dark:text-gray-300"
             sx={{
               fontSize: "20px",
               fontWeight: 500,
               lineHeight: "28px",
-              color: "#1C274C",
             }}
           >
             Apple iPhone 14 Plus
           </Typography>
           <Typography
+            className="text-[#1C274C] dark:text-white"
             sx={{
               fontSize: "40px",
               fontWeight: 700,
               lineHeight: "48px",
-              color: "#1C274C !important",
               pt: "30px",
               pb: "34px",
             }}
@@ -46,6 +46,7 @@ export default function Phonedetail() {
             UP TO 30% OFF
           </Typography>
           <Typography
+            className="text-gray-600 dark:text-gray-400"
             sx={{ fontSize: "16px", fontWeight: 400, lineHeight: "24px" }}
           >
             iPhone 14 has the same superspeedy chip that's in iPhone 13 Pro, A15
@@ -79,8 +80,8 @@ export default function Phonedetail() {
         {/* product 1 */}
         <Grid
           size={6}
+          className="bg-[#DBF4F3] dark:bg-slate-800 transition-colors duration-300"
           sx={{
-            backgroundColor: "#DBF4F3",
             borderRadius: "10px",
             display: "flex",
             justifyContent: "space-between",
@@ -97,23 +98,23 @@ export default function Phonedetail() {
           </Grid>
 
           {/* phone text */}
-          <Grid size={6} pt={7.8}>
+          <Grid size={6} pt={7.8} pl={2}>
             <Typography
+              className="text-[#1C274C] dark:text-gray-300"
               sx={{
                 fontSize: "18px",
                 fontWeight: 400,
                 lineHeight: "28px",
-                color: "#1C274C",
               }}
             >
               Foldable Motorised Treadmill
             </Typography>
             <Typography
+              className="text-[#1C274C] dark:text-white"
               sx={{
                 fontSize: "30px",
                 fontWeight: 700,
                 lineHeight: "38px",
-                color: "#1C274C !important",
                 pt: "22px",
                 pb: "24px",
               }}
@@ -152,8 +153,8 @@ export default function Phonedetail() {
         {/* product 2 */}
         <Grid
           size={6}
+          className="bg-[#FFECE1] dark:bg-[#2A2D3E] transition-colors duration-300"
           sx={{
-            backgroundColor: "#FFECE1",
             borderRadius: "10px",
             display: "flex",
             justifyContent: "space-between",
@@ -162,21 +163,21 @@ export default function Phonedetail() {
           {/* phone text */}
           <Grid size={8} pt={7.8} pl={5}>
             <Typography
+              className="text-[#1C274C] dark:text-gray-300"
               sx={{
                 fontSize: "18px",
                 fontWeight: 400,
                 lineHeight: "28px",
-                color: "#1C274C",
               }}
             >
               Apple Watch Ultra
             </Typography>
             <Typography
+              className="text-[#1C274C] dark:text-white"
               sx={{
                 fontSize: "30px",
                 fontWeight: 700,
                 lineHeight: "38px",
-                color: "#1C274C !important",
                 pt: "22px",
                 pb: "24px",
               }}
@@ -184,11 +185,11 @@ export default function Phonedetail() {
               Up to 40% off
             </Typography>
             <Typography
+              className="text-gray-700 dark:text-gray-400"
               sx={{
                 fontSize: "14px",
                 fontWeight: 400,
                 lineHeight: "22px",
-                color: "#000000",
               }}
             >
               The aerospace-grade titanium case strikes the perfect balance of
