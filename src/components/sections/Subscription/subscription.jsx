@@ -4,9 +4,8 @@ export default function Subscription() {
   return (
     <>
       <Box
+        className="bg-gradient-to-r from-[#1d3f72] via-[#1753cb] to-[#7a82e4] dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#334155] transition-all duration-500"
         sx={{
-          backgroundImage:
-            "linear-gradient(to right bottom, #1d3f72, #1753cb, #5372d6, #6071c7, #7a82e4)",
           borderRadius: "10px",
         }}
       >
@@ -54,42 +53,35 @@ export default function Subscription() {
                   placeholder="Enter your email"
                   fullWidth
                   sx={{
-                    ".css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+                    "& .MuiInputBase-input": {
                       background: "white",
-                      outline: "none",
-                      padding: "5px 7px",
+                      padding: "8px 15px",
                       borderRadius: "20px",
-                      border: "none",
                     },
-                    ".css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root": {
-                      borderRadius: "16px",
-                      "&:hover": {
-                        borderColor: "#1c274c",
-                      },
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "20px",
+                      background: "white",
+                      "& fieldset": { border: "none" },
                     },
-                    ".css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
-                      {
-                        border: "none",
-                      },
+                    "& .dark & .MuiInputBase-input": {
+                      background: "#1e293b",
+                      color: "white",
+                    },
                   }}
                 />
               </Box>
 
               <Box>
                 <Button
+                  className="bg-[#3C50E0] dark:bg-blue-600 hover:bg-[#1c3fb7] dark:hover:bg-blue-700 transition-colors duration-300"
                   sx={{
                     fontSize: "16px",
                     lineHeight: "24px",
                     fontWeight: 500,
                     textTransform: "none",
-                    p: "5px 10px",
-                    border: "transparent",
+                    p: "5px 20px",
                     borderRadius: "20px",
-                    background: "#3C50E0",
                     color: "#fff",
-                    "&:hover": {
-                      background: "#1c3fb7",
-                    },
                   }}
                 >
                   Subscribe
