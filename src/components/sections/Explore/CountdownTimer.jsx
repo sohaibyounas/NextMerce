@@ -49,18 +49,18 @@ const CountdownTimer = () => {
   }
 
   return (
-    <div className="flex justify-start items-center gap-6">
+    <div className="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-6">
       {[
         { label: "Days", value: timeLeft.days },
         { label: "Hours", value: timeLeft.hours },
         { label: "Minutes", value: timeLeft.minutes },
         { label: "Seconds", value: timeLeft.seconds },
       ].map((item, index) => (
-        <div key={index} className="text-center">
-          <div className="bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-4xl font-bold rounded-xl shadow-md w-20 h-20 flex justify-center items-center transition-colors duration-300">
+        <div key={index} className="text-center min-w-[70px] sm:min-w-[80px]">
+          <div className="bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-2xl sm:text-4xl font-bold rounded-xl shadow-md w-16 h-16 sm:w-20 sm:h-20 flex justify-center items-center transition-colors duration-300">
             {item.value}
           </div>
-          <p className="text-white dark:text-gray-300 mt-2 font-medium">
+          <p className="text-white dark:text-gray-300 mt-2 font-medium text-xs sm:text-sm">
             {item.label}
           </p>
         </div>

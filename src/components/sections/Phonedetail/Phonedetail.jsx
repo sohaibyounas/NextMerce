@@ -22,7 +22,7 @@ export default function Phonedetail() {
         }}
       >
         {/* phone text */}
-        <Grid size={6} maxWidth={600} pl={10}>
+        <Grid size={{ xs: 12, md: 6 }} maxWidth={600} pl={10}>
           <Typography
             className="text-[#1C274C] dark:text-gray-300"
             sx={{
@@ -70,7 +70,7 @@ export default function Phonedetail() {
           </Button>
         </Grid>
         {/* phone image */}
-        <Grid size={6} pl={40}>
+        <Grid size={{ xs: 12, md: 6 }} pl={40}>
           <Image src={Promo} alt="Phone Image" width={274} height={350} />
         </Grid>
       </Grid>
@@ -79,7 +79,7 @@ export default function Phonedetail() {
       <Grid container spacing={4} mt={4}>
         {/* product 1 */}
         <Grid
-          size={6}
+          size={{ xs: 12, md: 6 }}
           className="bg-[#DBF4F3] dark:bg-slate-800 transition-colors duration-300"
           sx={{
             borderRadius: "10px",
@@ -88,7 +88,7 @@ export default function Phonedetail() {
           }}
         >
           {/* phone image */}
-          <Grid size={6} pt={7}>
+          <Grid size={{ xs: 12, md: 6 }} pt={7}>
             <Image
               src={Workout}
               alt="Workout Machine"
@@ -98,7 +98,7 @@ export default function Phonedetail() {
           </Grid>
 
           {/* phone text */}
-          <Grid size={6} pt={7.8} pl={2}>
+          <Grid size={{ xs: 12, md: 6 }} pt={7.8} pl={2}>
             <Typography
               className="text-[#1C274C] dark:text-gray-300"
               sx={{
@@ -136,7 +136,7 @@ export default function Phonedetail() {
               sx={{
                 backgroundColor: "#02AAA4",
                 color: "#FFFFFF",
-                mt: 4,
+                my: 2,
                 px: 3,
                 textTransform: "none",
                 fontSize: "16px",
@@ -152,7 +152,7 @@ export default function Phonedetail() {
 
         {/* product 2 */}
         <Grid
-          size={6}
+          size={{ xs: 12, md: 6 }}
           className="bg-[#FFECE1] dark:bg-[#2A2D3E] transition-colors duration-300"
           sx={{
             borderRadius: "10px",
@@ -161,7 +161,7 @@ export default function Phonedetail() {
           }}
         >
           {/* phone text */}
-          <Grid size={8} pt={7.8} pl={5}>
+          <Grid size={{ xs: 12, md: 6 }} pt={7.8} pl={5}>
             <Typography
               className="text-[#1C274C] dark:text-gray-300"
               sx={{
@@ -200,7 +200,7 @@ export default function Phonedetail() {
               sx={{
                 backgroundColor: "#F27430",
                 color: "#FFFFFF",
-                mt: 4,
+                my: 2,
                 px: 3,
                 textTransform: "none",
                 fontSize: "16px",
@@ -214,8 +214,13 @@ export default function Phonedetail() {
           </Grid>
 
           {/* phone image */}
-          <Grid size={4} pt={7}>
-            <Image src={Watch} alt="Smart Watch" width={200} height={200} />
+          <Grid size={{ xs: 12, md: 6 }} pt={7}>
+            <Image
+              src={Watch}
+              alt="Smart Watch"
+              width={"100%"}
+              height={"100%"}
+            />
           </Grid>
         </Grid>
       </Grid>

@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 // Define your home page path
 const HOME_PAGE = "/";
 
-// Middleware to handle routing
-export function middleware(request) {
+// Proxy to handle routing
+export function proxy(request) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/popular") {
@@ -38,16 +38,17 @@ export function middleware(request) {
         pathname.toLowerCase().startsWith(path.toLowerCase())
     );
 
-  console.log("Middleware Check:", { pathname, isValidPath });
-
   // If path is not valid route, redirect to home
-  if (
-    !isValidPath &&
-    !pathname.startsWith("/_next") &&
-    !pathname.startsWith("/api") &&
-    !pathname.includes(".")
-  ) {
-    console.log("Redirecting to Home from:", pathname);
+  // Improved exclusion to avoid interfering with internal paths (@react-refresh, _next, etc.)
+  const isInternalPath =
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/@") || // Exclude Vite/HMR internal paths
+    pathname.includes("."); // Exclude files with extensions (sw.js, index.css, etc.)
+
+  if (!isValidPath && !isInternalPath) {
+    console.log("Proxy Redirect Attempt:", { pathname, isValidPath });
+    // console.log("Redirecting to Home from:", pathname);
     // const url = request.nextUrl.clone();
     // url.pathname = HOME_PAGE;
     // return NextResponse.redirect(url);
@@ -56,7 +57,7 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Configure which routes to run middleware on
+// Configure which routes to run proxy on
 export const config = {
   matcher: [
     /*
@@ -64,8 +65,9 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - public folder files
+     * - Internal paths starting with @ (Vite/Turbopack)
+     * - Files with common extensions
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|@.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|tsx|jsx|ts|json)$).*)",
   ],
 };

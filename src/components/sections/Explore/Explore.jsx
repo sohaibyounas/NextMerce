@@ -11,14 +11,19 @@ export default function Explore() {
       <Grid
         container
         spacing={2}
-        pt={10}
+        pt={{ xs: 6, md: 10 }}
         className="bg-gradient-to-tr from-[#3b4371] via-[#7695b3] to-[#d0e9f3] dark:from-[#1e293b] dark:via-[#334155] dark:to-[#0f172a] transition-all duration-500"
         sx={{
           minHeight: "450px",
+          pb: { xs: 6, md: 0 },
         }}
       >
         {/* grid text */}
-        <Grid size={6} pl={7}>
+        <Grid
+          size={{ xs: 12, md: 6 }}
+          px={{ xs: 3, md: 7 }}
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           <Box>
             <Typography
               className="text-[#3C50E0] dark:text-blue-400"
@@ -33,9 +38,9 @@ export default function Explore() {
             <Typography
               className="text-[#1c274c] dark:text-white"
               sx={{
-                fontSize: "40px",
+                fontSize: { xs: "28px", md: "40px" },
                 fontWeight: 700,
-                lineHeight: "48px",
+                lineHeight: { xs: "36px", md: "48px" },
                 pt: "20px",
                 pb: "17px",
               }}
@@ -66,7 +71,9 @@ export default function Explore() {
               color: "#fff",
               textTransform: "none",
               borderRadius: "20px",
-              p: "0px 10px",
+              mb: 2,
+              px: 4,
+              py: 1,
               "&:hover": {
                 background: "#1c36f0",
                 color: "#fff",
@@ -78,9 +85,23 @@ export default function Explore() {
         </Grid>
 
         {/* grid image */}
-        <Grid size={6}>
-          <Box>
-            <Image src={Headphone} alt="Head phone" width={411} height={376} />
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              pt: { xs: 4, md: 0 },
+            }}
+          >
+            <Image
+              src={Headphone}
+              alt="Head phone"
+              width={411}
+              height={376}
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
           </Box>
         </Grid>
       </Grid>
