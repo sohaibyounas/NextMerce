@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FaCartShopping } from "react-icons/fa6";
 import Image from "next/image";
 import User from "@/assets/user.svg";
@@ -20,12 +21,14 @@ export default function UserDetails() {
             />
           </div>
           <div>
-            <h1 className="text-[#8D93A5] dark:text-gray-400 text-[10px] font-[500]">
+            <h1 className="text-[#8D93A5] dark:text-gray-400 text-[10px] font-medium">
               Account
             </h1>
-            <p className="text-[#1C274C] dark:text-gray-200 text-[14px] font-[500] hover:text-blue-600 dark:hover:text-blue-400">
-              Sign In / Register
-            </p>
+            <Link href="/signin">
+              <p className="text-[#1C274C] dark:text-gray-200 text-[14px] font-medium hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                Sign In / Register
+              </p>
+            </Link>
           </div>
         </div>
 

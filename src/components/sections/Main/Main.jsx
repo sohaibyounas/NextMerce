@@ -30,6 +30,11 @@ import Footer from "@/components/layout/Footer/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTheme } from "next-themes";
+import {
+  ScrollAnimatedSection,
+  FadeInStagger,
+  StaggerItem,
+} from "@/components/shared/ScrollAnimations";
 
 export default function Mainarea() {
   const [images, setImages] = useState([]);
@@ -58,7 +63,7 @@ export default function Mainarea() {
   return (
     <>
       {/* slider and cards */}
-      <div className="grid grid-cols-12 gap-4 pt-8">
+      <ScrollAnimatedSection className="grid grid-cols-12 gap-4 pt-8">
         {/* Image Slider */}
         <div className="col-span-12 lg:col-span-8 px-2">
           <div className="relative w-full h-full overflow-hidden rounded-lg custom_slide bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
@@ -105,9 +110,9 @@ export default function Mainarea() {
         </div>
 
         {/* Products */}
-        <div className="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4 px-2 lg:px-0 lg:pr-2">
+        <FadeInStagger className="col-span-12 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4 px-2 lg:px-0 lg:pr-2">
           {/* First card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+          <StaggerItem className="bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
             <div className="flex items-start justify-between flex-1">
               <div className="flex-1">
                 <div className="max-w-[180px]">
@@ -133,10 +138,10 @@ export default function Mainarea() {
                 </span>
               </p>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Second card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+          <StaggerItem className="bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-[#1E293B] p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
             <div className="flex items-start justify-between flex-1">
               <div className="flex-1">
                 <div className="max-w-[180px]">
@@ -162,15 +167,15 @@ export default function Mainarea() {
                 </span>
               </p>
             </div>
-          </div>
-        </div>
-      </div>
+          </StaggerItem>
+        </FadeInStagger>
+      </ScrollAnimatedSection>
 
       {/* general texts / value propositions */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start justify-between gap-8 sm:gap-6 lg:gap-10 mt-6 px-2">
+      <FadeInStagger className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start justify-between gap-8 sm:gap-6 lg:gap-10 mt-6 px-2">
         {/* 1st */}
-        <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
+        <StaggerItem className="flex items-center gap-4">
+          <div className="shrink-0">
             <Image
               src={Icon1}
               alt="Free Shipping"
@@ -187,11 +192,11 @@ export default function Mainarea() {
               For all orders $200
             </p>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* 2nd */}
-        <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
+        <StaggerItem className="flex items-center gap-4">
+          <div className="shrink-0">
             <Image
               src={Icon2}
               alt="1 & 1 Returns"
@@ -208,11 +213,11 @@ export default function Mainarea() {
               Cancellation after 1 day
             </p>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* 3rd */}
-        <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
+        <StaggerItem className="flex items-center gap-4">
+          <div className="shrink-0">
             <Image
               src={Icon3}
               alt="Secure Payments"
@@ -229,11 +234,11 @@ export default function Mainarea() {
               Guarantee secure payments
             </p>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* 4th */}
-        <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
+        <StaggerItem className="flex items-center gap-4">
+          <div className="shrink-0">
             <Image
               src={Icon4}
               alt="Dedicated Support"
@@ -250,26 +255,38 @@ export default function Mainarea() {
               Support Anywhere & anytime
             </p>
           </div>
-        </div>
-      </div>
+        </StaggerItem>
+      </FadeInStagger>
 
       {/* category slides */}
-      <Category />
+      <ScrollAnimatedSection>
+        <Category />
+      </ScrollAnimatedSection>
 
       {/* shop slider */}
-      <Shop />
+      <ScrollAnimatedSection>
+        <Shop />
+      </ScrollAnimatedSection>
 
       {/* phone details */}
-      <Phonedetail />
+      <ScrollAnimatedSection>
+        <Phonedetail />
+      </ScrollAnimatedSection>
 
       {/* Best Seller product detail */}
-      <Seller data={cardData} />
+      <ScrollAnimatedSection>
+        <Seller data={cardData} />
+      </ScrollAnimatedSection>
 
       {/* explore page */}
-      <Explore />
+      <ScrollAnimatedSection>
+        <Explore />
+      </ScrollAnimatedSection>
 
       {/* User Feedback  */}
-      <Feedback />
+      <ScrollAnimatedSection>
+        <Feedback />
+      </ScrollAnimatedSection>
 
       {/* Footer */}
       <Footer />

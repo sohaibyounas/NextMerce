@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Grid, Icon, Typography } from "@mui/material";
+import { Box, Grid, Grid2, Icon, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaApple, FaGooglePlay, FaRegEnvelope } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
@@ -36,9 +36,9 @@ export default function Footer() {
         transition: "all 0.3s ease",
       }}
     >
-      <Grid container spacing={2} pt={11} px={2}>
+      <Grid2 container spacing={2} pt={11} px={2}>
         {/* help & support */}
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
           <Typography
             sx={{
               fontSize: "22px",
@@ -139,10 +139,10 @@ export default function Footer() {
               </Box>
             </Box>
           </Box>
-        </Grid>
+        </Grid2>
 
         {/* Account */}
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
           <Typography
             sx={{
               fontSize: "22px",
@@ -228,10 +228,10 @@ export default function Footer() {
               </Link>
             </Box>
           </Box>
-        </Grid>
+        </Grid2>
 
         {/* Quick Link */}
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
           <Typography
             sx={{
               fontSize: "22px",
@@ -349,10 +349,10 @@ export default function Footer() {
               </Link>
             </Box>
           </Box>
-        </Grid>
+        </Grid2>
 
         {/* Download App */}
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
           <Typography
             sx={{
               fontSize: "22px",
@@ -486,8 +486,8 @@ export default function Footer() {
               </Box>
             </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   );
 }

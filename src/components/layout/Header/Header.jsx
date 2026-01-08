@@ -88,18 +88,18 @@ export default function Header() {
               <div className="relative px-2" ref={dropdownRef}>
                 <div
                   onClick={() => setIsOpen(!isOpen)}
-                  className="w-[160px] h-[40px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-4 py-1 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[14px] font-[500] cursor-pointer transition-colors"
+                  className="w-[160px] h-[40px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-4 py-1 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[14px] font-medium cursor-pointer transition-colors"
                 >
                   <span>
-                    <RxHamburgerMenu className="h-4 w-4 flex-shrink-0" />
+                    <RxHamburgerMenu className="h-4 w-4 shrink-0" />
                   </span>
                   <span className="flex-1 truncate text-sm text-center ">
                     {selected}
                   </span>
                   {isOpen ? (
-                    <IoIosArrowUp className="h-4 w-4 flex-shrink-0" />
+                    <IoIosArrowUp className="h-4 w-4 shrink-0" />
                   ) : (
-                    <IoIosArrowDown className="h-4 w-4 flex-shrink-0" />
+                    <IoIosArrowDown className="h-4 w-4 shrink-0" />
                   )}
                 </div>
                 <DropdownMenu
@@ -200,7 +200,7 @@ export default function Header() {
                 <div className="relative" ref={dropdownRef}>
                   <div
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-full h-[45px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-5 py-2 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[15px] font-[500] cursor-pointer transition-colors shadow-sm"
+                    className="w-full h-[45px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-5 py-2 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[15px] font-medium cursor-pointer transition-colors shadow-sm"
                   >
                     <div className="flex items-center gap-3">
                       <RxHamburgerMenu className="h-5 w-5 text-blue-600" />
@@ -336,7 +336,7 @@ export default function Header() {
             <div className="flex-none border-t border-[#F2F3F8] dark:border-gray-800 p-6 bg-gray-50/50 dark:bg-gray-900/50">
               <div className="space-y-5">
                 <Link
-                  href="#"
+                  href="/signin"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center gap-4 group"
                 >

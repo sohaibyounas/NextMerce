@@ -39,35 +39,24 @@ export function proxy(request) {
     );
 
   // If path is not valid route, redirect to home
-  // Improved exclusion to avoid interfering with internal paths (@react-refresh, _next, etc.)
   const isInternalPath =
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    pathname.startsWith("/@") || // Exclude Vite/HMR internal paths
-    pathname.includes("."); // Exclude files with extensions (sw.js, index.css, etc.)
+    pathname.startsWith("/@") ||
+    pathname.includes(".");
 
   if (!isValidPath && !isInternalPath) {
     console.log("Proxy Redirect Attempt:", { pathname, isValidPath });
-    // console.log("Redirecting to Home from:", pathname);
-    // const url = request.nextUrl.clone();
-    // url.pathname = HOME_PAGE;
-    // return NextResponse.redirect(url);
+    const url = request.nextUrl.clone();
+    url.pathname = HOME_PAGE;
+    return NextResponse.redirect(url);
   }
-
   return NextResponse.next();
 }
 
 // Configure which routes to run proxy on
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - Internal paths starting with @ (Vite/Turbopack)
-     * - Files with common extensions
-     */
     "/((?!_next/static|_next/image|favicon.ico|@.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|tsx|jsx|ts|json)$).*)",
   ],
 };

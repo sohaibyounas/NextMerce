@@ -21,17 +21,19 @@ const menuItems = [
   { label: "Blogs", href: "/blogs", arrow: true },
 ];
 
-// Sample sub-items for Pages and Blogs dropdowns
+// sub pages for Pages menu
 const pagesSubItems = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "FAQ", href: "/faq" },
   {
-    label: "Shop with sidebar",
+    label: "Shop without sidebar",
     href: "/shop-without-sidebar",
   },
+  { label: "Sign In", href: "/signin", arrow: false },
 ];
 
+// sub pages for blogs menu
 const blogsSubItems = [
   { label: "Latest Posts", href: "/blogs/latest" },
   { label: "Categories", href: "/blogs/categories" },
@@ -124,7 +126,7 @@ export default function Menu() {
                             key={subItem.href}
                             href={subItem.href}
                             onClick={handleDropdownItemClick}
-                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] dark:text-gray-400 font-[400] hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition duration-200 ease-in-out"
+                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] dark:text-gray-400 font-normal hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition duration-200 ease-in-out"
                           >
                             {subItem.label}
                           </Link>
@@ -133,7 +135,7 @@ export default function Menu() {
                             key={subItem.href}
                             href={subItem.href}
                             onClick={handleDropdownItemClick}
-                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-[400] hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
+                            className="block w-full px-4 py-2 rounded-md text-sm text-[#606882] font-normal hover:bg-gray-100 hover:text-gray-900 transition duration-200 ease-in-out"
                           >
                             {subItem.label}
                           </a>
@@ -149,10 +151,10 @@ export default function Menu() {
 
         {/* Right Side */}
         <div className="flex items-center space-x-2 select-none">
-          <p className="text-[14px] text-[#1C274C] dark:text-gray-200 font-[500] hover:text-blue-600 dark:hover:text-blue-400">
+          <p className="text-[14px] text-[#1C274C] dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400">
             Best Selling
           </p>
-          <div className="bg-[#F23030] uppercase text-white px-2 py-1 rounded-full text-[8px] font-[600]">
+          <div className="bg-[#F23030] uppercase text-white px-2 py-1 rounded-full text-[8px] font-semibold">
             sale
           </div>
         </div>
