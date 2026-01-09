@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Grid, Grid2, Icon, Typography } from "@mui/material";
+import { Box, Grid2, Icon, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaApple, FaGooglePlay, FaRegEnvelope } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
