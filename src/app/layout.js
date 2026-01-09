@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import ToastProvider from "@/components/Toast/ToastProvider";
 
 // export const metadata = {
 //   title: "NextMerce | Future of Shopping",
@@ -25,7 +26,10 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             {children}
+            {/* scroll to top */}
             <ScrollToTop />
+            {/* toast */}
+            <ToastProvider />
           </ThemeProvider>
         </SessionProvider>
       </body>

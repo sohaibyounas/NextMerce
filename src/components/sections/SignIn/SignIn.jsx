@@ -17,10 +17,53 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import SignOut from "@/components/sections/SignOut/SignOut";
 import { signIn, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 export default function SignIn() {
   const { data: session } = useSession();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
+  // handle sign in google
+  const handleSignIn = async () => {
+    try {
+      await signIn("google");
+      toast.success("Sign in successfully");
+    } catch (error) {
+      toast.error("Error signing in");
+      console.error("Error signing in:", error);
+    }
+  };
+
+  // handle sign in github
+  const handleSignInGithub = async () => {
+    try {
+      await signIn("github");
+      toast.success("Sign in successfully");
+    } catch (error) {
+      toast.error("Error signing in");
+      console.error("Error signing in:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      toast.success("Sign in successfully");
+    } catch (error) {
+      toast.error("Error signing in");
+      console.error("Error signing in:", error);
+    }
+  };
+
+  // session
   if (session) {
     return <SignOut />;
   }
@@ -29,6 +72,7 @@ export default function SignIn() {
     <>
       {/* header */}
       <Header />
+
       {/* breadcrumb */}
       <Breadcrumb title="Sign In" />
 
@@ -41,7 +85,9 @@ export default function SignIn() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          transition: "all 0.3s ease",
         }}
+        className="bg-gray-50 dark:bg-[#0B1120]"
       >
         <Container maxWidth="sm">
           <Paper
@@ -51,7 +97,9 @@ export default function SignIn() {
               borderRadius: 3,
               boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
               bgcolor: "white",
+              transition: "all 0.3s ease",
             }}
+            className="bg-white dark:bg-[#1E293B] dark:shadow-[0px_4px_20px_rgba(0,0,0,0.3)]"
           >
             {/* title */}
             <Box sx={{ textAlign: "center", mb: 4 }}>
@@ -63,17 +111,23 @@ export default function SignIn() {
                   mb: 1,
                   fontSize: { xs: "24px", sm: "28px" },
                 }}
+                className="text-[#1C274C] dark:text-white"
               >
                 Sign In to Your Account
               </Typography>
-              <Typography sx={{ color: "#606882", fontSize: "15px" }}>
+              <Typography
+                sx={{ color: "#606882", fontSize: "15px" }}
+                className="text-[#606882] dark:text-gray-400"
+              >
                 Enter your detail below
               </Typography>
             </Box>
 
+            {/* form fields */}
             <Box
               component="form"
               sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+              onSubmit={handleSubmit}
             >
               {/* email */}
               <Box>
@@ -84,14 +138,21 @@ export default function SignIn() {
                     color: "#1C274C",
                     mb: 1,
                   }}
+                  className="text-[#1C274C] dark:text-gray-200"
                 >
                   Email
                 </Typography>
                 <TextField
                   fullWidth
+                  required
                   placeholder="example@gmail.com"
                   type="email"
                   variant="outlined"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  // onBlur={handleEmailBlur}
+                  error={setErrors}
+                  helperText={setErrors}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
@@ -101,6 +162,7 @@ export default function SignIn() {
                       "&.Mui-focused fieldset": { borderColor: "#1C274C" },
                     },
                   }}
+                  className="[&_.MuiOutlinedInput-root]:bg-gray-50 dark:[&_.MuiOutlinedInput-root]:bg-[#0B1120] [&_.MuiOutlinedInput-root]:border-gray-200 dark:[&_.MuiOutlinedInput-root]:border-gray-700 [&_input]:text-[#1C274C] dark:[&_input]:text-white [&_input::placeholder]:text-gray-400 dark:[&_input::placeholder]:text-gray-500 [&_fieldset]:border-gray-200 dark:[&_fieldset]:border-gray-700"
                 />
               </Box>
 
@@ -113,14 +175,22 @@ export default function SignIn() {
                     color: "#1C274C",
                     mb: 1,
                   }}
+                  className="text-[#1C274C] dark:text-gray-200"
                 >
                   Password
                 </Typography>
+
                 <TextField
                   fullWidth
+                  required
                   placeholder="Enter your password"
                   type="password"
                   variant="outlined"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  // onBlur={handlePasswordBlur}
+                  error={setErrors}
+                  helperText={setErrors}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
@@ -130,12 +200,14 @@ export default function SignIn() {
                       "&.Mui-focused fieldset": { borderColor: "#1C274C" },
                     },
                   }}
+                  className="[&_.MuiOutlinedInput-root]:bg-gray-50 dark:[&_.MuiOutlinedInput-root]:bg-[#0B1120] [&_.MuiOutlinedInput-root]:border-gray-200 dark:[&_.MuiOutlinedInput-root]:border-gray-700 [&_input]:text-[#1C274C] dark:[&_input]:text-white [&_input::placeholder]:text-gray-400 dark:[&_input::placeholder]:text-gray-500 [&_fieldset]:border-gray-200 dark:[&_fieldset]:border-gray-700"
                 />
               </Box>
 
-              {/* sign in buttons */}
+              {/* sign in button */}
               <Button
                 fullWidth
+                type="submit"
                 variant="contained"
                 sx={{
                   bgcolor: "#1C274C",
@@ -151,6 +223,8 @@ export default function SignIn() {
                     boxShadow: "none",
                   },
                 }}
+                onClick={handleSignIn}
+                className="bg-[#1C274C] dark:bg-blue-600 hover:bg-[#111827] dark:hover:bg-blue-700"
               >
                 Sign in
               </Button>
@@ -167,6 +241,7 @@ export default function SignIn() {
                       fontSize: "14px",
                       "&:hover": { color: "#1C274C" },
                     }}
+                    className="text-[#606882] dark:text-gray-400 hover:text-[#1C274C] dark:hover:text-white"
                   >
                     Forgot your password?
                   </Typography>
@@ -180,6 +255,7 @@ export default function SignIn() {
                   fontSize: "14px",
                   "&::before, &::after": { borderColor: "#E5E7EB" },
                 }}
+                className="text-[#606882] dark:text-gray-400 [&::before]:border-gray-200 dark:[&::before]:border-gray-700 [&::after]:border-gray-200 dark:[&::after]:border-gray-700"
               >
                 Or
               </Divider>
@@ -203,7 +279,8 @@ export default function SignIn() {
                     bgcolor: "#F3F4F6",
                   },
                 }}
-                onClick={() => signIn("google")}
+                className="border-gray-200 dark:border-gray-700 text-[#606882] dark:text-gray-300 bg-gray-50 dark:bg-[#0B1120] hover:bg-gray-100 dark:hover:bg-gray-800"
+                onClick={handleSignIn}
               >
                 Sign In with Google
               </Button>
@@ -212,7 +289,9 @@ export default function SignIn() {
               <Button
                 fullWidth
                 variant="outlined"
-                startIcon={<FaGithub size={20} color="black" />}
+                startIcon={
+                  <FaGithub size={20} className="text-black dark:text-white" />
+                }
                 sx={{
                   borderColor: "#E5E7EB",
                   color: "#606882",
@@ -227,14 +306,18 @@ export default function SignIn() {
                     bgcolor: "#F3F4F6",
                   },
                 }}
-                onClick={() => signIn("github")}
+                className="border-gray-200 dark:border-gray-700 text-[#606882] dark:text-gray-300 bg-gray-50 dark:bg-[#0B1120] hover:bg-gray-100 dark:hover:bg-gray-800"
+                onClick={handleSignInGithub}
               >
                 Sign In with Github
               </Button>
 
               {/* sign up  */}
               <Box sx={{ textAlign: "center", mt: 1 }}>
-                <Typography sx={{ fontSize: "14px", color: "#606882" }}>
+                <Typography
+                  sx={{ fontSize: "14px", color: "#606882" }}
+                  className="text-[#606882] dark:text-gray-400"
+                >
                   Don't have an account?{" "}
                   <Link href="/signup" style={{ textDecoration: "none" }}>
                     <Typography
@@ -244,6 +327,7 @@ export default function SignIn() {
                         fontWeight: 600,
                         "&:hover": { textDecoration: "underline" },
                       }}
+                      className="text-[#1C274C] dark:text-blue-400"
                     >
                       Sign Up Now!
                     </Typography>

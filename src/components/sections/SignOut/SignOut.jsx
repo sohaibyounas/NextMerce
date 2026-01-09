@@ -13,9 +13,16 @@ import Link from "next/link";
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
+import { toast } from "react-toastify";
 
 export default function SignOut() {
   const { data: session } = useSession();
+
+  // handle sign out
+  const handleSignOut = () => {
+    signOut();
+    toast.success("Sign out successfully");
+  };
 
   return (
     <>
@@ -94,7 +101,7 @@ export default function SignOut() {
               <Button
                 fullWidth
                 variant="outlined"
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 sx={{
                   py: 1.5,
                   borderRadius: 2,
