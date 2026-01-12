@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Grid2, Typography } from "@mui/material";
 import Image from "next/image";
 import Headphone from "@/assets/products/new-headphone.webp";
 import CountdownTimer from "./CountdownTimer";
@@ -8,18 +8,20 @@ import CountdownTimer from "./CountdownTimer";
 export default function Explore() {
   return (
     <>
-      <Grid
+      <Grid2
         container
         spacing={2}
         pt={{ xs: 6, md: 10 }}
-        className="bg-gradient-to-tr from-[#3b4371] via-[#7695b3] to-[#d0e9f3] dark:from-[#1e293b] dark:via-[#334155] dark:to-[#0f172a] transition-all duration-500"
+        className="bg-[linear-gradient(to_top_right,#3b4371,#7695b3,#d0e9f3)] 
+             dark:bg-[linear-gradient(to_top_right,#1e293b,#334155,#0f172a)] 
+             transition-all duration-500"
         sx={{
           minHeight: "450px",
-          pb: { xs: 6, md: 0 },
+          py: { xs: 6, md: 0 },
         }}
       >
         {/* grid text */}
-        <Grid
+        <Grid2
           size={{ xs: 12, md: 6 }}
           px={{ xs: 3, md: 7 }}
           sx={{ textAlign: { xs: "center", md: "left" } }}
@@ -60,7 +62,7 @@ export default function Explore() {
             </Typography>
           </Box>
 
-          {/* autotiemr */}
+          {/* autotimer */}
           <Box sx={{ pb: "20px" }}>
             <CountdownTimer />
           </Box>
@@ -82,10 +84,10 @@ export default function Explore() {
           >
             Check it out!
           </Button>
-        </Grid>
+        </Grid2>
 
         {/* grid image */}
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Box
             sx={{
               display: "flex",
@@ -103,8 +105,8 @@ export default function Explore() {
               style={{ maxWidth: "100%", height: "auto" }}
             />
           </Box>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </>
   );
 }

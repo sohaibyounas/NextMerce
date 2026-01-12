@@ -14,7 +14,10 @@ import Menu from "./Menu/Menu";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 
+import { useSession } from "next-auth/react";
+
 export default function Header() {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("Laptop & PC");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -341,14 +344,14 @@ export default function Header() {
                   className="flex items-center gap-4 group"
                 >
                   <div className="inline-flex h-12 w-24 items-center justify-center rounded-full bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-gray-700 shadow-sm text-[#1C274C] dark:text-gray-200 font-bold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all">
-                    Account
+                    {session ? "Profile" : "Account"}
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[16px] font-bold text-[#1C274C] dark:text-gray-200">
-                      Sign In
+                      {session ? session?.user?.name : "Sign In"}
                     </span>
                     <span className="text-[13px] text-[#606882]">
-                      Enter your account
+                      {session ? "Manage your account" : "Enter your account"}
                     </span>
                   </div>
                 </Link>

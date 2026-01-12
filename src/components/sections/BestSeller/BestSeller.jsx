@@ -10,6 +10,7 @@ import {
   Tooltip,
   Typography,
   Grid,
+  Grid2,
 } from "@mui/material";
 import Image from "next/image";
 import { CiHeart } from "react-icons/ci";
@@ -76,9 +77,9 @@ export default function Seller({ data = [] }) {
       </Box>
 
       {/* Product Details */}
-      <Grid container spacing={2}>
+      <Grid2 container spacing={2}>
         {safeData.map((card) => (
-          <Grid key={card.id} size={{ xs: 6, sm: 4 }}>
+          <Grid2 key={card.id} size={{ xs: 6, sm: 4 }}>
             <Link href="/Productdetails" style={{ textDecoration: "none" }}>
               <Card
                 sx={{
@@ -297,9 +298,9 @@ export default function Seller({ data = [] }) {
                 </CardContent>
               </Card>
             </Link>
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Grid2, Typography } from "@mui/material";
 import Image from "next/image";
 import Promo from "@/assets/general/promo-01.png";
 import Watch from "@/assets/products/promo-03.png";
@@ -10,7 +10,7 @@ export default function Phonedetail() {
   return (
     <>
       {/* phone detail */}
-      <Grid
+      <Grid2
         container
         spacing={2}
         className="bg-[#F5F5F5] dark:bg-slate-900/50 transition-colors duration-300"
@@ -22,7 +22,7 @@ export default function Phonedetail() {
         }}
       >
         {/* phone text */}
-        <Grid size={{ xs: 12, md: 6 }} maxWidth={600} pl={10}>
+        <Grid2 size={{ xs: 12, md: 6 }} maxWidth={600} pl={10}>
           <Typography
             className="text-[#1C274C] dark:text-gray-300"
             sx={{
@@ -68,17 +68,17 @@ export default function Phonedetail() {
           >
             Buy Now
           </Button>
-        </Grid>
+        </Grid2>
         {/* phone image */}
-        <Grid size={{ xs: 12, md: 6 }} pl={40}>
+        <Grid2 size={{ xs: 12, md: 6 }} pl={40}>
           <Image src={Promo} alt="Phone Image" width={274} height={350} />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* product detail */}
-      <Grid container spacing={4} mt={4}>
+      <Grid2 container spacing={4} mt={4}>
         {/* product 1 */}
-        <Grid
+        <Grid2
           size={{ xs: 12, md: 6 }}
           className="bg-[#DBF4F3] dark:bg-slate-800 transition-colors duration-300"
           sx={{
@@ -88,17 +88,17 @@ export default function Phonedetail() {
           }}
         >
           {/* phone image */}
-          <Grid size={{ xs: 12, md: 6 }} pt={7}>
+          <Grid2 size={{ xs: 12, md: 6 }} pt={7}>
             <Image
               src={Workout}
               alt="Workout Machine"
               width={300}
               height={300}
             />
-          </Grid>
+          </Grid2>
 
           {/* phone text */}
-          <Grid size={{ xs: 12, md: 6 }} pt={7.8} pl={2}>
+          <Grid2 size={{ xs: 12, md: 6 }} pt={7.8} pl={2}>
             <Typography
               className="text-[#1C274C] dark:text-gray-300"
               sx={{
@@ -147,11 +147,11 @@ export default function Phonedetail() {
             >
               Buy Now
             </Button>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
 
         {/* product 2 */}
-        <Grid
+        <Grid2
           size={{ xs: 12, md: 6 }}
           className="bg-[#FFECE1] dark:bg-[#2A2D3E] transition-colors duration-300"
           sx={{
@@ -161,7 +161,7 @@ export default function Phonedetail() {
           }}
         >
           {/* phone text */}
-          <Grid size={{ xs: 12, md: 6 }} pt={7.8} pl={5}>
+          <Grid2 size={{ xs: 12, md: 6 }} pt={7.8} pl={5}>
             <Typography
               className="text-[#1C274C] dark:text-gray-300"
               sx={{
@@ -211,19 +211,19 @@ export default function Phonedetail() {
             >
               Buy Now
             </Button>
-          </Grid>
+          </Grid2>
 
           {/* phone image */}
-          <Grid size={{ xs: 12, md: 6 }} pt={7}>
+          <Grid2 size={{ xs: 12, md: 6 }} pt={7}>
             <Image
               src={Watch}
               alt="Smart Watch"
               width={"100%"}
               height={"100%"}
             />
-          </Grid>
-        </Grid>
-      </Grid>
+          </Grid2>
+        </Grid2>
+      </Grid2>
     </>
   );
 }

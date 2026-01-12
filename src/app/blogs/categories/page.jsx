@@ -101,11 +101,11 @@ export default function BlogCategories() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
               </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 p-10 mt-auto flex flex-col items-start h-full justify-end text-white">
+              <div className="relative z-0 p-10 mt-auto flex flex-col items-start h-full justify-end text-white">
                 <div
                   className={`p-4 rounded-2xl ${cat.color} mb-6 text-2xl shadow-lg ring-4 ring-white/20 group-hover:scale-110 transition-transform`}
                 >
@@ -132,7 +132,7 @@ export default function BlogCategories() {
 
               {/* Hover highlight line */}
               <div
-                className={`absolute bottom-0 left-0 h-2 w-0 group-hover:w-full transition-all duration-500 ${cat.color} z-20 shadow-[0_-10px_20px_rgba(0,0,0,0.2)]`}
+                className={`absolute bottom-0 left-0 h-2 w-0 group-hover:w-full transition-all duration-500 ${cat.color} z-0 shadow-[0_-10px_20px_rgba(0,0,0,0.2)]`}
               ></div>
             </div>
           ))}

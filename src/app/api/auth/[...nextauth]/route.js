@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
   providers: [
@@ -12,7 +13,27 @@ const handler = NextAuth({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (credentials?.email && credentials?.password.length >= 6) {
+          return {
+            id: "1",
+            name: "User",
+            email: credentials.email,
+          };
+        }
+        return null;
+      },
+    }),
   ],
+  pages: {
+    signIn: "/signin", // Custom sign-in page to prevent default NextAuth page
+  },
   session: {
     strategy: "jwt",
   },

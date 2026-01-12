@@ -1,5 +1,9 @@
 "use client";
 
+import React, { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import {
   Box,
   Button,
@@ -9,337 +13,423 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer/Footer";
-import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
-import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import SignOut from "@/components/sections/SignOut/SignOut";
-import { signIn, useSession } from "next-auth/react";
-import { toast } from "react-toastify";
-import { useState } from "react";
+import { IoArrowBack } from "react-icons/io5";
+import Image from "next/image";
+import NextLogo from "@/assets/next-logo.svg"; // ← same logo as forgot password
+import Link from "next/link";
+import SignOut from "../SignOut/SignOut";
 
 export default function SignIn() {
   const { data: session } = useSession();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
-  // handle sign in google
-  const handleSignIn = async () => {
-    try {
-      await signIn("google");
-      toast.success("Sign in successfully");
-    } catch (error) {
-      toast.error("Error signing in");
-      console.error("Error signing in:", error);
-    }
-  };
-
-  // handle sign in github
-  const handleSignInGithub = async () => {
-    try {
-      await signIn("github");
-      toast.success("Sign in successfully");
-    } catch (error) {
-      toast.error("Error signing in");
-      console.error("Error signing in:", error);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      toast.success("Sign in successfully");
-    } catch (error) {
-      toast.error("Error signing in");
-      console.error("Error signing in:", error);
-    }
-  };
-
-  // session
   if (session) {
     return <SignOut />;
   }
 
+  // email validation
+  const validate = () => {
+    const temp = { email: "", password: "" };
+    temp.email = /\S+@\S+\.\S+/.test(form.email) ? "" : "Invalid email format";
+    temp.password = form.password.length >= 6 ? "" : "Min 6 characters";
+    setErrors(temp);
+    return Object.values(temp).every((x) => x === "");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setLoading(true);
+    try {
+      const res = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      if (res?.error) {
+        toast.error(
+          res.error === "CredentialsSignin" ? "Invalid credentials" : res.error
+        );
+      } else if (res?.ok) {
+        toast.success("Signed in successfully!");
+        router.push(res.url || "/");
+      }
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSocialSignIn = (provider) => {
+    signIn(provider, { callbackUrl: "/" });
+    toast.success("Redirecting...");
+  };
+
   return (
-    <>
-      {/* header */}
-      <Header />
-
-      {/* breadcrumb */}
-      <Breadcrumb title="Sign In" />
-
-      {/* sign in details */}
+    <Box sx={{ display: "flex", height: "100dvh", overflow: "hidden" }}>
+      {/* ── Left Side - Form ── */}
       <Box
         sx={{
-          bgcolor: "#F9FAFB",
-          py: 8,
-          minHeight: "80vh",
+          flex: { xs: 1, md: "0 0 50%" },
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          transition: "all 0.3s ease",
+          bgcolor: "white",
+          p: { xs: 2.5, sm: 4, md: 6 },
+          overflowY: "auto",
         }}
-        className="bg-gray-50 dark:bg-[#0B1120]"
       >
-        <Container maxWidth="sm">
-          <Paper
-            elevation={0}
-            sx={{
-              p: { xs: 3, sm: 6 },
-              borderRadius: 3,
-              boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
-              bgcolor: "white",
-              transition: "all 0.3s ease",
-            }}
-            className="bg-white dark:bg-[#1E293B] dark:shadow-[0px_4px_20px_rgba(0,0,0,0.3)]"
-          >
-            {/* title */}
-            <Box sx={{ textAlign: "center", mb: 4 }}>
-              <Typography
-                variant="h4"
+        <Box sx={{ width: "100%", maxWidth: 420, my: "auto" }}>
+          {/* Logo + Back */}
+          <Box sx={{ mb: { xs: 3, sm: 4 } }}>
+            <Box
+              sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 4 }}
+            >
+              <Box
                 sx={{
-                  fontWeight: 700,
-                  color: "#1C274C",
-                  mb: 1,
-                  fontSize: { xs: "24px", sm: "28px" },
+                  width: 40,
+                  height: 40,
+                  bgcolor: "#1C274C",
+                  borderRadius: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
                 }}
-                className="text-[#1C274C] dark:text-white"
               >
-                Sign In to Your Account
-              </Typography>
-              <Typography
-                sx={{ color: "#606882", fontSize: "15px" }}
-                className="text-[#606882] dark:text-gray-400"
-              >
-                Enter your detail below
-              </Typography>
+                <Image
+                  src={NextLogo}
+                  alt="Logo"
+                  width={26}
+                  height={26}
+                  style={{ filter: "invert(1)" }}
+                  href="/"
+                />
+              </Box>
             </Box>
 
-            {/* form fields */}
+            <Link href="/" style={{ textDecoration: "none" }}>
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1,
+                  color: "#606882",
+                  mb: 3,
+                  "&:hover": { color: "#1C274C" },
+                }}
+              >
+                <IoArrowBack size={18} />
+                <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
+                  Back to Home
+                </Typography>
+              </Box>
+            </Link>
+
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 700,
+                color: "#1C274C",
+                mb: 1,
+                fontSize: { xs: "26px", sm: "32px" },
+              }}
+            >
+              Welcome back
+            </Typography>
+            <Typography sx={{ color: "#606882", mb: 4 }}>
+              Sign in to your account
+            </Typography>
+
             <Box
               component="form"
-              sx={{ display: "flex", flexDirection: "column", gap: 3 }}
               onSubmit={handleSubmit}
+              sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
             >
-              {/* email */}
+              {/* Email */}
               <Box>
                 <Typography
                   sx={{
                     fontSize: "14px",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "#1C274C",
                     mb: 1,
                   }}
-                  className="text-[#1C274C] dark:text-gray-200"
                 >
                   Email
                 </Typography>
                 <TextField
                   fullWidth
-                  required
-                  placeholder="example@gmail.com"
+                  placeholder="hi@example.com"
                   type="email"
-                  variant="outlined"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  // onBlur={handleEmailBlur}
-                  error={setErrors}
-                  helperText={setErrors}
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  error={!!errors.email}
+                  helperText={errors.email}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
-                      bgcolor: "#F9FAFB",
-                      "& fieldset": { borderColor: "#E5E7EB" },
-                      "&:hover fieldset": { borderColor: "#D1D5DB" },
+                      bgcolor: "white",
+                      "& fieldset": {
+                        borderColor: "#E5E7EB",
+                        borderWidth: "1.5px",
+                      },
+                      "&:hover fieldset": { borderColor: "#9CA3AF" },
                       "&.Mui-focused fieldset": { borderColor: "#1C274C" },
                     },
                   }}
-                  className="[&_.MuiOutlinedInput-root]:bg-gray-50 dark:[&_.MuiOutlinedInput-root]:bg-[#0B1120] [&_.MuiOutlinedInput-root]:border-gray-200 dark:[&_.MuiOutlinedInput-root]:border-gray-700 [&_input]:text-[#1C274C] dark:[&_input]:text-white [&_input::placeholder]:text-gray-400 dark:[&_input::placeholder]:text-gray-500 [&_fieldset]:border-gray-200 dark:[&_fieldset]:border-gray-700"
                 />
               </Box>
 
-              {/* password */}
+              {/* Password */}
               <Box>
                 <Typography
                   sx={{
                     fontSize: "14px",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "#1C274C",
                     mb: 1,
                   }}
-                  className="text-[#1C274C] dark:text-gray-200"
                 >
                   Password
                 </Typography>
-
                 <TextField
                   fullWidth
-                  required
-                  placeholder="Enter your password"
+                  placeholder="••••••••"
                   type="password"
-                  variant="outlined"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  // onBlur={handlePasswordBlur}
-                  error={setErrors}
-                  helperText={setErrors}
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                  error={!!errors.password}
+                  helperText={errors.password}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
-                      bgcolor: "#F9FAFB",
-                      "& fieldset": { borderColor: "#E5E7EB" },
-                      "&:hover fieldset": { borderColor: "#D1D5DB" },
+                      bgcolor: "white",
+                      "& fieldset": {
+                        borderColor: "#E5E7EB",
+                        borderWidth: "1.5px",
+                      },
+                      "&:hover fieldset": { borderColor: "#9CA3AF" },
                       "&.Mui-focused fieldset": { borderColor: "#1C274C" },
                     },
                   }}
-                  className="[&_.MuiOutlinedInput-root]:bg-gray-50 dark:[&_.MuiOutlinedInput-root]:bg-[#0B1120] [&_.MuiOutlinedInput-root]:border-gray-200 dark:[&_.MuiOutlinedInput-root]:border-gray-700 [&_input]:text-[#1C274C] dark:[&_input]:text-white [&_input::placeholder]:text-gray-400 dark:[&_input::placeholder]:text-gray-500 [&_fieldset]:border-gray-200 dark:[&_fieldset]:border-gray-700"
                 />
               </Box>
 
-              {/* sign in button */}
-              <Button
-                fullWidth
-                type="submit"
-                variant="contained"
-                sx={{
-                  bgcolor: "#1C274C",
-                  color: "white",
-                  py: 1.5,
-                  borderRadius: 2,
-                  textTransform: "none",
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  boxShadow: "none",
-                  "&:hover": {
-                    bgcolor: "#111827",
-                    boxShadow: "none",
-                  },
-                }}
-                onClick={handleSignIn}
-                className="bg-[#1C274C] dark:bg-blue-600 hover:bg-[#111827] dark:hover:bg-blue-700"
-              >
-                Sign in
-              </Button>
-
-              {/* forgot password */}
-              <Box sx={{ textAlign: "center" }}>
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: -1 }}>
                 <Link
                   href="/forgot-password"
                   style={{ textDecoration: "none" }}
                 >
                   <Typography
+                    variant="body2"
                     sx={{
-                      color: "#606882",
-                      fontSize: "14px",
-                      "&:hover": { color: "#1C274C" },
+                      color: "#1C274C",
+                      fontWeight: 500,
+                      "&:hover": { textDecoration: "underline" },
                     }}
-                    className="text-[#606882] dark:text-gray-400 hover:text-[#1C274C] dark:hover:text-white"
                   >
-                    Forgot your password?
+                    Forgot password?
                   </Typography>
                 </Link>
               </Box>
 
-              {/* divider */}
-              <Divider
+              <Button
+                fullWidth
+                type="submit"
+                disabled={loading}
+                variant="contained"
                 sx={{
-                  color: "#606882",
-                  fontSize: "14px",
-                  "&::before, &::after": { borderColor: "#E5E7EB" },
+                  bgcolor: "#1C274C",
+                  py: 1.6,
+                  borderRadius: 2,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "15.5px",
+                  boxShadow: "0px 4px 12px rgba(28,39,76,0.2)",
+                  "&:hover": {
+                    bgcolor: "#111827",
+                    boxShadow: "0px 8px 20px rgba(28,39,76,0.3)",
+                    transform: "translateY(-1px)",
+                  },
                 }}
-                className="text-[#606882] dark:text-gray-400 [&::before]:border-gray-200 dark:[&::before]:border-gray-700 [&::after]:border-gray-200 dark:[&::after]:border-gray-700"
               >
-                Or
-              </Divider>
+                {loading ? "Signing in..." : "Sign In"}
+              </Button>
 
-              {/* sign in with google */}
+              <Divider sx={{ my: 2, color: "#9CA3AF" }}>or</Divider>
+
               <Button
                 fullWidth
                 variant="outlined"
                 startIcon={<FcGoogle size={20} />}
+                onClick={() => handleSocialSignIn("google")}
                 sx={{
+                  py: 1.4,
                   borderColor: "#E5E7EB",
-                  color: "#606882",
-                  py: 1.5,
-                  borderRadius: 10,
-                  textTransform: "none",
-                  fontSize: "15px",
+                  color: "#1F2937",
                   fontWeight: 500,
-                  bgcolor: "#F9FAFB",
-                  "&:hover": {
-                    borderColor: "#D1D5DB",
-                    bgcolor: "#F3F4F6",
-                  },
+                  "&:hover": { borderColor: "#1C274C", bgcolor: "#F9FAFB" },
                 }}
-                className="border-gray-200 dark:border-gray-700 text-[#606882] dark:text-gray-300 bg-gray-50 dark:bg-[#0B1120] hover:bg-gray-100 dark:hover:bg-gray-800"
-                onClick={handleSignIn}
               >
-                Sign In with Google
+                Continue with Google
               </Button>
 
-              {/* sign in with github */}
               <Button
                 fullWidth
                 variant="outlined"
-                startIcon={
-                  <FaGithub size={20} className="text-black dark:text-white" />
-                }
+                startIcon={<FaGithub size={20} />}
+                onClick={() => handleSocialSignIn("github")}
                 sx={{
+                  py: 1.4,
                   borderColor: "#E5E7EB",
-                  color: "#606882",
-                  py: 1.5,
-                  borderRadius: 10,
-                  textTransform: "none",
-                  fontSize: "15px",
+                  color: "#1F2937",
                   fontWeight: 500,
-                  bgcolor: "#F9FAFB",
-                  "&:hover": {
-                    borderColor: "#D1D5DB",
-                    bgcolor: "#F3F4F6",
-                  },
+                  "&:hover": { borderColor: "#1C274C", bgcolor: "#F9FAFB" },
                 }}
-                className="border-gray-200 dark:border-gray-700 text-[#606882] dark:text-gray-300 bg-gray-50 dark:bg-[#0B1120] hover:bg-gray-100 dark:hover:bg-gray-800"
-                onClick={handleSignInGithub}
               >
-                Sign In with Github
+                Continue with GitHub
               </Button>
 
-              {/* sign up  */}
-              <Box sx={{ textAlign: "center", mt: 1 }}>
-                <Typography
-                  sx={{ fontSize: "14px", color: "#606882" }}
-                  className="text-[#606882] dark:text-gray-400"
-                >
+              <Box sx={{ textAlign: "center", mt: 3 }}>
+                <Typography sx={{ color: "#606882", fontSize: "14px" }}>
                   Don't have an account?{" "}
-                  <Link href="/signup" style={{ textDecoration: "none" }}>
-                    <Typography
-                      component="span"
-                      sx={{
-                        color: "#1C274C",
-                        fontWeight: 600,
-                        "&:hover": { textDecoration: "underline" },
-                      }}
-                      className="text-[#1C274C] dark:text-blue-400"
-                    >
-                      Sign Up Now!
-                    </Typography>
+                  <Link
+                    href="/signup"
+                    style={{
+                      color: "#1C274C",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                    }}
+                  >
+                    Sign up
                   </Link>
                 </Typography>
               </Box>
             </Box>
-          </Paper>
-        </Container>
+          </Box>
+        </Box>
       </Box>
 
-      <Footer />
-    </>
+      {/* Right Side - Hero / Visual (md+ only) */}
+      <Box
+        sx={{
+          flex: 1,
+          display: { xs: "none", md: "flex" },
+          bgcolor: "#1C274C",
+          backgroundImage:
+            "radial-gradient(circle at 10% 20%, #2a3b75 0%, #1C274C 90%)",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+          color: "white",
+          p: 8,
+          overflow: "hidden",
+        }}
+      >
+        {/* Decorative blurred circles */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: -120,
+            right: -120,
+            width: 600,
+            height: 600,
+            borderRadius: "50%",
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -80,
+            left: -80,
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+
+        <Box sx={{ zIndex: 2, maxWidth: 520 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              lineHeight: 1.1,
+              mb: 4,
+              fontSize: { md: "3.2rem", lg: "3.8rem" },
+            }}
+          >
+            Welcome to
+            <Box component="span" sx={{ color: "#a5b4fc", display: "block" }}>
+              NextMerce
+            </Box>
+          </Typography>
+
+          <Typography
+            variant="h6"
+            sx={{ color: "#c7d2fe", mb: 5, maxWidth: 420 }}
+          >
+            Sign in to access your dashboard, manage products, orders and grow
+            your business.
+          </Typography>
+
+          {/* Small security card */}
+          <Box
+            sx={{
+              bgcolor: "rgba(255,255,255,0.95)",
+              borderRadius: 3,
+              p: 3,
+              color: "#1C274C",
+              boxShadow: "0 20px 40px -10px rgba(0,0,0,0.4)",
+              maxWidth: 360,
+              ml: "auto",
+            }}
+          >
+            <Typography variant="subtitle1" fontWeight={700} mb={1}>
+              Secure Authentication
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#4B5563", mb: 2 }}>
+              Protected with industry-standard encryption & modern auth
+              providers
+            </Typography>
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+              {["OAuth2", "JWT", "2FA Ready"].map((tag) => (
+                <Box
+                  key={tag}
+                  sx={{
+                    bgcolor: "#F3F4F6",
+                    px: 1.8,
+                    py: 0.6,
+                    borderRadius: 10,
+                    fontSize: "12px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {tag}
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }

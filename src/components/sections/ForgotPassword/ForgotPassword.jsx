@@ -25,14 +25,13 @@ export default function ForgotPassword() {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+    <Box sx={{ display: "flex", height: "100dvh", overflow: "hidden" }}>
       {/* Left Side - Form */}
       <Box
         sx={{
           flex: { xs: 1, md: "0 0 50%" },
           display: "flex",
           flexDirection: "column",
-          justifyContent: { xs: "flex-start", sm: "center" },
           alignItems: "center",
           bgcolor: "white",
           p: { xs: 2.5, sm: 4, md: 6 },
@@ -42,7 +41,14 @@ export default function ForgotPassword() {
           overflowX: "hidden",
         }}
       >
-        <Box sx={{ width: "100%", maxWidth: 400, py: { xs: 2, sm: 0 } }}>
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 400,
+            py: { xs: 2, sm: 0 },
+            my: "auto",
+          }}
+        >
           {/* Logo Section */}
           <Box
             sx={{
@@ -64,6 +70,7 @@ export default function ForgotPassword() {
                 color: "white",
                 fontWeight: "bold",
                 fontSize: "20px",
+                cursor: "pointer",
               }}
             >
               <Image
@@ -72,6 +79,7 @@ export default function ForgotPassword() {
                 width={24}
                 height={24}
                 style={{ filter: "invert(1)" }}
+                href="/"
               />
             </Box>
           </Box>

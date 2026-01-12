@@ -52,7 +52,7 @@ export default function Footer() {
 
           {/* help options */}
           <Box sx={{ pt: 3.6 }}>
-            {/* 1st */}
+            {/* location */}
             <Box
               sx={{
                 display: "flex",
@@ -81,7 +81,7 @@ export default function Footer() {
               </Box>
             </Box>
 
-            {/* 2nd */}
+            {/* phone */}
             <Box
               sx={{
                 display: "flex",
@@ -110,7 +110,7 @@ export default function Footer() {
               </Box>
             </Box>
 
-            {/* 3rd */}
+            {/* email */}
             <Box
               sx={{
                 display: "flex",
@@ -163,6 +163,7 @@ export default function Footer() {
               gap: "5px",
             }}
           >
+            {/* sign up */}
             <Box
               sx={{
                 display: "flex",
@@ -175,10 +176,12 @@ export default function Footer() {
               <span>
                 <IoMdLogIn color={isDark ? "white" : "#3b82f6"} />
               </span>
-              <Link href="#" className="linkStyles">
-                Login / Register
+              <Link href="/SignUp" className="linkStyles">
+                Register / Signup
               </Link>
             </Box>
+
+            {/* cart */}
             <Box
               sx={{
                 display: "flex",
@@ -195,6 +198,8 @@ export default function Footer() {
                 Cart
               </Link>
             </Box>
+
+            {/* wishlist */}
             <Box
               sx={{
                 display: "flex",
@@ -211,6 +216,8 @@ export default function Footer() {
                 Wishlist
               </Link>
             </Box>
+
+            {/* shop */}
             <Box
               sx={{
                 display: "flex",
@@ -252,6 +259,7 @@ export default function Footer() {
               gap: "5px",
             }}
           >
+            {/* privacy policy */}
             <Box
               sx={{
                 display: "flex",
@@ -268,6 +276,8 @@ export default function Footer() {
                 Privacy Policy
               </Link>
             </Box>
+
+            {/* services */}
             <Box
               sx={{
                 display: "flex",
@@ -284,6 +294,8 @@ export default function Footer() {
                 Services
               </Link>
             </Box>
+
+            {/* refund policy */}
             <Box
               sx={{
                 display: "flex",
@@ -300,6 +312,8 @@ export default function Footer() {
                 Refund Policy
               </Link>
             </Box>
+
+            {/* terms of use */}
             <Box
               sx={{
                 display: "flex",
@@ -316,6 +330,8 @@ export default function Footer() {
                 Terms of Use
               </Link>
             </Box>
+
+            {/* faq */}
             <Box
               sx={{
                 display: "flex",
@@ -332,6 +348,8 @@ export default function Footer() {
                 FAQs
               </Link>
             </Box>
+
+            {/* contact us */}
             <Box
               sx={{
                 display: "flex",
@@ -373,11 +391,14 @@ export default function Footer() {
               gap: "5px",
             }}
           >
+            {/* save money */}
             <Box>
               <Typography sx={{ color: isDark ? "#D1D5DB" : "#1C274C" }}>
                 Save $3 With App & New User only
               </Typography>
             </Box>
+
+            {/* app download */}
             <Box
               sx={{
                 display: "flex",

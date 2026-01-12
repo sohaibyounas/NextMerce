@@ -119,10 +119,7 @@ export default function SignOut() {
                 Sign Out
               </Button>
 
-              <Link
-                href="/shop"
-                style={{ width: "100%", textDecoration: "none" }}
-              >
+              <Link href="/" style={{ width: "100%", textDecoration: "none" }}>
                 <Button
                   fullWidth
                   variant="contained"

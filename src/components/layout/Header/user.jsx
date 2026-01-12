@@ -7,7 +7,10 @@ import User from "@/assets/user.svg";
 import Heart from "@/assets/heart.svg";
 import Cart from "@/assets/cart.svg";
 
+import { useSession } from "next-auth/react";
+
 export default function UserDetails() {
+  const { data: session } = useSession();
   return (
     <>
       <div className="flex items-center justify-between gap-[5px]">
@@ -22,11 +25,11 @@ export default function UserDetails() {
           </div>
           <div>
             <h1 className="text-[#8D93A5] dark:text-gray-400 text-[10px] font-medium">
-              Account
+              {session ? session?.user?.name : "Account"}
             </h1>
             <Link href="/signin">
               <p className="text-[#1C274C] dark:text-gray-200 text-[14px] font-medium hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
-                Sign In / Register
+                {session ? "Sign Out" : "Sign In / Register"}
               </p>
             </Link>
           </div>
