@@ -40,7 +40,7 @@ export default function Explore() {
             <Typography
               className="text-[#1c274c] dark:text-white"
               sx={{
-                fontSize: { xs: "28px", md: "40px" },
+                fontSize: { xs: "28px", md: "34px" },
                 fontWeight: 700,
                 lineHeight: { xs: "36px", md: "48px" },
                 pt: "20px",

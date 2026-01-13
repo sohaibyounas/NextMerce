@@ -1,56 +1,51 @@
-const style = {
-    shop: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        mb: 2,
-        mx: "10px",
-    },
+import Fitness from "@/assets/newarrivals/fitness-runner.png";
+import GrayLCD from "@/assets/newarrivals/graylcd.png";
+import Iphone from "@/assets/newarrivals/iphone17.png";
+import Juicer from "@/assets/newarrivals/juicer.png";
+import Monitor from "@/assets/newarrivals/monitor.png";
+import Screen from "@/assets/newarrivals/lcdscreen.png";
 
-    shopTitle: {
-        fontSize: "30px",
-        fontWeight: 600,
-        color: "#1C274C"
-    },
-    shopButton: {
-        textTransform: "none",
-        border: "1px solid #8C92A4",
-        borderRadius: "20px",
-        "&: hover": {
-            backgroundColor: "#1c274c",
-            color: "#fff",
-            border: "none",
-        },
-    },
-
-    shopButtonText: {
-        fontSize: "14px",
-        fontWeight: 500,
-        color: "#1C274C",
-        p: "0px 5px",
-        "&: hover": {
-            color: "#fff",
-        },
-    },
-
-    shopCard: {
-        minWidth: 275,
-        boxShadow: "2",
-        borderRadius: "15px"
-    },
-
-    cardButton: {
-        p: "10px 15px",
-        textTransform: "none",
-        borderRadius: "20px",
-        boxShadow: "10px",
-        color: "#fff",
-        "&:hover": {
-            backgroundColor: "#1c3fb7",
-            color: "#fff"
-        },
-    },
-
-}
-
-export default style;
+export const cardData = [
+	{
+		id: 1,
+		image: Fitness,
+		description: "This is the finess runner machine.",
+		price: "$200",
+		priceCut: "$150",
+	},
+	{
+		id: 2,
+		image: GrayLCD,
+		description: "This is the gray LCD.",
+		price: "$150",
+		priceCut: "$100",
+	},
+	{
+		id: 3,
+		image: Iphone,
+		description: "This is the gray LCD.",
+		price: "$150",
+		priceCut: "$100",
+	},
+	{
+		id: 4,
+		image: Juicer,
+		description: "This is the gray LCD.",
+		price: "$150",
+		priceCut: "$100",
+	},
+	{
+		id: 5,
+		image: Monitor,
+		description: "This is the gray LCD.",
+		price: "$150",
+		priceCut: "$100",
+	},
+	{
+		id: 6,
+		image: Screen,
+		description: "This is the gray LCD.",
+		price: "$150",
+		priceCut: "$100",
+	},
+];

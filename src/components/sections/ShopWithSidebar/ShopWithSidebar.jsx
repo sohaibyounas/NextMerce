@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -32,6 +32,7 @@ import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
+import { useTheme } from "next-themes";
 
 export default function ShopWithSidebar() {
   const [view, setView] = useState("grid");
@@ -40,6 +41,15 @@ export default function ShopWithSidebar() {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 999]);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // theme toggle
+  const isDark = mounted && theme === "dark";
 
   // saved calculated value
   const products = useMemo(
@@ -196,17 +206,35 @@ export default function ShopWithSidebar() {
     setView("grid");
   };
 
+  // menuitem styles
+  const menuItemSx = (isDark) => ({
+    color: isDark ? "#f1f5f9" : "#111827",
+
+    "&:hover": {
+      backgroundColor: isDark ? "#334155" : "#f3f4f6",
+    },
+
+    "&.Mui-selected": {
+      backgroundColor: isDark ? "#475569" : "#e5e7eb",
+    },
+
+    "&.Mui-selected:hover": {
+      backgroundColor: isDark ? "#64748b" : "#d1d5db",
+    },
+  });
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
+        {/* breadcrumb */}
         <Breadcrumb title="Explore All Products" />
+
+        {/* shop details  */}
         <Box
           sx={{
-            maxWidth: 1200,
-            mx: "auto",
-            px: { xs: 2, md: 3 },
-            py: { xs: 3, md: 4 },
-            backgroundColor: "#F3F4F6",
+            py: 3,
+            backgroundColor: isDark ? "#1E293B" : "#F3F4F6",
+            overflow: "hidden",
           }}
         >
           {/* sidebar  + products view */}
@@ -231,15 +259,23 @@ export default function ShopWithSidebar() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "#111827",
                 }}
               >
-                <Typography sx={{ fontWeight: 600, color: "#111827" }}>
-                  Filters:
-                </Typography>
+                <Typography sx={{ fontWeight: 600 }}>Filters:</Typography>
                 <Button
                   onClick={onClearAll}
                   variant="text"
-                  sx={{ textTransform: "none", color: "#3B82F6" }}
+                  sx={{
+                    textTransform: "none",
+                    color: isDark ? "#fff" : "#111827",
+                    ...(isDark && {
+                      "&:hover": {
+                        border: "1px solid #fff",
+                      },
+                    }),
+                  }}
                 >
                   Clean All
                 </Button>
@@ -248,10 +284,41 @@ export default function ShopWithSidebar() {
               {/* category */}
               <Paper
                 elevation={0}
-                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+                sx={{
+                  borderRadius: 2,
+                  border: "1px solid #E5E7EB",
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "#111827",
+                }}
               >
-                <Accordion defaultExpanded elevation={0} disableGutters>
-                  <AccordionSummary expandIcon={<FiChevronDown />}>
+                <Accordion
+                  defaultExpanded
+                  elevation={0}
+                  disableGutters
+                  sx={{
+                    backgroundColor: "transparent",
+                    color: "inherit",
+                    "& .MuiAccordionSummary-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "& .MuiAccordionDetails-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<FiChevronDown />}
+                    sx={{
+                      "& .MuiAccordionSummary-expandIconWrapper": {
+                        color: "inherit",
+                      },
+                    }}
+                  >
                     <Typography sx={{ fontWeight: 600 }}>Category</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -276,6 +343,12 @@ export default function ShopWithSidebar() {
                               <Checkbox
                                 checked={selectedCategories.includes(c.label)}
                                 onChange={() => onToggleCategory(c.label)}
+                                sx={{
+                                  color: isDark ? "#fff" : "#111827",
+                                  "&.Mui-checked": {
+                                    color: isDark ? "#fff" : "#111827",
+                                  },
+                                }}
                               />
                             }
                             label={c.label}
@@ -285,13 +358,14 @@ export default function ShopWithSidebar() {
                               minWidth: 22,
                               height: 18,
                               px: 1,
-                              borderRadius: 10,
-                              backgroundColor: "#F3F4F6",
+                              borderRadius: "40%",
+                              backgroundColor: isDark ? "#F3F4F6" : "#1C274C",
+                              color: isDark ? "#111827" : "#FFFFFF",
+                              fontWeight: 600,
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
                               fontSize: 12,
-                              color: "#111827",
                             }}
                           >
                             {c.count}
@@ -306,10 +380,41 @@ export default function ShopWithSidebar() {
               {/* size */}
               <Paper
                 elevation={0}
-                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+                sx={{
+                  borderRadius: 2,
+                  border: "1px solid #E5E7EB",
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "#111827",
+                }}
               >
-                <Accordion defaultExpanded elevation={0} disableGutters>
-                  <AccordionSummary expandIcon={<FiChevronDown />}>
+                <Accordion
+                  defaultExpanded
+                  elevation={0}
+                  disableGutters
+                  sx={{
+                    backgroundColor: "transparent",
+                    color: "inherit",
+                    "& .MuiAccordionSummary-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "& .MuiAccordionDetails-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<FiChevronDown />}
+                    sx={{
+                      "& .MuiAccordionSummary-expandIconWrapper": {
+                        color: "inherit",
+                      },
+                    }}
+                  >
                     <Typography sx={{ fontWeight: 600 }}>Size</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -327,6 +432,7 @@ export default function ShopWithSidebar() {
                               backgroundColor: selected ? "#1C274C" : "#F3F4F6",
                               color: selected ? "#FFFFFF" : "#111827",
                               fontWeight: 600,
+                              "&:hover": { color: "#fff" },
                             }}
                           />
                         );
@@ -339,10 +445,41 @@ export default function ShopWithSidebar() {
               {/* color */}
               <Paper
                 elevation={0}
-                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+                sx={{
+                  borderRadius: 2,
+                  border: "1px solid #E5E7EB",
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "#111827",
+                }}
               >
-                <Accordion defaultExpanded elevation={0} disableGutters>
-                  <AccordionSummary expandIcon={<FiChevronDown />}>
+                <Accordion
+                  defaultExpanded
+                  elevation={0}
+                  disableGutters
+                  sx={{
+                    backgroundColor: "transparent",
+                    color: "inherit",
+                    "& .MuiAccordionSummary-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "& .MuiAccordionDetails-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<FiChevronDown />}
+                    sx={{
+                      "& .MuiAccordionSummary-expandIconWrapper": {
+                        color: "inherit",
+                      },
+                    }}
+                  >
                     <Typography sx={{ fontWeight: 600 }}>Colors</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -376,10 +513,41 @@ export default function ShopWithSidebar() {
               {/* price */}
               <Paper
                 elevation={0}
-                sx={{ borderRadius: 2, border: "1px solid #E5E7EB" }}
+                sx={{
+                  borderRadius: 2,
+                  border: "1px solid #E5E7EB",
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "#111827",
+                }}
               >
-                <Accordion defaultExpanded elevation={0} disableGutters>
-                  <AccordionSummary expandIcon={<FiChevronDown />}>
+                <Accordion
+                  defaultExpanded
+                  elevation={0}
+                  disableGutters
+                  sx={{
+                    backgroundColor: "transparent",
+                    color: "inherit",
+                    "& .MuiAccordionSummary-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "& .MuiAccordionDetails-root": {
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                    },
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<FiChevronDown />}
+                    sx={{
+                      "& .MuiAccordionSummary-expandIconWrapper": {
+                        color: "inherit",
+                      },
+                    }}
+                  >
                     <Typography sx={{ fontWeight: 600 }}>Price</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -389,7 +557,7 @@ export default function ShopWithSidebar() {
                       valueLabelDisplay="auto"
                       min={0}
                       max={999}
-                      sx={{ color: "#1C274C" }}
+                      sx={{ color: isDark ? "#fff" : "1C274C" }}
                     />
                     <Box
                       sx={{
@@ -406,7 +574,7 @@ export default function ShopWithSidebar() {
                           px: 1,
                           py: 0.5,
                           fontSize: 12,
-                          color: "#111827",
+                          color: isDark ? "#fff" : "#111827",
                         }}
                       >
                         $ {priceRange[0]}
@@ -418,7 +586,7 @@ export default function ShopWithSidebar() {
                           px: 1,
                           py: 0.5,
                           fontSize: 12,
-                          color: "#111827",
+                          color: isDark ? "#fff" : "#111827",
                         }}
                       >
                         $ {priceRange[1]}
@@ -443,69 +611,149 @@ export default function ShopWithSidebar() {
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                   gap: 2,
+                  background: isDark ? "#1E293B" : "#F3F4F6",
+                  color: isDark ? "#fff" : "1C274C",
                 }}
               >
+                {/* right side header, dropdown */}
                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     gap: 2,
                     flexWrap: "wrap",
+                    color: "inherit",
                   }}
                 >
-                  <FormControl size="small" sx={{ minWidth: 180 }}>
+                  <FormControl
+                    size="small"
+                    sx={{
+                      minWidth: 180,
+                      backgroundColor: isDark ? "#1C274C" : "#ffffff",
+                      "& .MuiOutlinedInput-root": {
+                        padding: 0,
+                      },
+                    }}
+                  >
                     <Select
                       value={sort}
                       onChange={(e) => setSort(e.target.value)}
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                            backgroundColor: isDark ? "#1E293B" : "#ffffff",
+                            borderRadius: 1,
+                            mt: 0.5,
+                          },
+                        },
+                        // remove extra space
+                        MenuListProps: {
+                          sx: {
+                            padding: 0,
+                          },
+                        },
+                      }}
+                      sx={{
+                        backgroundColor: isDark ? "#334155" : "#ffffff",
+                        color: isDark ? "#f1f5f9" : "#111827",
+                        borderRadius: 1,
+
+                        "& .MuiSelect-select": {
+                          padding: "8px 32px 8px 12px",
+                          display: "flex",
+                          alignItems: "center",
+                        },
+
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: isDark ? "#475569" : "#D1D5DB",
+                        },
+
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: isDark ? "#60a5fa" : "#3b82f6",
+                          borderWidth: "2px",
+                        },
+
+                        "& .MuiSvgIcon-root": {
+                          color: isDark ? "#94a3b8" : "#6b7280",
+                        },
+                      }}
                     >
-                      <MenuItem value="latest">Latest Products</MenuItem>
-                      <MenuItem value="priceLow">Price: Low to High</MenuItem>
-                      <MenuItem value="priceHigh">Price: High to Low</MenuItem>
+                      <MenuItem value="latest" sx={menuItemSx(isDark)}>
+                        Latest Products
+                      </MenuItem>
+
+                      <MenuItem value="priceLow" sx={menuItemSx(isDark)}>
+                        Price: Low to High
+                      </MenuItem>
+
+                      <MenuItem value="priceHigh" sx={menuItemSx(isDark)}>
+                        Price: High to Low
+                      </MenuItem>
                     </Select>
                   </FormControl>
-                  <Typography sx={{ color: "#111827" }}>
+
+                  <Typography
+                    sx={{
+                      color: "inherit",
+                      fontWeight: 500,
+                    }}
+                  >
                     Showing {filteredProducts.length} of {products.length}{" "}
                     Products
                   </Typography>
                 </Box>
 
+                {/* list & detail view */}
                 <Box sx={{ display: "flex", gap: 1 }}>
-                  <Box
-                    onClick={() => setView("grid")}
-                    sx={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 2,
-                      border: "1px solid #E5E7EB",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                      backgroundColor:
-                        view === "grid" ? "#1C274C" : "transparent",
-                      color: view === "grid" ? "#FFFFFF" : "#111827",
-                    }}
-                  >
-                    <FiGrid />
-                  </Box>
-                  <Box
-                    onClick={() => setView("list")}
-                    sx={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 2,
-                      border: "1px solid #E5E7EB",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                      backgroundColor:
-                        view === "list" ? "#1C274C" : "transparent",
-                      color: view === "list" ? "#FFFFFF" : "#111827",
-                    }}
-                  >
-                    <FiList />
-                  </Box>
+                  <Tooltip title="Grid View" arrow>
+                    <Box
+                      onClick={() => setView("grid")}
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 2,
+                        border: "1px solid #E5E7EB",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        backgroundColor: view === "grid" ? "#1C274C" : "#fff",
+                        color: view === "grid" ? "#FFFFFF" : "#111827",
+
+                        "&:hover": {
+                          backgroundColor:
+                            view === "grid" ? "#1C274C" : "#F3F4F6",
+                        },
+                      }}
+                    >
+                      <FiGrid />
+                    </Box>
+                  </Tooltip>
+
+                  <Tooltip title="List View" arrow>
+                    <Box
+                      onClick={() => setView("list")}
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 2,
+                        border: "1px solid #E5E7EB",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        backgroundColor: view === "list" ? "#1C274C" : "#fff",
+                        color: view === "list" ? "#FFFFFF" : "#111827",
+
+                        "&:hover": {
+                          backgroundColor:
+                            view === "list" ? "#1C274C" : "#F3F4F6",
+                        },
+                      }}
+                    >
+                      <FiList />
+                    </Box>
+                  </Tooltip>
                 </Box>
               </Paper>
 
@@ -530,7 +778,8 @@ export default function ShopWithSidebar() {
                         borderRadius: 2,
                         border: "1px solid #E5E7EB",
                         overflow: "visible",
-                        backgroundColor: "#FFFFFF",
+                        backgroundColor: isDark ? "#1E293B" : "#FFFFFF",
+                        color: isDark ? "#fff" : "#FFFFFF",
                         position: "relative",
                       }}
                     >
@@ -569,7 +818,7 @@ export default function ShopWithSidebar() {
                             sx={{
                               fontSize: 14,
                               fontWeight: 700,
-                              color: "#1C274C",
+                              color: isDark ? "#fff" : "#1C274C",
                               mb: 1,
                             }}
                           >
@@ -584,19 +833,22 @@ export default function ShopWithSidebar() {
                               gap: 1,
                             }}
                           >
+                            {/* old price */}
                             <Typography
                               sx={{
                                 textDecoration: "line-through",
-                                color: "#8C92A4",
+                                color: isDark ? "#fff" : "#8C92A4",
                                 fontWeight: 600,
                                 fontSize: 14,
                               }}
                             >
                               ${p.oldPrice}
                             </Typography>
+
+                            {/* new price */}
                             <Typography
                               sx={{
-                                color: "#1C274C",
+                                color: isDark ? "#fff" : "#1C274C",
                                 fontWeight: 800,
                                 fontSize: 14,
                               }}
@@ -627,8 +879,8 @@ export default function ShopWithSidebar() {
                             slotProps={{
                               tooltip: {
                                 sx: {
-                                  bgcolor: "#fff",
-                                  color: "#000",
+                                  bgcolor: isDark ? "#334155" : "#fff",
+                                  color: isDark ? "#fff" : "#000",
                                   borderRadius: "8px",
                                   fontSize: "10px",
                                   fontWeight: 500,
@@ -663,8 +915,8 @@ export default function ShopWithSidebar() {
                             slotProps={{
                               tooltip: {
                                 sx: {
-                                  bgcolor: "#fff",
-                                  color: "#000",
+                                  bgcolor: isDark ? "#334155" : "#fff",
+                                  color: isDark ? "#fff" : "#000",
                                   borderRadius: "8px",
                                   fontSize: "10px",
                                   fontWeight: 500,
@@ -699,8 +951,8 @@ export default function ShopWithSidebar() {
                             slotProps={{
                               tooltip: {
                                 sx: {
-                                  bgcolor: "#fff",
-                                  color: "#000",
+                                  bgcolor: isDark ? "#334155" : "#fff",
+                                  color: isDark ? "#fff" : "#000",
                                   borderRadius: "8px",
                                   fontSize: "10px",
                                   fontWeight: 500,
@@ -744,9 +996,11 @@ export default function ShopWithSidebar() {
                         display: "flex",
                         gap: 2,
                         alignItems: "center",
-                        backgroundColor: "#FFFFFF",
+                        backgroundColor: isDark ? "#1E293B" : "#FFFFFF",
+                        color: isDark ? "#fff" : "#1C274C",
                       }}
                     >
+                      {/* image */}
                       <Box
                         sx={{
                           width: 120,
@@ -769,21 +1023,29 @@ export default function ShopWithSidebar() {
                           }}
                         />
                       </Box>
+
+                      {/* title, price */}
                       <Box sx={{ flex: 1 }}>
                         <Typography
                           sx={{
                             fontSize: 16,
                             fontWeight: 700,
-                            color: "#1C274C",
+                            color: isDark ? "#fff" : "#1C274C",
                           }}
                         >
                           {p.title}
                         </Typography>
                         <Typography
-                          sx={{ fontSize: 13, color: "#6B7280", mt: 0.5 }}
+                          sx={{
+                            fontSize: 13,
+                            color: isDark ? "#fff" : "#6B7280",
+                            mt: 0.5,
+                          }}
                         >
                           {p.category}
                         </Typography>
+
+                        {/* old, new price */}
                         <Box
                           sx={{
                             display: "flex",
@@ -795,7 +1057,7 @@ export default function ShopWithSidebar() {
                           <Typography
                             sx={{
                               textDecoration: "line-through",
-                              color: "#8C92A4",
+                              color: isDark ? "#fff" : "#8C92A4",
                               fontWeight: 600,
                               fontSize: 14,
                             }}
@@ -804,7 +1066,7 @@ export default function ShopWithSidebar() {
                           </Typography>
                           <Typography
                             sx={{
-                              color: "#1C274C",
+                              color: isDark ? "#fff" : "#1C274C",
                               fontWeight: 800,
                               fontSize: 14,
                             }}

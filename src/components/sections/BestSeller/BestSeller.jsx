@@ -9,7 +9,6 @@ import {
   Icon,
   Tooltip,
   Typography,
-  Grid,
   Grid2,
 } from "@mui/material";
 import Image from "next/image";
@@ -19,8 +18,9 @@ import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { cardData } from "./best";
 
-export default function Seller({ data = [] }) {
+export default function Seller({ data = cardData, showTitle = true }) {
   const router = useRouter();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -29,52 +29,54 @@ export default function Seller({ data = [] }) {
     setMounted(true);
   }, []);
 
-  const safeData = Array.isArray(data) ? data : [];
   const isDark = mounted && theme === "dark";
+  const safeData = Array.isArray(data) ? data : [];
 
   return (
     <Box>
-      {/* title + view button */}
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          pr: 1,
-        }}
-      >
-        {/* title */}
-        <Box sx={{ pt: "90px", pb: "48px", pl: 1 }}>
-          <Typography
-            sx={{
-              fontSize: "28px",
-              lineHeight: "40px",
-              fontWeight: 600,
-              color: isDark ? "#fff" : "#1C274C",
-              cursor: "pointer",
-            }}
-          >
-            Best Seller
-          </Typography>
-        </Box>
-        {/* view details button */}
-        <Button
+      {showTitle && (
+        <Box
           sx={{
-            border: isDark ? "1px solid #374151" : "1px solid #E5E7EB",
-            borderRadius: "20px",
-            textTransform: "none",
-            p: "0px 10px",
-            color: isDark ? "#fff" : "#1C274C",
-            "&:hover": {
-              background: "#1c274c",
-              color: "#fff",
-            },
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            pr: 1,
           }}
-          onClick={() => router.push("/shop-without-sidebar")}
         >
-          View All
-        </Button>
-      </Box>
+          {/* title */}
+          <Box sx={{ pt: "90px", pb: "48px", pl: 1 }}>
+            <Typography
+              sx={{
+                fontSize: "28px",
+                lineHeight: "40px",
+                fontWeight: 600,
+                color: isDark ? "#fff" : "#1C274C",
+                cursor: "pointer",
+              }}
+            >
+              Best Seller
+            </Typography>
+          </Box>
+          
+          {/* view details button */}
+          <Button
+            sx={{
+              border: isDark ? "1px solid #374151" : "1px solid #E5E7EB",
+              borderRadius: "20px",
+              textTransform: "none",
+              p: "0px 10px",
+              color: isDark ? "#fff" : "#1C274C",
+              "&:hover": {
+                background: "#1c274c",
+                color: "#fff",
+              },
+            }}
+            onClick={() => router.push("/shop-without-sidebar")}
+          >
+            View All
+          </Button>
+        </Box>
+      )}
 
       {/* Product Details */}
       <Grid2 container spacing={2}>
