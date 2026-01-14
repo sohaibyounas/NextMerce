@@ -8,19 +8,16 @@ import Subscription from "../Subscription/subscription";
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Button,
   Card,
   CardContent,
-  Avatar,
   Stack,
   IconButton,
-  useTheme,
+  Grid2,
 } from "@mui/material";
 import {
   MdRocketLaunch,
-  MdGroups,
   MdSecurity,
   MdSupportAgent,
   MdArrowForward,
@@ -33,6 +30,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import Image from "next/image";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 // Sample Data
 const stats = [
@@ -126,35 +124,41 @@ const FadeInSection = ({ children, delay = 0 }) => {
 };
 
 export default function AboutUs() {
-  const theme = useTheme();
+  const { mounted, isDark } = useAppTheme();
+
+  if (!mounted) return null;
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
+      {/* header */}
       <Header />
+
+      {/* breadcrumb section */}
       <Breadcrumb title="About Us" />
 
       {/* Hero Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-        <Grid container spacing={8} alignItems="center">
-          <Grid item xs={12} md={6}>
+        <Grid2 container spacing={8} alignItems="center">
+          {/* left section */}
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <FadeInSection>
               <Box sx={{ position: "relative" }}>
                 <Typography
                   variant="h6"
                   sx={{
-                    color: "#3C50E0",
+                    color: isDark ? "#fff" : "#3C50E0",
                     fontWeight: 700,
                     mb: 2,
-                    textTransform: "uppercase",
                     letterSpacing: 2,
                     display: "flex",
                     alignItems: "center",
                     gap: 1,
+                    textTransform: "uppercase",
                     "&:before": {
                       content: '""',
                       width: 40,
                       height: 2,
-                      bgcolor: "#3C50E0",
+                      bgcolor: isDark ? "#fff" : "#3C50E0",
                     },
                   }}
                 >
@@ -163,19 +167,25 @@ export default function AboutUs() {
                 <Typography
                   variant="h2"
                   sx={{
+                    textTransform: "uppercase",
                     fontWeight: 800,
-                    fontSize: { xs: "2.5rem", md: "4rem" },
+                    fontSize: { xs: "2.5rem", md: "2.5rem" },
                     lineHeight: 1.1,
                     mb: 3,
-                    color: "#1C274C",
+                    color: isDark ? "#fff" : "#1C274C",
                   }}
                 >
                   Innovating the <br />
-                  <span style={{ color: "#3C50E0" }}>Future</span> of Shopping
+                  <span style={{ color: isDark ? "#99a0d8ff" : "#3C50E0" }}>
+                    Future
+                  </span>{" "}
+                  of Shopping
                 </Typography>
+
+                {/* para */}
                 <Typography
                   sx={{
-                    color: "#606882",
+                    color: isDark ? "#fff" : "#606882",
                     fontSize: "1.1rem",
                     lineHeight: 1.8,
                     mb: 4,
@@ -186,13 +196,16 @@ export default function AboutUs() {
                   into a vibrant platform dedicated to bringing quality products
                   and exceptional experiences to customers around the world.
                 </Typography>
+
+                {/* more content buttons */}
                 <Stack direction="row" spacing={3}>
                   <Button
                     variant="contained"
                     size="large"
                     endIcon={<MdArrowForward />}
                     sx={{
-                      bgcolor: "#3C50E0",
+                      bgcolor: isDark ? "#fff" : "#3C50E0",
+                      color: isDark ? "#3C50E0" : "#fff",
                       borderRadius: "50px",
                       px: 5,
                       py: 1.8,
@@ -201,6 +214,7 @@ export default function AboutUs() {
                       boxShadow: "0 10px 20px rgba(60, 80, 224, 0.2)",
                       "&:hover": {
                         bgcolor: "#2A3EB1",
+                        color: isDark ? "#fff" : "#3c50E0",
                         transform: "translateY(-2px)",
                         boxShadow: "0 15px 30px rgba(60, 80, 224, 0.3)",
                       },
@@ -211,8 +225,8 @@ export default function AboutUs() {
                   </Button>
                   <IconButton
                     sx={{
-                      color: "#3C50E0",
-                      bgcolor: "rgba(60, 80, 224, 0.1)",
+                      color: isDark ? "#fff" : "#3C50E0",
+                      bgcolor: isDark ? "#787b7dff" : "rgba(60, 80, 224, 0.1)",
                       p: 2,
                       "&:hover": {
                         bgcolor: "#3C50E0",
@@ -227,8 +241,10 @@ export default function AboutUs() {
                 </Stack>
               </Box>
             </FadeInSection>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          </Grid2>
+
+          {/* right image section */}
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <FadeInSection delay={0.2}>
               <Box
                 sx={{
@@ -255,32 +271,43 @@ export default function AboutUs() {
                 />
               </Box>
             </FadeInSection>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
 
       {/* Mission & Vision Section */}
-      <Box sx={{ bgcolor: "#F9FAFB", py: 10 }}>
+      <Box sx={{ bgcolor: isDark ? "#111827" : "#F9FAFB", py: 10 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={6}>
-            <Grid item xs={12} md={6}>
+          <Grid2 container spacing={6}>
+            {/* our mission */}
+            <Grid2 size={{ xs: 12, md: 6 }}>
               <FadeInSection>
                 <Box
                   sx={{
-                    bgcolor: "white",
+                    bgcolor: isDark ? "#1F2937" : "white",
                     p: 5,
                     borderRadius: 4,
                     height: "100%",
-                    boxShadow: "0 4px 25px rgba(0,0,0,0.05)",
+                    boxShadow: "0 10px 30px rgba(60, 80, 224, 0.3)",
                   }}
                 >
                   <Typography
                     variant="h4"
-                    sx={{ fontWeight: 800, mb: 3, color: "#1C274C" }}
+                    sx={{
+                      fontWeight: 800,
+                      mb: 3,
+                      color: isDark ? "#fff" : "#1C274C",
+                    }}
                   >
                     Our Mission
                   </Typography>
-                  <Typography sx={{ color: "#606882", lineHeight: 1.8, mb: 3 }}>
+                  <Typography
+                    sx={{
+                      color: isDark ? "#fff" : "#606882",
+                      lineHeight: 1.8,
+                      mb: 3,
+                    }}
+                  >
                     To revolutionize the online shopping experience by providing
                     a seamless, secure, and customer-centric platform. We strive
                     to bridge the gap between quality products and eager
@@ -288,12 +315,14 @@ export default function AboutUs() {
                   </Typography>
                 </Box>
               </FadeInSection>
-            </Grid>
-            <Grid item xs={12} md={6}>
+            </Grid2>
+
+            {/* our vision */}
+            <Grid2 size={{ xs: 12, md: 6 }}>
               <FadeInSection delay={0.2}>
                 <Box
                   sx={{
-                    bgcolor: "#3C50E0",
+                    bgcolor: isDark ? "#1F2937" : "#3C50E0",
                     p: 5,
                     borderRadius: 4,
                     height: "100%",
@@ -321,24 +350,24 @@ export default function AboutUs() {
                   </Typography>
                 </Box>
               </FadeInSection>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </Container>
       </Box>
 
       {/* Stats Section */}
-      <Box sx={{ bgcolor: "white", py: 8 }}>
+      <Box sx={{ bgcolor: isDark ? "#0B1120" : "white", py: 8 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={4}>
+          <Grid2 container spacing={4}>
             {stats.map((stat, index) => (
-              <Grid key={index} item xs={6} md={3}>
+              <Grid2 key={index} size={{ xs: 6, md: 3 }}>
                 <FadeInSection delay={index * 0.1}>
                   <Box
                     sx={{
                       textAlign: "center",
                       p: 3,
                       borderRadius: 4,
-                      bgcolor: "white",
+                      bgcolor: isDark ? "#1F2937" : "white",
                       boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
                       transition: "transform 0.3s ease",
                       "&:hover": { transform: "translateY(-10px)" },
@@ -346,23 +375,33 @@ export default function AboutUs() {
                   >
                     <Typography
                       variant="h3"
-                      sx={{ fontWeight: 800, color: "#3C50E0", mb: 1 }}
+                      sx={{
+                        fontWeight: 800,
+                        color: isDark ? "#fff" : "#3C50E0",
+                        mb: 1,
+                      }}
                     >
                       {stat.number}
                     </Typography>
-                    <Typography sx={{ color: "#606882", fontWeight: 500 }}>
+                    <Typography
+                      sx={{
+                        color: isDark ? "#fff" : "#606882",
+                        fontWeight: 500,
+                      }}
+                    >
                       {stat.label}
                     </Typography>
                   </Box>
                 </FadeInSection>
-              </Grid>
+              </Grid2>
             ))}
-          </Grid>
+          </Grid2>
         </Container>
       </Box>
 
       {/* Features Section */}
       <Container maxWidth="lg" sx={{ py: 10 }}>
+        {/* header info */}
         <FadeInSection>
           <Box sx={{ textAlign: "center", mb: 8, maxWidth: 600, mx: "auto" }}>
             <Typography
@@ -372,22 +411,27 @@ export default function AboutUs() {
                 fontWeight: 600,
                 mb: 2,
                 letterSpacing: 1,
+                textTransform: "capitalize",
               }}
             >
-              WHY CHOOSE US
+              Why choose us
             </Typography>
             <Typography
               variant="h3"
-              sx={{ fontWeight: 700, color: "#1C274C", mb: 2 }}
+              sx={{
+                fontWeight: 700,
+                color: isDark ? "#fff" : "#1C274C",
+                mb: 2,
+              }}
             >
               We Provide The Best Service For You
             </Typography>
           </Box>
         </FadeInSection>
 
-        <Grid container spacing={4}>
+        <Grid2 container spacing={4}>
           {features.map((feature, index) => (
-            <Grid key={index} item xs={12} md={4}>
+            <Grid2 key={index} size={{ xs: 12, md: 4 }}>
               <FadeInSection delay={index * 0.15}>
                 <Card
                   sx={{
@@ -398,8 +442,9 @@ export default function AboutUs() {
                     textAlign: "center",
                     p: 4,
                     borderRadius: 4,
+                    bgcolor: isDark ? "#1F2937" : "white",
                     boxShadow: "none",
-                    border: "1px solid #E5E7EB",
+                    border: isDark ? "1px solid #374151" : "1px solid #E5E7EB",
                     transition: "all 0.3s ease",
                     "&:hover": {
                       borderColor: "#3C50E0",
@@ -431,41 +476,60 @@ export default function AboutUs() {
                   <CardContent sx={{ p: 0 }}>
                     <Typography
                       variant="h5"
-                      sx={{ fontWeight: 600, mb: 2, color: "#1C274C" }}
+                      sx={{
+                        fontWeight: 600,
+                        mb: 2,
+                        color: isDark ? "#fff" : "#1C274C",
+                      }}
                     >
                       {feature.title}
                     </Typography>
-                    <Typography sx={{ color: "#606882", lineHeight: 1.6 }}>
+                    <Typography
+                      sx={{
+                        color: isDark ? "#fff" : "#606882",
+                        lineHeight: 1.6,
+                      }}
+                    >
                       {feature.desc}
                     </Typography>
                   </CardContent>
                 </Card>
               </FadeInSection>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
       </Container>
 
       {/* Team Section */}
-      <Box sx={{ bgcolor: "#F9FAFB", py: 10 }}>
+      <Box sx={{ bgcolor: isDark ? "#111827" : "#F9FAFB", py: 10 }}>
         <Container maxWidth="lg">
           <FadeInSection>
             <Box sx={{ textAlign: "center", mb: 8 }}>
               <Typography
                 variant="h3"
-                sx={{ fontWeight: 700, color: "#1C274C", mb: 2 }}
+                sx={{
+                  fontWeight: 700,
+                  color: isDark ? "#fff" : "#1C274C",
+                  mb: 2,
+                }}
               >
                 Meet Our Expert Team
               </Typography>
-              <Typography sx={{ color: "#606882", maxWidth: 600, mx: "auto" }}>
+              <Typography
+                sx={{
+                  color: isDark ? "#fff" : "#606882",
+                  maxWidth: 600,
+                  mx: "auto",
+                }}
+              >
                 The talented people behind our success and your satisfaction.
               </Typography>
             </Box>
           </FadeInSection>
 
-          <Grid container spacing={4}>
+          <Grid2 container spacing={4}>
             {team.map((member, index) => (
-              <Grid key={index} item xs={12} sm={6} md={3}>
+              <Grid2 key={index} size={{ xs: 12, sm: 6, md: 3 }}>
                 <FadeInSection delay={index * 0.1}>
                   <Box
                     sx={{
@@ -552,14 +616,16 @@ export default function AboutUs() {
                     </Stack>
                   </Box>
                 </FadeInSection>
-              </Grid>
+              </Grid2>
             ))}
-          </Grid>
+          </Grid2>
         </Container>
       </Box>
 
       {/* Subscription Section */}
       <Subscription />
+
+      {/* footer section */}
       <Footer />
     </Box>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -32,7 +32,7 @@ import Iphone from "@/assets/newarrivals/iphone17.png";
 import Juicer from "@/assets/newarrivals/juicer.png";
 import Monitor from "@/assets/newarrivals/monitor.png";
 import Screen from "@/assets/newarrivals/lcdscreen.png";
-import { useTheme } from "next-themes";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 export default function ShopWithSidebar() {
   const [view, setView] = useState("grid");
@@ -41,15 +41,9 @@ export default function ShopWithSidebar() {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 999]);
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { mounted, isDark } = useAppTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // theme toggle
-  const isDark = mounted && theme === "dark";
+  if (!mounted) return null;
 
   // saved calculated value
   const products = useMemo(

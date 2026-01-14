@@ -12,7 +12,10 @@ import {
   FaEnvelope,
   FaArrowRight,
 } from "react-icons/fa";
+import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
+// pages list
 const pagesList = [
   {
     title: "About Us",
@@ -21,7 +24,9 @@ const pagesList = [
     icon: <FaInfoCircle className="text-3xl" />,
     href: "/about",
     bg: "bg-blue-50",
+    bgDark: "dark:bg-blue-900/20",
     text: "text-blue-500",
+    textDark: "dark:text-blue-400",
     hoverBg: "group-hover:bg-blue-500",
     hoverBorder: "hover:border-blue-500",
   },
@@ -32,7 +37,9 @@ const pagesList = [
     icon: <FaServicestack className="text-3xl" />,
     href: "/services",
     bg: "bg-purple-50",
+    bgDark: "dark:bg-purple-900/20",
     text: "text-purple-500",
+    textDark: "dark:text-purple-400",
     hoverBg: "group-hover:bg-purple-500",
     hoverBorder: "hover:border-purple-500",
   },
@@ -43,7 +50,9 @@ const pagesList = [
     icon: <FaQuestionCircle className="text-3xl" />,
     href: "/faq",
     bg: "bg-green-50",
+    bgDark: "dark:bg-green-900/20",
     text: "text-green-500",
+    textDark: "dark:text-green-400",
     hoverBg: "group-hover:bg-green-500",
     hoverBorder: "hover:border-green-500",
   },
@@ -54,7 +63,9 @@ const pagesList = [
     icon: <FaShoppingBag className="text-3xl" />,
     href: "/shop",
     bg: "bg-orange-50",
+    bgDark: "dark:bg-orange-900/20",
     text: "text-orange-500",
+    textDark: "dark:text-orange-400",
     hoverBg: "group-hover:bg-orange-500",
     hoverBorder: "hover:border-orange-500",
   },
@@ -65,7 +76,9 @@ const pagesList = [
     icon: <FaBlog className="text-3xl" />,
     href: "/blogs/latest",
     bg: "bg-red-50",
+    bgDark: "dark:bg-red-900/20",
     text: "text-red-500",
+    textDark: "dark:text-red-400",
     hoverBg: "group-hover:bg-red-500",
     hoverBorder: "hover:border-red-500",
   },
@@ -76,41 +89,51 @@ const pagesList = [
     icon: <FaEnvelope className="text-3xl" />,
     href: "/contact",
     bg: "bg-indigo-50",
+    bgDark: "dark:bg-indigo-900/20",
     text: "text-indigo-500",
+    textDark: "dark:text-indigo-400",
     hoverBg: "group-hover:bg-indigo-500",
     hoverBorder: "hover:border-indigo-500",
   },
 ];
 
 export default function Pages() {
+  const { mounted, isDark } = useAppTheme();
+
+  if (!mounted) return null;
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div
+      className={`min-h-screen flex flex-col ${
+        isDark ? "bg-gray-900" : "bg-gray-50"
+      }`}
+    >
+      {/* Header */}
       <Header />
 
-      <main className="flex-grow">
-        {/* Navigation Breadcrumb - Optional but nice */}
-        <div className="bg-white border-b border-gray-200 py-4">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center text-sm text-gray-500">
-              <Link href="/" className="hover:text-blue-600">
-                Home
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-gray-900 font-medium">Pages</span>
-            </div>
-          </div>
-        </div>
+      {/* main content */}
+      <main className="flex-grow:1">
+        {/* breadcrumb */}
+        <Breadcrumb title="Pages" />
 
         {/* Hero Section */}
-        <section className="bg-[#1C274C] text-white py-20 px-4 relative overflow-hidden">
+        <section
+          className={`py-20 px-4 relative overflow-hidden ${
+            isDark ? "bg-gray-800" : "bg-[#1C274C]"
+          }`}
+        >
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full -mr-48 -mt-48 blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full -ml-48 -mb-48 blur-3xl"></div>
 
           <div className="container mx-auto text-center relative z-0">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Explore Our Site
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p
+              className={`text-xl max-w-2xl mx-auto leading-relaxed ${
+                isDark ? "text-gray-300" : "text-gray-300"
+              }`}
+            >
               Find everything you need in one place. Navigate through our
               different sections to discover products, services, and expert
               insights.
@@ -125,18 +148,30 @@ export default function Pages() {
               {pagesList.map((item, index) => (
                 <Link
                   href={item.href}
-                  key={index}
-                  className={`group bg-white rounded-3xl p-8 shadow-sm hover:shadow-[0_10px_30px_rgba(60,80,224,0.1)] transition-all duration-300 border border-gray-100 ${item.hoverBorder} flex flex-col h-full transform hover:-translate-y-[5px]`}
+                  key={item.href}
+                  className={`group rounded-3xl p-8 shadow-sm hover:shadow-[0_10px_30px_rgba(60,80,224,0.1)] transition-all duration-300 border flex flex-col h-full transform hover:-translate-y-1 ${
+                    isDark
+                      ? "bg-gray-800 border-gray-700 hover:border-blue-500"
+                      : `bg-white border-gray-100 ${item.hoverBorder}`
+                  }`}
                 >
                   <div
-                    className={`icon-box w-16 h-16 ${item.bg} ${item.text} rounded-2xl flex items-center justify-center mb-6 ${item.hoverBg} group-hover:text-white transition-all duration-300`}
+                    className={`icon-box w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${item.bg} ${item.bgDark} ${item.text} ${item.textDark} ${item.hoverBg} group-hover:text-white transition-all duration-300`}
                   >
                     {item.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
+                  <h3
+                    className={`text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors ${
+                      isDark ? "text-white" : "text-gray-800"
+                    }`}
+                  >
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 mb-8 flex-grow leading-relaxed">
+                  <p
+                    className={`mb-8 flex-grow:1 leading-relaxed ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {item.description}
                   </p>
                   <div className="flex items-center text-blue-600 font-bold gap-2 group-hover:gap-4 transition-all">
@@ -149,9 +184,13 @@ export default function Pages() {
         </section>
 
         {/* Support Section */}
-        <section className="bg-white py-20 px-4 border-t border-gray-100">
+        <section
+          className={`py-20 px-4 border-t ${
+            isDark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100"
+          }`}
+        >
           <div className="container mx-auto">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-800 rounded-[3rem] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-blue-indigo rounded-[3rem] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
 
               <div className="flex flex-col md:flex-col lg:flex-row items-center justify-between gap-12 relative">

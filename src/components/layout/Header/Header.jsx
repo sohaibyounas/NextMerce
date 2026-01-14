@@ -67,10 +67,10 @@ export default function Header() {
   return (
     <div className="sticky top-0 z-10 shadow-md bg-white dark:bg-[#0B1120] transition-colors duration-300">
       {/* header left side */}
-      <div className="bg-white dark:bg-[#0B1120] px-2 py-[11px] transition-colors duration-300">
+      <div className="bg-white dark:bg-[#0B1120] px-2 py-2.75 transition-colors duration-300">
         <div className="flex items-center justify-between">
           {/* logo + filters */}
-          <div className="flex items-center justify-between gap-[10px]">
+          <div className="flex items-center justify-between gap-2.5">
             {/* logo with home route */}
             <div>
               <Link href="/">
@@ -91,7 +91,7 @@ export default function Header() {
               <div className="relative px-2" ref={dropdownRef}>
                 <div
                   onClick={() => setIsOpen(!isOpen)}
-                  className="w-[160px] h-[40px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-4 py-1 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[14px] font-medium cursor-pointer transition-colors"
+                  className="w-40 h-10 flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-4 py-1 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[14px] font-medium cursor-pointer transition-colors"
                 >
                   <span>
                     <RxHamburgerMenu className="h-4 w-4 shrink-0" />
@@ -203,7 +203,7 @@ export default function Header() {
                 <div className="relative" ref={dropdownRef}>
                   <div
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-full h-[45px] flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-5 py-2 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[15px] font-medium cursor-pointer transition-colors shadow-sm"
+                    className="w-full h-11.25 flex items-center justify-between border border-[#E5E7EB] dark:border-gray-700 rounded-full px-5 py-2 bg-white dark:bg-[#1E293B] text-[#1C274C] dark:text-gray-200 text-[15px] font-medium cursor-pointer transition-colors shadow-sm"
                   >
                     <div className="flex items-center gap-3">
                       <RxHamburgerMenu className="h-5 w-5 text-blue-600" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, Grid2, Typography } from "@mui/material";
+import { Box, Button, Grid2, Typography } from "@mui/material";
 import Image from "next/image";
 import Headphone from "@/assets/products/new-headphone.webp";
 import CountdownTimer from "./CountdownTimer";
@@ -17,14 +17,14 @@ export default function Explore() {
              transition-all duration-500"
         sx={{
           minHeight: "450px",
-          py: { xs: 6, md: 0 },
+          py: { xs: 6, md: 4 },
         }}
       >
         {/* grid text */}
         <Grid2
           size={{ xs: 12, md: 6 }}
           px={{ xs: 3, md: 7 }}
-          sx={{ textAlign: { xs: "center", md: "left" } }}
+          sx={{ textAlign: "start" }}
         >
           <Box>
             <Typography
@@ -40,7 +40,7 @@ export default function Explore() {
             <Typography
               className="text-[#1c274c] dark:text-white"
               sx={{
-                fontSize: { xs: "28px", md: "34px" },
+                fontSize: { xs: "28px", md: "32px" },
                 fontWeight: 700,
                 lineHeight: { xs: "36px", md: "48px" },
                 pt: "20px",

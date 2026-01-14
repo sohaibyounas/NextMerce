@@ -28,6 +28,7 @@ export default function Breadcrumb({ title }) {
         backgroundColor: isDark ? "#1C274C" : "#fff",
         color: isDark ? "#fff" : "#1C274C",
         gap: { xs: 1, sm: 0 },
+        borderBottom: "3px solid #E5E7EB",
       }}
     >
       <Typography
@@ -40,20 +41,20 @@ export default function Breadcrumb({ title }) {
         {title}
       </Typography>
 
-      <Breadcrumbs aria-label="breadcrumb" sx={{
-        // Target the separator (/)
-        '& .MuiBreadcrumbs-separator': {
-          color: isDark ? '#ffffff' : '#1C274C',
-        }
-      }}>
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        sx={{
+          // Target the separator (/)
+          "& .MuiBreadcrumbs-separator": {
+            color: isDark ? "#ffffff" : "#1C274C",
+          },
+        }}
+      >
         {breadcrumbs.map((crumb, idx) => {
           const isLast = idx === breadcrumbs.length - 1;
 
           return isLast ? (
-            <Typography
-              key={crumb.href}
-              color={isDark ? "#ffffff" : "#1C274C"}
-            >
+            <Typography key={crumb.href} color={isDark ? "#ffffff" : "#1C274C"}>
               {crumb.label}
             </Typography>
           ) : (

@@ -5,18 +5,12 @@ import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import { Box } from "@mui/material";
 import Breadcrumb from "@/components/sections/Breadcrumb/Breadcrumb";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 export default function PopularPage() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { mounted, isDark } = useAppTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = mounted && theme === "dark";
+  if (!mounted) return null;
   return (
     <>
       {/* header section */}
